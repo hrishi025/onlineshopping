@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 const fs = require('fs')
 
-function sendEmail(template, subject, email, callback) {
+function sendEmail(subject, link, email, callback) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -10,12 +10,12 @@ function sendEmail(template, subject, email, callback) {
     },
   })
 
-  const contents = '' + fs.readFileSync('./email_templates/' + template)
+  //const contents = '' + fs.readFileSync('./email_templates/' + template)
   const mailOptions = {
     from: 'panky110598@gmail.com',
     to: email,
     subject: subject,
-    html: contents,
+    html: link,
   }
 
   transporter.sendMail(mailOptions, function (error, info) {

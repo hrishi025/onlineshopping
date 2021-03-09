@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 
 // list of routers
 const routerUser = require('./routes/user')
+const routerCategory = require('./routes/category')
 
 const app = express()
 
@@ -11,9 +12,9 @@ app.use(bodyParser.json())
 
 // enable frontend application to call the APIs
 
-
 // add routers
 app.use('/user', routerUser)
+app.use(routerCategory)
 
 app.get('/', (request, response) => {
   response.send('welcome to ecommerce application')

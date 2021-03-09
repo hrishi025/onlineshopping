@@ -4,13 +4,15 @@ const config = require('../config')
 const utils = require('../utils')
 const crypto = require('crypto-js')
 const mailer = require('../mailer')
+const { request, response } = require('express')
 
+// router will be used to add routes in the app server
 const router = express.Router()
 
 //Signup
 router.post('/signup', (request, response) => {
   const { name, email, phone, password } = request.body // get sign up details from request
-  // Password Encryption
+  // Password Encryption`
   const encPwd = '' + crypto.SHA256(password)
   const statement = `insert into user(name, email, phone, password) values('${name}','${email}','${phone}','${encPwd}')`
   console.log(encPwd)
@@ -19,9 +21,17 @@ router.post('/signup', (request, response) => {
     const result = utils.createResult(error, data)
 
     if (!error) {
+      // const stmt = `SELECT id FROM user WHERE email = '${email}'`
+      // db.execute(stmt, (error, data) => {
+      //   // result
+      //   const res = utils.createResult(error, data)
+      //   console.log(res.data.BinaryRow.id)
+      //   console.log('res ' + res.data.id)
+      // })
       mailer.sendEmail(
-        'signup.html',
+        //'signup.html',
         'welcome to ecommerce application',
+        `Confirm Your Email <a href='http://localhost:4000/user/verify/${email}'>Here</a>`,
         email,
         (error, info) => {
           response.send(result)
@@ -45,7 +55,7 @@ router.post('/signin', (request, response) => {
 
   db.execute(statement, (error, users) => {
     const result = {
-      status: ''
+      status: '',
     }
 
     if (error != null) {
@@ -86,6 +96,17 @@ router.post('/signin', (request, response) => {
 
       response.send(result)
     }
+  })
+})
+
+//verify Email
+router.get('/verify/:email', (request, response) => {
+  const { email } = request.params
+  const statement = `UPDATE user SET status = 1 where email = '${email}'`
+  db.execute(statement, (error, data) => {
+    // result
+    const result = utils.createResult(error, data)
+    response.send(result)
   })
 })
 
