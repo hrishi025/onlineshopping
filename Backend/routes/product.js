@@ -26,7 +26,7 @@ router.post('/product', (request, response) => {
     prod_qty,
   } = request.body
   const statement = `INSERT INTO product (prod_title, 
-    prod_description, prod_price, cat_id,
+    prod_description, cat_id, prod_price,
       comp_id, prod_qty) VALUES 
          ('${prod_title}','${prod_description}', '${cat_id}', '${prod_price}', '${comp_id}','${prod_qty}')`
   db.execute(statement, (error, data) => {
