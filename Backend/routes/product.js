@@ -1,3 +1,4 @@
+const { request, response } = require('express')
 const express = require('express')
 const db = require('../db')
 const utils = require('../utils')
@@ -68,4 +69,25 @@ router.delete('/product/:prod_id', (request, response) => {
   })
 })
 
+router.patch('/product/quantity/:prod_id',(request, response)=>
+{
+  const { prod_id } = request.params
+  const { quantity } = request.body
+
+  const statement = `update product set prod_qty = ${quantity} where prod_id = ${prod_id}`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
+router.patch('/product/price/:prod_id',(request, response)=>
+{
+  const { prod_id } = request.params
+  const { price } = request.body
+
+  const statement = `update product set prod_price = ${price} where prod_id = ${prod_id}`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
 module.exports = router

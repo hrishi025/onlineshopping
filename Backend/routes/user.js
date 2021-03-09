@@ -131,7 +131,32 @@ router.get('/orders/:user_id', (request, response) => {
   const { user_id } = request.params
   //Product Id,Product Title, Product Price, Product Qty, Payment Amount,Payment Date, Payment type(optional)
   //Product name(product table), orderdetails orderstatus
-  const statement = `select o.product_id,p.prod_title,p.prod_price,p.prod_qty,pa.pay_amount,pa.pay_date from product p inner join orderdetails o on o.product_id=p.prod_id inner join payment pa on o.orderdetails_id=pa.orderdetails_id   `
+  const statement = `SELECT
+	product.prod_title, 
+	orderdetails.quantity, 
+	CASE
+    WHEN myorder.status = 0 THEN 'not delivered'
+    WHEN myorder.status = 1 THEN 'delivered'
+    ELSE 'cancelled'
+	END AS status, 
+	payment.pay_amount, 
+	payment.pay_date, 
+	product.prod_price
+FROM
+	myorder
+	INNER JOIN
+	orderdetails
+	ON 
+		myorder.myorder_id = orderdetails.myorder_id
+	INNER JOIN
+	product
+	ON 
+		orderdetails.product_id = product.prod_id
+	INNER JOIN
+	payment
+	ON 
+		orderdetails.orderdetails_id = payment.orderdetails_id
+where myorder.user_id = '${user_id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

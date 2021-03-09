@@ -12,6 +12,8 @@ const routerProduct = require('./routes/product')
 const routerOrderdetails = require('./routes/orderdetails')
 const routerPayment = require('./routes/payment')
 const routermyorder = require('./routes/myorder')
+const routerAdmin = require('./routes/admin')
+const routerSeller = require('./routes/seller')
 
 const app = express()
 
@@ -31,6 +33,8 @@ app.use(routerProduct)
 app.use(routerOrderdetails)
 app.use(routerPayment)
 app.use(routermyorder)
+app.use(routerAdmin)
+app.use(routerSeller)
 
 app.get('/', (request, response) => {
   response.send('welcome to ecommerce application')
