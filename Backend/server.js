@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 // list of routers
 const routerUser = require('./routes/user')
@@ -18,6 +19,7 @@ const app = express()
 app.use(bodyParser.json())
 
 // enable frontend application to call the APIs
+app.use(cors('*'))
 
 // add routers
 app.use('/user', routerUser)
