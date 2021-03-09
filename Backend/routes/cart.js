@@ -10,7 +10,7 @@ module.exports = router
 
 //Get Cart Contents
 router.get('/cart', (request, response) => {
-  const statement = ``
+  const statement = `SELECT cart_id, user_id, prod_id, cart_quantity FROM cart`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
@@ -18,27 +18,27 @@ router.get('/cart', (request, response) => {
 
 //Insert new content in Cart
 router.post('/cart', (request, response) => {
-  const {} = request.body
-  const statement = ``
+  const { user_id, prod_id, cart_quanity } = request.body
+  const statement = `INSER INTO cart(user_id, prod_id, cart_quanity) VALUES('${user_id}', '${prod_id}', '${cart_quanity}') `
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
 })
 
 //Update Cart
-router.put('/cart/:id', (request, response) => {
-  const {} = request.body
-  const { id } = request.params
-  const statement = ``
+router.put('/cart/:cart_id', (request, response) => {
+  const { cart_quanity } = request.body
+  const { cart_id } = request.params
+  const statement = `UPDATE cart SET cart_quanity = '${cart_quanity}' WHERE cart_id = '${cart_id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
 })
 
-// Delete Category
-router.delete('/cart/:id', (request, response) => {
-  const { id } = request.params
-  const statement = `DELETE FROM cart WHERE id = '${id}'`
+// Delete Cart
+router.delete('/cart/:cart_id', (request, response) => {
+  const { cart_id } = request.params
+  const statement = `DELETE FROM cart WHERE cart_id = '${cart_id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

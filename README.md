@@ -14,8 +14,7 @@
 # Pending Tasks
 
 - Verify Email
-- Cart Table Creation
-- Cart Functionalities : Get, Put, Post, Delete
+  -orderdetails insert
 
 ================================================================================##
 

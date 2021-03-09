@@ -7,9 +7,9 @@ const router = express.Router()
 
 //Get All Products
 router.get('/product', (request, response) => {
-  const statement = `SELECT  product_id, product_title, 
-   product_spec, product_price, product_cat_id,
-   product_company_id, product_quantity FROM product`
+  const statement = `SELECT  prod_id, prod_title, 
+   prod_description, prod_price, cat_id,
+   comp_id, prod_qty FROM product`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
@@ -18,51 +18,51 @@ router.get('/product', (request, response) => {
 // Add New Product
 router.post('/product', (request, response) => {
   const {
-    product_title,
-    product_spec,
-    product_price,
-    product_cat_id,
-    product_company_id,
-    product_quantity,
+    prod_title,
+    prod_description,
+    cat_id,
+    prod_price,
+    comp_id,
+    prod_qty,
   } = request.body
-  const statement = `INSERT INTO product (product_title, 
-      product_spec, product_price, product_cat_id,
-      product_company_id, product_quantity) VALUES 
-         ('${product_title}','${product_spec}', '${product_price}', '${product_cat_id}', '${product_company_id}','${product_quantity}')`
+  const statement = `INSERT INTO product (prod_title, 
+    prod_description, prod_price, cat_id,
+      comp_id, prod_qty) VALUES 
+         ('${prod_title}','${prod_description}', '${cat_id}', '${prod_price}', '${comp_id}','${prod_qty}')`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
 })
 
 // Update Product
-router.put('/product/:product_id', (request, response) => {
-  const { product_id } = request.params
+router.put('/product/:prod_id', (request, response) => {
+  const { prod_id } = request.params
   const {
-    product_title,
-    product_spec,
-    product_price,
-    product_cat_id,
-    product_company_id,
-    product_quantity,
+    prod_title,
+    prod_description,
+    cat_id,
+    prod_price,
+    comp_id,
+    prod_qty,
   } = request.body
   const statement = `UPDATE product SET 
-   product_title = '${product_title}',
-   product_spec = '${product_spec}', 
-   product_price = '${product_price}',
-   product_cat_id = '${product_cat_id}',
-   product_company_id = '${product_company_id}',
-   product_quantity = '${product_quantity}'
-   where product_id = ${product_id}`
+   prod_title = '${prod_title}',
+   prod_description = '${prod_description}', 
+   cat_id = '${cat_id}',
+   prod_price = '${prod_price}',
+   comp_id = '${comp_id}',
+   prod_qty = '${prod_qty}'
+   WHERE prod_id = ${prod_id}`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
 })
 
 //Delete Product
-router.delete('/product/:product_id', (request, response) => {
-  const { product_id } = request.params
+router.delete('/product/:prod_id', (request, response) => {
+  const { prod_id } = request.params
 
-  const statement = `DELETE FROM product where product_id = ${product_id}`
+  const statement = `DELETE FROM product where prod_id = ${prod_id}`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

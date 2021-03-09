@@ -7,7 +7,7 @@ const router = express.Router()
 
 // Get Category Details
 router.get('/category', (request, response) => {
-  const statement = `SELECT cat_id, title, description FROM category`
+  const statement = `SELECT cat_id, cat_title, cat_description FROM category`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
@@ -16,7 +16,7 @@ router.get('/category', (request, response) => {
 //Insert new categoty
 router.post('/category', (request, response) => {
   const { title, description } = request.body
-  const statement = `INSERT INTO category(title, description) VALUES('${title}', '${description}')`
+  const statement = `INSERT INTO category(cat_title, cat_description) VALUES('${title}', '${description}')`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
@@ -26,7 +26,7 @@ router.post('/category', (request, response) => {
 router.put('/category/:id', (request, response) => {
   const { title, description } = request.body
   const { id } = request.params
-  const statement = `UPDATE category SET title = '${title}', description = '${description}' WHERE cat_id = '${id}'`
+  const statement = `UPDATE category SET cat_title = '${title}', cat_description = '${description}' WHERE cat_id = '${id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

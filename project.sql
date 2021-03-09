@@ -108,7 +108,7 @@ CREATE TABLE `myorder`  (
   `myorder_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NULL DEFAULT NULL,
   `orderDate` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `status` int NULL DEFAULT NULL,
+  `status` int NULL DEFAULT 0,
   PRIMARY KEY (`myorder_id`) USING BTREE,
   INDEX `FK_UserOrder`(`user_id`) USING BTREE,
   CONSTRAINT `FK_UserOrder` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
