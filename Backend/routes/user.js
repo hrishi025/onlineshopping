@@ -125,4 +125,34 @@ router.get("/verify/:email", (request, response) => {
   });
 });
 
+//View Order
+//join myorder, orderdetails, payment(for payment id)
+router.get('/orders/:user_id', (request, response) => {
+  const { user_id } = request.params
+  //Product Id,Product Title, Product Price, Product Qty, Payment Amount,Payment Date, Payment type(optional)
+  //Product name(product table), orderdetails orderstatus
+  const statement = `select o.product_id,p.prod_title,p.prod_price,p.prod_qty,pa.pay_amount,pa.pay_date from product p inner join orderdetails o on o.product_id=p.prod_id inner join payment pa on o.orderdetails_id=pa.orderdetails_id   `
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
