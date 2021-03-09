@@ -6,7 +6,7 @@ const utils = require('../utils')
 // router will be used to add routes in the app server
 const router = express.Router()
 
-
+// show list of all users
 router.get('/admin/user',(request ,response)=>
 {
    const statement =`select user_id,user_name,user_email,user_role,	
@@ -20,7 +20,8 @@ router.get('/admin/user',(request ,response)=>
    })
 })
 
-router.post('/admin/approve_seller/:user_id',(request ,response)=>
+//approve seller request
+router.patch('/admin/approve_seller/:user_id',(request ,response)=>
 {
    const{user_id}=request.params
    const statement =`update user set user_role = 'SELLER' where user_id ='${user_id}'`
@@ -28,7 +29,18 @@ router.post('/admin/approve_seller/:user_id',(request ,response)=>
       response.send(utils.createResult(error,data))
    })
 })
-router.post('/admin/suspend_user/:user_id',(request ,response)=>
+
+//reject seller request
+router.patch('/seller/reject_seller/:user_id', (request, response) => {
+   const { user_id } = request.params
+   const statement = `update user set user_role ='CUSTOMER' where user_id = ${user_id}`
+   db.execute(statement, (error, data) => {
+      response.send(utils.createResult(error, data))
+   })
+})
+
+//suspend user
+router.patch('/admin/suspend_user/:user_id',(request ,response)=>
 {
    const{user_id}=request.params
    const statement =`update user set user_status = 2 where user_id ='${user_id}'`

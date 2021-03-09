@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0dad5eb4-e2a1-4bf7-9c20-61e721fe6ba0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/.prettierrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/.prettierrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/CODE_OF_CONDUCT.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/CODE_OF_CONDUCT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/addressparser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/addressparser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/base64/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/base64/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/message-parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/message-parser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/relaxed-body.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/relaxed-body.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/sign.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/sign.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/fetch/cookies.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/fetch/cookies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/fetch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/fetch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/json-transport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/json-transport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mail-composer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mail-composer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mailer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mailer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mailer/mail-message.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mailer/mail-message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-funcs/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-funcs/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-funcs/mime-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-funcs/mime-types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-node/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-node/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-node/last-newline.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/mime-node/last-newline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/nodemailer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/nodemailer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/qp/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/qp/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/le-unix.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/le-unix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/le-windows.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/le-windows.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/ses-transport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/ses-transport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/shared/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/shared/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/data-stream.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/data-stream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/http-proxy-client.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/http-proxy-client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-pool/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-pool/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-pool/pool-resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-pool/pool-resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-transport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-transport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/stream-transport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/stream-transport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/well-known/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/well-known/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/well-known/services.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/well-known/services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/lib/xoauth2/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/lib/xoauth2/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nodemailer/postinstall.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/nodemailer/postinstall.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1pW8EDx35kcXJBrcVuNZup9gRZp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../MERN_Stack_Project_Ecommerce_Hayroo/client" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0dad5eb4-e2a1-4bf7-9c20-61e721fe6ba0" name="Default Changelist" comment="" />
+      <created>1615287396412</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615287396412</updated>
+      <workItem from="1615287413051" duration="2963000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

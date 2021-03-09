@@ -5,6 +5,7 @@ const utils = require('../utils')
 
 // router will be used to add routes in the app server
 const router = express.Router()
+
 //apply for seller
 router.patch('/seller/apply/:user_id', (request, response) => {
    const { user_id } = request.params

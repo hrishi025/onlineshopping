@@ -90,4 +90,5 @@ router.patch('/product/price/:prod_id',(request, response)=>
     response.send(utils.createResult(error, data))
   })
 })
+
 module.exports = router
