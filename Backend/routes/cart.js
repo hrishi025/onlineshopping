@@ -18,8 +18,8 @@ router.get('/cart', (request, response) => {
 
 //Insert new content in Cart
 router.post('/cart', (request, response) => {
-  const { user_id, prod_id, cart_quanity } = request.body
-  const statement = `INSER INTO cart(user_id, prod_id, cart_quanity) VALUES('${user_id}', '${prod_id}', '${cart_quanity}') `
+  const { user_id, prod_id, cart_quantity } = request.body
+  const statement = `INSERT INTO cart(user_id, prod_id, cart_quantity) VALUES('${user_id}', '${prod_id}', '${cart_quantity}') `
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
@@ -27,9 +27,9 @@ router.post('/cart', (request, response) => {
 
 //Update Cart
 router.put('/cart/:cart_id', (request, response) => {
-  const { cart_quanity } = request.body
+  const { cart_quantity } = request.body
   const { cart_id } = request.params
-  const statement = `UPDATE cart SET cart_quanity = '${cart_quanity}' WHERE cart_id = '${cart_id}'`
+  const statement = `UPDATE cart SET cart_quantity = '${cart_quantity}' WHERE cart_id = '${cart_id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
