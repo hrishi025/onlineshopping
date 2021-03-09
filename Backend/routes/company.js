@@ -15,7 +15,9 @@ router.get('/company', (request, response) => {
 
 //Insert new categoty
 router.post('/company', (request, response) => {
+  console.log("in post compnay")
   const { title, description } = request.body
+  console.log(`title-->${title} desciption-->${description}`)
   const statement = `INSERT INTO company(comp_title, comp_description) VALUES('${title}', '${description}')`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
@@ -26,7 +28,8 @@ router.post('/company', (request, response) => {
 router.put('/company/:id', (request, response) => {
   const { title, description } = request.body
   const { id } = request.params
-  const statement = `UPDATE company SET comp_title = '${title}', comp_description = '${description}' WHERE com_id = '${id}'`
+  console.log(`title-->${title} desciption-->${description}`)
+  const statement = `UPDATE company SET comp_title = '${title}', comp_description = '${description}' WHERE comp_id = '${id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
