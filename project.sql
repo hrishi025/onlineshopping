@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : Localhost
  Source Server Type    : MySQL
- Source Server Version : 80023
+ Source Server Version : 80021
  Source Host           : localhost:3306
- Source Schema         : poject
+ Source Schema         : project
 
  Target Server Type    : MySQL
- Target Server Version : 80023
+ Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 09/03/2021 08:43:51
+ Date: 09/03/2021 13:35:47
 */
 
 SET NAMES utf8mb4;
@@ -30,13 +30,35 @@ CREATE TABLE `address`  (
   `country` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `pin` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`add_id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  INDEX `FK_UserAddress`(`user_id`) USING BTREE,
+  CONSTRAINT `FK_UserAddress` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of address
 -- ----------------------------
+INSERT INTO `address` VALUES (1, 1, 'Chaudhari Wada ', 'Jalgaon', 'Maharashtra', 'India', '425524');
+
+-- ----------------------------
+-- Table structure for cart
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart`  (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NULL DEFAULT NULL,
+  `prod_id` int NULL DEFAULT NULL,
+  `cart_quantity` int NULL DEFAULT NULL,
+  PRIMARY KEY (`cart_id`) USING BTREE,
+  INDEX `FK_UserCart`(`user_id`) USING BTREE,
+  INDEX `FK_CartProduct`(`prod_id`) USING BTREE,
+  CONSTRAINT `FK_CartProduct` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_UserCart` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
+INSERT INTO `cart` VALUES (1, 1, 1, 1);
 
 -- ----------------------------
 -- Table structure for category
@@ -44,55 +66,80 @@ CREATE TABLE `address`  (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category`  (
   `cat_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `cat_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `cat_description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`cat_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
+INSERT INTO `category` VALUES (1, 'Electronics', 'My Electronics');
+INSERT INTO `category` VALUES (2, 'Decor', 'Beutiful Decor');
+INSERT INTO `category` VALUES (3, 'Books', 'Fictional Books');
+INSERT INTO `category` VALUES (4, 'Nutritions', 'MuscleBezz');
 
 -- ----------------------------
 -- Table structure for company
 -- ----------------------------
 DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company`  (
-  `com_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`com_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `comp_id` int NOT NULL AUTO_INCREMENT,
+  `comp_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `comp_description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`comp_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of company
 -- ----------------------------
+INSERT INTO `company` VALUES (1, 'Apple', 'Expensive Comany');
+INSERT INTO `company` VALUES (2, 'Redmi', 'Cheap Company');
+INSERT INTO `company` VALUES (3, 'Micromax', 'Indian Brand');
+INSERT INTO `company` VALUES (4, 'Classmates', 'Indian TextBook Company');
+INSERT INTO `company` VALUES (5, 'Beautify', 'Decor Company');
+INSERT INTO `company` VALUES (6, 'Navneet Publication', 'Book Company');
 
 -- ----------------------------
--- Table structure for order_details
+-- Table structure for myorder
 -- ----------------------------
-DROP TABLE IF EXISTS `order_details`;
-CREATE TABLE `order_details`  (
-  `order_id` int NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `myorder`;
+CREATE TABLE `myorder`  (
+  `myorder_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NULL DEFAULT NULL,
-  `address_id` int NULL DEFAULT NULL,
-  `product_id` int NULL DEFAULT NULL,
-  `pay_id` int NULL DEFAULT NULL,
-  `ispaid` int NULL DEFAULT 0,
-  PRIMARY KEY (`order_id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE,
-  INDEX `address_id`(`address_id`) USING BTREE,
-  INDEX `product_id`(`product_id`) USING BTREE,
-  INDEX `pay_id`(`pay_id`) USING BTREE,
-  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`address_id`) REFERENCES `address` (`add_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `order_details_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `order_details_ibfk_4` FOREIGN KEY (`pay_id`) REFERENCES `payment` (`pay_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `orderDate` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `status` int NULL DEFAULT NULL,
+  PRIMARY KEY (`myorder_id`) USING BTREE,
+  INDEX `FK_UserOrder`(`user_id`) USING BTREE,
+  CONSTRAINT `FK_UserOrder` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of order_details
+-- Records of myorder
 -- ----------------------------
+INSERT INTO `myorder` VALUES (1, 1, '2021-03-09', 0);
+
+-- ----------------------------
+-- Table structure for orderdetails
+-- ----------------------------
+DROP TABLE IF EXISTS `orderdetails`;
+CREATE TABLE `orderdetails`  (
+  `orderdetails_id` int NOT NULL AUTO_INCREMENT,
+  `myorder_id` int NULL DEFAULT NULL,
+  `product_id` int NULL DEFAULT NULL,
+  `price` float NULL DEFAULT NULL,
+  `quantity` int NULL DEFAULT NULL,
+  `rating` int NULL DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`orderdetails_id`) USING BTREE,
+  INDEX `FK_MyOrderDetails`(`myorder_id`) USING BTREE,
+  CONSTRAINT `FK_MyOrderDetails` FOREIGN KEY (`myorder_id`) REFERENCES `myorder` (`myorder_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of orderdetails
+-- ----------------------------
+INSERT INTO `orderdetails` VALUES (1, 1, 1, 200000, 1, 5, 'Good Phone');
 
 -- ----------------------------
 -- Table structure for payment
@@ -100,57 +147,75 @@ CREATE TABLE `order_details`  (
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment`  (
   `pay_id` int NOT NULL AUTO_INCREMENT,
-  `pay_date` date NULL DEFAULT NULL,
-  `pay_type` int NULL DEFAULT 1,
-  `pay_amount` float NOT NULL,
-  PRIMARY KEY (`pay_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `user_id` int NULL DEFAULT NULL,
+  `pay_amount` float NULL DEFAULT NULL,
+  `orderdetails_id` int NULL DEFAULT NULL,
+  `pay_date` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `pay_type` int NULL DEFAULT 0,
+  PRIMARY KEY (`pay_id`) USING BTREE,
+  INDEX `FK_UserPayment`(`user_id`) USING BTREE,
+  INDEX `FK_OrderPayment`(`orderdetails_id`) USING BTREE,
+  CONSTRAINT `FK_OrderPayment` FOREIGN KEY (`orderdetails_id`) REFERENCES `orderdetails` (`orderdetails_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_UserPayment` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
 -- ----------------------------
+INSERT INTO `payment` VALUES (1, 1, 200000, 1, '2021-03-09', 1);
 
 -- ----------------------------
 -- Table structure for product
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-  `product_id` int NOT NULL AUTO_INCREMENT,
-  `product_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `product_spec` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `product_price` double NOT NULL,
-  `product_cat_id` int NULL DEFAULT NULL,
-  `product_company_id` int NULL DEFAULT NULL,
-  `product_quantity` int NULL DEFAULT NULL,
-  PRIMARY KEY (`product_id`) USING BTREE,
-  INDEX `product_cat_id`(`product_cat_id`) USING BTREE,
-  INDEX `product_company_id`(`product_company_id`) USING BTREE,
-  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_cat_id`) REFERENCES `category` (`cat_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `product_ibfk_2` FOREIGN KEY (`product_company_id`) REFERENCES `company` (`com_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `prod_id` int NOT NULL AUTO_INCREMENT,
+  `prod_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `prod_description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `prod_price` float NULL DEFAULT NULL,
+  `cat_id` int NULL DEFAULT NULL,
+  `comp_id` int NULL DEFAULT NULL,
+  `prod_qty` int NULL DEFAULT 0,
+  PRIMARY KEY (`prod_id`) USING BTREE,
+  INDEX `FK_ProductCategory`(`cat_id`) USING BTREE,
+  INDEX `FK_ProductCompany`(`comp_id`) USING BTREE,
+  CONSTRAINT `FK_ProductCategory` FOREIGN KEY (`cat_id`) REFERENCES `category` (`cat_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_ProductCompany` FOREIGN KEY (`comp_id`) REFERENCES `company` (`comp_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
+INSERT INTO `product` VALUES (1, 'IPhone', 'Very Good Phone', 200000, 1, 1, 10);
+INSERT INTO `product` VALUES (2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `product` VALUES (3, '11 hours', 'Crime Book ', 250, 3, 4, 40);
+INSERT INTO `product` VALUES (4, 'Sofa', 'Chillax sofa', 25000, 2, 5, 10);
+INSERT INTO `product` VALUES (5, 'The  Billion Dream', 'Book of Sachin Tendulkar', 900, 3, 6, 20);
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'CUSTOMER',
-  `status` int NULL DEFAULT 0,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `email`(`email`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `user_phone` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `user_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `user_password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `user_status` int NULL DEFAULT NULL,
+  `user_role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'CUSTOMER',
+  PRIMARY KEY (`user_id`) USING BTREE,
+  UNIQUE INDEX `user_email`(`user_email`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES (1, 'pranit', '9988776655', 'pranit@gmail.com', 'pranit', 1, 'CUSTOMER');
+INSERT INTO `user` VALUES (2, 'yogesh', '9823132998', 'ytchaudhari7@gmail.com', '1234', 0, 'CUSTOMER');
+INSERT INTO `user` VALUES (3, 'Pankaj', '8007840189', 'chaudharip371@gmail.com', 'Pankaj@98', 1, 'CUSTOMER');
+INSERT INTO `user` VALUES (4, 'Roshan', '7972333108', 'rdc420@gmail.com', 'rc123', 2, 'CUSTOMER');
+INSERT INTO `user` VALUES (5, 'Hrishi', '9923528048', 'hrishi302@gmail.com', 'hrishi@98', 0, 'CUSTOMER');
+
 
 SET FOREIGN_KEY_CHECKS = 1;
