@@ -14,8 +14,8 @@
 # Pending Tasks
 
 - Verify Email
-
-
+- Cart Table Creation
+- Cart Functionalities : Get, Put, Post, Delete
 
 ================================================================================##
 
@@ -23,15 +23,15 @@ create database project;
 use project;
 
 CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
-  `phone` varchar(12) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `status` int DEFAULT 0,
-  `role` varchar(10) DEFAULT 'CUSTOMER',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
+`id` int NOT NULL AUTO_INCREMENT,
+`name` varchar(30) DEFAULT NULL,
+`phone` varchar(12) DEFAULT NULL,
+`email` varchar(50) DEFAULT NULL,
+`password` varchar(100) DEFAULT NULL,
+`status` int DEFAULT 0,
+`role` varchar(10) DEFAULT 'CUSTOMER',
+PRIMARY KEY (`id`),
+UNIQUE KEY `email` (`email`)
 )
 ALTER TABLE user ADD UNIQUE (email);
 
@@ -61,11 +61,11 @@ create table orderDetails (id integer primary key auto_increment, orderId intege
 
 ================================================================================
 create table productReviews (
-	id integer PRIMARY KEY auto_increment, 
-	review VARCHAR(100),
-	userId INTEGER,
-	productId INTEGER,
-	rating DECIMAL,
-	createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+id integer PRIMARY KEY auto_increment,
+review VARCHAR(100),
+userId INTEGER,
+productId INTEGER,
+rating DECIMAL,
+createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ================================================================================
