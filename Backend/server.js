@@ -7,6 +7,7 @@ const routerCategory = require('./routes/category')
 const routerCart = require('./routes/cart')
 const routerCompany = require('./routes/company')
 const routerAddress = require('./routes/address')
+const routerProduct = require('./routes/product')
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.use(routerCategory)
 app.use(routerCart)
 app.use(routerCompany)
 app.use(routerAddress)
+app.use(routerProduct)
 
 app.get('/', (request, response) => {
   response.send('welcome to ecommerce application')
