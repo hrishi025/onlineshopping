@@ -6,6 +6,20 @@ const crypto = require('crypto-js');
 const mailer = require('../mailer');
 const { request, response } = require('express');
 
+// for checkout in order to perform transaction
+const mysql2 = require('mysql2/promise');
+const pool = mysql2.createPool({
+	host: 'localhost',
+	user: 'root',
+	password: 'root',
+	port: 3306,
+	database: 'project',
+	waitForConnections: true,
+	connectionLimit: 10,
+	queueLimit: 0
+});
+const moment = require('moment');
+
 // router will be used to add routes in the app server
 const router = express.Router();
 
@@ -158,6 +172,79 @@ where myorder.user_id = '${user_id}'`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
+});
+
+router.post('/checkout/:id', (request, response) => {
+	const { id } = request.params;
+	let { pay_type } = request.body;
+	// closure
+	(async () => {
+		// step 1:
+		// - get all the products from cart
+		const statementCart = `
+			select 
+				c.cart_id as cart_id,
+				p.prod_id as prod_id, 
+				p.prod_title as prod_title, 
+				p.prod_price as prod_price,
+				c.cart_quantity as cart_quantity
+			from cart c
+				inner join product p on c.prod_id = p.prod_id
+				where c.user_id = ${id}`;
+
+		const [ cart_items ] = await pool.execute(statementCart);
+
+		//create a total variable to calculate total cart items value
+		let total = 0;
+		for (const item of cart_items) {
+			total += item['cart_quantity'] * item['prod_price'];
+			// total = total + ( item['cart_quantity'] * item['prod_price'] )
+		}
+		console.log(total);
+
+		// steps 2:
+		// - add these products to an order
+		const date = moment().format('DD/MM/YYYY');
+		const statementMyOrder = `
+			insert into myorder 
+				(user_id, total_price, orderDate)
+			values
+				(${id}, ${total}, '${date}')
+			`;
+		console.log(statementMyOrder);
+
+		// place an order
+		const [ myorder ] = await pool.execute(statementMyOrder);
+		console.log(myorder);
+
+		// get the myorder_id
+		const myorder_id = myorder['insertId'];
+
+		//insert all cart items one by one in order details table
+		for (const item of cart_items) {
+			const statementOrderDetails = `
+				insert into orderDetails 
+					(myorder_id, product_id, price, quantity)
+				values
+					(${myorder_id}, ${item['prod_id']}, ${item['prod_price']}, ${item['cart_quantity']})`;
+			console.log(statementOrderDetails);
+			await pool.execute(statementOrderDetails);
+		}
+
+		// step 3
+		// - delete all the items from the cart
+		const statementCartDeleteItems = `delete from cart where user_id = ${id}`;
+		await pool.execute(statementCartDeleteItems);
+
+		//make payment 	//Insert into Payment
+		if (pay_type == undefined) {
+			pay_type = 0;
+		}
+		const statementPayment = `INSERT INTO payment(user_id, pay_amount, myorder_id, pay_date, pay_type) VALUES('${id}', '${total}', '${myorder_id}', '${date}', '${pay_type}')`;
+		await pool.execute(statementPayment);
+
+		response.send({ status: 'success' });
+	})();
 });
 
 module.exports = router;

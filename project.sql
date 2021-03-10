@@ -149,13 +149,13 @@ CREATE TABLE `payment`  (
   `pay_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NULL DEFAULT NULL,
   `pay_amount` float NULL DEFAULT NULL,
-  `orderdetails_id` int NULL DEFAULT NULL,
+  `myorder_id` int NULL DEFAULT NULL,
   `pay_date` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `pay_type` int NULL DEFAULT 0,
   PRIMARY KEY (`pay_id`) USING BTREE,
   INDEX `FK_UserPayment`(`user_id`) USING BTREE,
-  INDEX `FK_OrderPayment`(`orderdetails_id`) USING BTREE,
-  CONSTRAINT `FK_OrderPayment` FOREIGN KEY (`orderdetails_id`) REFERENCES `orderdetails` (`orderdetails_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  INDEX `FK_MyorderPayment`(`myorder_id`) USING BTREE,
+  CONSTRAINT `FK_MyorderPayment` FOREIGN KEY (`myorder_id`) REFERENCES `myorder` (`myorder_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_UserPayment` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
