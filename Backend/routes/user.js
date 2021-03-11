@@ -77,29 +77,29 @@ router.post('/signin', (request, response) => {
 
 		if (error != null) {
 			// error while executing statement
-			result['user_status'] = 'error';
+			result['status'] = 'error';
 			result['error'] = error;
 		} else {
 			if (users.length == 0) {
 				// user does not exist
-				result['user_status'] = 'error';
+				result['status'] = 'error';
 				result['error'] = 'User does not exist';
 			} else {
 				const user = users[0];
 
 				// check the user status
 				// 0: non-verified, 1: active, 2: suspended
-				if (user['user_status'] == 0) {
-					result['user_status'] = 'error';
+				if (user['status'] == 0) {
+					result['status'] = 'error';
 					result['error'] = 'You have not verified your account yet. Please verify your account.';
-				} else if (user['user_status'] == 2) {
-					result['user_status'] = 'error';
+				} else if (user['status'] == 2) {
+					result['status'] = 'error';
 					result['error'] = 'Your account is suspended, please contact administrator';
 				} else {
 					const payload = { id: user['user_id'] };
 					const token = jwt.sign(payload, config.secret);
 
-					result['user_status'] = 'success';
+					result['status'] = 'success';
 					result['data'] = {
 						token: token,
 						name: user['user_name'],
