@@ -6,6 +6,9 @@ const crypto = require('crypto-js');
 const mailer = require('../mailer');
 const { request, response } = require('express');
 
+//use jwt token to  encrypt user_id
+const jwt = require('jsonwebtoken');
+
 // for checkout in order to perform transaction
 const mysql2 = require('mysql2/promise');
 const pool = mysql2.createPool({
@@ -94,11 +97,11 @@ router.post('/signin', (request, response) => {
 					result['error'] = 'Your account is suspended, please contact administrator';
 				} else {
 					const payload = { id: user['user_id'] };
-					//const token = jwt.sign(payload, config.secret)
+					const token = jwt.sign(payload, config.secret);
 
 					result['user_status'] = 'success';
 					result['data'] = {
-						// token: token,
+						token: token,
 						name: user['user_name'],
 						email: user['user_email'],
 						phone: user['user_phone']
@@ -112,14 +115,14 @@ router.post('/signin', (request, response) => {
 });
 
 //Edit Profile
-router.post('/edit/:id', (request, response) => {
+router.post('/edit', (request, response) => {
 	const { name, password, phone } = request.body;
 
 	// encrypt the password
 	const encryptedPassword = '' + crypto.SHA256(password);
 
 	const { id } = request.params;
-	const statement = `UPDATE user SET user_name='${name}',user_password='${encryptedPassword}',user_phone='${phone}' WHERE user_id='${id}'`;
+	const statement = `UPDATE user SET user_name='${name}',user_password='${encryptedPassword}',user_phone='${phone}' WHERE user_id='${request.id}'`;
 	db.execute(statement, (error, data) => {
 		const result = utils.createResult(error, data);
 		response.send(result);
@@ -139,43 +142,37 @@ router.get('/verify/:email', (request, response) => {
 
 //View Order
 //join myorder, orderdetails, payment(for payment id)
-router.get('/orders/:user_id', (request, response) => {
-	const { user_id } = request.params;
+router.get('/orders', (request, response) => {
 	//Product Id,Product Title, Product Price, Product Qty, Payment Amount,Payment Date, Payment type(optional)
 	//Product name(product table), orderdetails orderstatus
 	const statement = `SELECT
-	product.prod_title, 
-	orderdetails.quantity, 
+	product.prod_title, orderdetails.quantity, 
 	CASE
-    WHEN myorder.status = 0 THEN 'not delivered'
-    WHEN myorder.status = 1 THEN 'delivered'
-    ELSE 'cancelled'
+		WHEN myorder.status = 0 THEN 'not delivered'
+		WHEN myorder.status = 1 THEN 'delivered'
+    	ELSE 'cancelled'
 	END AS status, 
-	payment.pay_amount, 
-	payment.pay_date, 
-	product.prod_price
-FROM
-	myorder
+	payment.pay_amount, payment.pay_date, product.prod_price
+	FROM myorder
 	INNER JOIN
-	orderdetails
-	ON 
-		myorder.myorder_id = orderdetails.myorder_id
+		orderdetails
+			ON 
+			myorder.myorder_id = orderdetails.myorder_id
 	INNER JOIN
-	product
-	ON 
-		orderdetails.product_id = product.prod_id
+		product
+			ON 
+			orderdetails.product_id = product.prod_id
 	INNER JOIN
-	payment
-	ON 
-		orderdetails.orderdetails_id = payment.orderdetails_id
-where myorder.user_id = '${user_id}'`;
+		payment
+			ON 
+			orderdetails.orderdetails_id = payment.orderdetails_id
+	where myorder.user_id = '${request.id}'`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
 });
 
-router.post('/checkout/:id', (request, response) => {
-	const { id } = request.params;
+router.post('/checkout', (request, response) => {
 	let { pay_type } = request.body;
 	// closure
 	(async () => {
@@ -190,7 +187,7 @@ router.post('/checkout/:id', (request, response) => {
 				c.cart_quantity as cart_quantity
 			from cart c
 				inner join product p on c.prod_id = p.prod_id
-				where c.user_id = ${id}`;
+				where c.user_id = ${request.id}`;
 
 		const [ cart_items ] = await pool.execute(statementCart);
 
@@ -209,7 +206,7 @@ router.post('/checkout/:id', (request, response) => {
 			insert into myorder 
 				(user_id, total_price, orderDate)
 			values
-				(${id}, ${total}, '${date}')
+				(${request.id}, ${total}, '${date}')
 			`;
 		console.log(statementMyOrder);
 
@@ -233,14 +230,14 @@ router.post('/checkout/:id', (request, response) => {
 
 		// step 3
 		// - delete all the items from the cart
-		const statementCartDeleteItems = `delete from cart where user_id = ${id}`;
+		const statementCartDeleteItems = `delete from cart where user_id = ${request.id}`;
 		await pool.execute(statementCartDeleteItems);
 
 		//make payment 	//Insert into Payment
 		if (pay_type == undefined) {
 			pay_type = 0;
 		}
-		const statementPayment = `INSERT INTO payment(user_id, pay_amount, myorder_id, pay_date, pay_type) VALUES('${id}', '${total}', '${myorder_id}', '${date}', '${pay_type}')`;
+		const statementPayment = `INSERT INTO payment(user_id, pay_amount, myorder_id, pay_date, pay_type) VALUES('${request.id}', '${total}', '${myorder_id}', '${date}', '${pay_type}')`;
 		await pool.execute(statementPayment);
 
 		response.send({ status: 'success' });

@@ -7,9 +7,8 @@ const utils = require('../utils');
 const router = express.Router();
 
 //apply for seller
-router.patch('/seller/apply/:user_id', (request, response) => {
-	const { user_id } = request.params;
-	const statement = `update user set user_role ='CUSTSELL' where user_id = ${user_id}`;
+router.patch('/seller/apply', (request, response) => {
+	const statement = `update user set user_role ='CUSTSELL' where user_id = ${request.id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});

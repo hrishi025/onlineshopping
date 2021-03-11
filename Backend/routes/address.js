@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Get Address Details
 router.get('/address', (request, response) => {
-	const statement = `SELECT add_id, user_id, address, city, state, country, pin FROM address`;
+	const statement = `SELECT add_id, user_id, address, city, state, country, pin FROM address where user_id=${response.id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
@@ -26,16 +26,16 @@ router.post('/address', (request, response) => {
 router.put('/address/:id', (request, response) => {
 	const { address, city, state, country, pin } = request.body;
 	const { id } = request.params;
-	const statement = `UPDATE address SET address = '${address}', city = '${city}', state = '${state}', country = '${country}', pin = '${pin}' WHERE user_id = '${id}'`;
+	const statement = `UPDATE address SET address = '${address}', city = '${city}', state = '${state}', country = '${country}', pin = '${pin}' where user_id=${response.id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
 });
 
-// Delete Category
-router.delete('/address/:id', (request, response) => {
+// Delete address
+router.delete('/address', (request, response) => {
 	const { id } = request.params;
-	const statement = `DELETE FROM address WHERE add_id = '${id}'`;
+	const statement = `DELETE FROM address where user_id=${response.id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
