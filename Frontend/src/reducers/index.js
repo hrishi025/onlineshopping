@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { userSignupReducer } from "./userReducer";
-import { userSigninReducer } from "./userReducer";
+import { userSigninReducer ,userProfileReducer} from "./userReducer";
 import {
   categoryFetchReducer,
   companyFetchReducer,
@@ -18,6 +18,7 @@ const reducers = combineReducers({
   cartItemsStore: cartFetchReducer,
   categoryFetchStore: categoryFetchReducer,
   companyFetchStore: companyFetchReducer,
+  editProfileStore : userProfileReducer
 });
 
 export default reducers;

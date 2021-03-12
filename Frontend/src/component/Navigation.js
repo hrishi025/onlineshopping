@@ -51,7 +51,18 @@ const Navigation = (props) => {
                       <span className="nav-link">SignUp</span>
                     </Link>
                   </li>
+                 
                 ))}
+
+             {userSigninStore.response &&
+              userSigninStore.response.status &&
+              userSigninStore.response.status == "success" && (
+                 <li className="nav-item">
+                    <Link to="/edit-profile">
+                      <span className="nav-link">Edit Profile</span>
+                    </Link>
+                  </li>
+              )}
             </ul>
             <div className="d-flex">
               {/* <span className="cart-count">

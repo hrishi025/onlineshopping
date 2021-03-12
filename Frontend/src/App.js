@@ -8,6 +8,8 @@ import Navigation from "./component/Navigation";
 import addProductList from "./screens/addProductScreen";
 import CartScreen from "./screens/cartScreen";
 import ProductDetailsScreen from "./screens/productDetailsScreen";
+import EditProfileScreen from "./screens/editProfileScreen";
+import AdminScreen from "./screens/adminScreen"
 
 function App() {
   return (
@@ -20,12 +22,14 @@ function App() {
         <Route exact path="/signin" component={SigninScreen} />
         <Route exact path="/add-product" component={addProductList} />
         <Route exact path="/cart" component={CartScreen} />
+        <Route exact path="/edit-profile" component={EditProfileScreen} />
+        <Route  path="/admin" component={AdminScreen}/>
         <Route
           exact
           path="/productdetails/:id"
           component={ProductDetailsScreen}
         />
-        <Redirect to="/" />
+       
       </Router>
     </div>
   );

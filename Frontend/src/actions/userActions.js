@@ -9,7 +9,10 @@ import {
   
  PRODUCT_FETCH_REQUEST ,
  PRODUCT_FETCH_SUCCESS ,
- PRODUCT_FETCH_FAIL, 
+ PRODUCT_FETCH_FAIL,
+ USER_PROFILE_REQUEST,
+ USER_PROFILE_SUCCESS,
+ USER_PROFILE_FAIL, 
  
 } from '../constants/userConstants'
 import { USER_SIGNUP_FAIL } from './../constants/userConstants'
@@ -93,3 +96,42 @@ export const signin = (email, password) => {
       })
   }
 }
+
+export const editprofile = (password, name, phone) => {
+  return (dispatch) => {
+    dispatch({
+      type: USER_PROFILE_REQUEST,
+    })
+
+    const url = 'http://localhost:4000/user/edit'
+
+    const body = {
+      password,
+      name,
+      phone,
+    }
+
+    const header = {
+      'Content-Type': 'application/json',
+      token:sessionStorage['token'],
+      
+    }
+    console.log(sessionStorage['token'])
+
+    axios
+      .post(url, body, header)
+      .then((response) => {
+        dispatch({
+          type: USER_PROFILE_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: USER_PROFILE_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
