@@ -9,7 +9,9 @@ const ProductDetailsScreen = (props) => {
   console.log("params.id" + params.id);
 
   const allProductStore = useSelector((store) => store.allProductStore);
-  const { response, loading, error } = allProductStore;
+
+  const cartStore = useSelector((state) => state.cartStore);
+  const { response, loading, error } = cartStore;
 
   const dispatch = useDispatch();
 
@@ -20,17 +22,17 @@ const ProductDetailsScreen = (props) => {
 
   const onAddToCart = (p) => {
     console.log(p);
-    dispatch(addToCart(p.prod_id));
+    dispatch(addToCart(p.prod_id, "1"));
   };
 
   return (
     <div>
       Product Details Screen
       <div>
-        {response &&
-          response.data &&
-          response.data.length > 0 &&
-          response.data.map((p) => {
+        {allProductStore.response &&
+          allProductStore.response.data &&
+          allProductStore.response.data.length > 0 &&
+          allProductStore.response.data.map((p) => {
             return (
               <div>
                 <hr />
@@ -38,6 +40,14 @@ const ProductDetailsScreen = (props) => {
                 <div>{p.prod_title}</div>
                 <div>{p.prod_description}</div>
                 <div>{p.cart_quantity}</div>
+                <button
+                  onClick={() => {
+                    onAddToCart(p);
+                  }}
+                  className="btn btn-sm btn-success btn-add-to-cart"
+                >
+                  Add to cart
+                </button>
               </div>
             );
           })}

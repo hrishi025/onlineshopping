@@ -22,44 +22,43 @@ const HomeScreen = (props) => {
   return (
     <div>
       <Link to="/add-product">add product</Link>
+      <br />
       <strong>Product List</strong>
-      <div className="row">
+      <div className="products-container">
         {response &&
           response.data &&
           response.data.length > 0 &&
           response.data.map((p) => {
             return (
               <div>
-                <div className="container">
-                  <div className="product col-md-3 col-10">
-                    <div className="card">
-                      <img
-                        src={props.imgsrc}
-                        className="card-img-top"
-                        alt="Image Loading Failed"
-                        width="142"
-                        height="142"
-                      />
-                      <div className="card-body">
-                        <h5 className="card-title font-weight-bold">
-                          <strong>{p.prod_id}</strong>
-                        </h5>
-                        <div>
-                          <Link to={`/productdetails/${p.prod_id}`}>
-                            {p.prod_title}
-                          </Link>
-                        </div>
-                        <div>{p.prod_price}</div>
-                        <div>{p.prod_qty}</div>
-                        <button
-                          onClick={() => {
-                            onAddToCart(p);
-                          }}
-                          className="btn btn-sm btn-success btn-add-to-cart"
-                        >
-                          Add to cart
-                        </button>
+                <div className="product-container">
+                  <div className="card">
+                    <img
+                      src={`https://media.wired.com/photos/5e9f56f143e5800008514457/1:1/w_1277,h_1277,c_limit/Gear-Feature-Apple_new-iphone-se-white_04152020.jpg`}
+                      className="rounded mx-auto d-block img-fluid"
+                      alt="Image Loading Failed"
+                      width="300px"
+                      height="300px"
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title font-weight-bold">
+                        <strong>{p.prod_id}</strong>
+                      </h5>
+                      <div>
+                        <Link to={`/productdetails/${p.prod_id}`}>
+                          {p.prod_title}
+                        </Link>
                       </div>
+                      <div>{p.prod_price}</div>
+                      <div>{p.prod_qty}</div>
+                      <button
+                        onClick={() => {
+                          onAddToCart(p);
+                        }}
+                        className="btn btn-sm btn-success btn-add-to-cart"
+                      >
+                        Add to cart
+                      </button>
                     </div>
                   </div>
                 </div>

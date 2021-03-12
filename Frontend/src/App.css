@@ -1,3 +1,17 @@
+.products-container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-container {
+  margin: 10%;
+  height: 100%;
+  width: auto;
+}
+
 .App {
   text-align: center;
 }
@@ -77,8 +91,8 @@ nav a {
 /* signup css */
 
 body {
-  color: #fff;
-  background: #4c535d;
+  color: black;
+  background: white;
   font-family: "Roboto", sans-serif;
 }
 .form-control {

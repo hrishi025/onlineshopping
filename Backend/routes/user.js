@@ -38,15 +38,7 @@ router.post('/signup', (request, response) => {
 		const result = utils.createResult(error, data);
 
 		if (!error) {
-			// const stmt = `SELECT id FROM user WHERE email = '${email}'`
-			// db.execute(stmt, (error, data) => {
-			//   // result
-			//   const res = utils.createResult(error, data)
-			//   console.log(res.data.BinaryRow.id)
-			//   console.log('res ' + res.data.id)
-			// })
 			mailer.sendEmail(
-				//'signup.html',
 				'welcome to ecommerce application',
 				`Confirm Your Email <a href='http://localhost:4000/user/verify/${email}'>Here</a>`,
 				email,

@@ -8,16 +8,20 @@ import {
   CART_ADD_FAIL,
 } from "./../constants/cartConstants";
 
-export const addToCart = (prod_id) => {
+export const addToCart = (prod_id, cart_quantity) => {
   return (dispatch) => {
     dispatch({
       type: CART_ADD_REQUEST,
     });
 
-    const url = "http://localhost:4000/cart/";
+    console.log("in add to cart");
+    console.log(prod_id + " token: " + sessionStorage["token"]);
+
+    const url = "http://localhost:4000/company";
 
     const body = {
       prod_id,
+      cart_quantity,
     };
 
     const header = {
