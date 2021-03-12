@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 
 const Navigation = (props) => {
+  const cart = useSelector((store) => store.cart)
   const dispatch = useDispatch()
   const userSigninStore = useSelector((store) => store.userSigninStore)
-  const{error, loading, response}=userSigninStore;
+  const { error, loading, response } = userSigninStore
   const onLogout = () => {
     dispatch(logout())
   }
@@ -47,6 +48,10 @@ const Navigation = (props) => {
                   </Link>
                 </li>
               </ul>
+              <div className="d-flex">
+                <span className="cart-count">Cart [{cart.length}]</span>
+              </div>
+
               <div className="d-flex">
                 <button onClick={onLogout} className="btn btn-outline-success">
                   Logout

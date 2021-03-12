@@ -19,6 +19,7 @@ router.get('/cart', (request, response) => {
 //Insert new content in Cart
 router.post('/cart', (request, response) => {
 	const { prod_id, cart_quantity } = request.body;
+	console.log(request.body)
 	const statement = `INSERT INTO cart(user_id, prod_id, cart_quantity) VALUES('${request.id}', '${prod_id}', '${cart_quantity}') `;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));

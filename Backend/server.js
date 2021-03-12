@@ -43,6 +43,7 @@ app.use((request, response, next) => {
   } else {
     // get the token from headers
     const token = request.headers['token']
+    console.log(token)
 
     try {
       // verify if the token is original or intact
@@ -57,6 +58,7 @@ app.use((request, response, next) => {
       // call the next handler
       next()
     } catch (ex) {
+      console.log(token)
       response.send({
         status: 'error',
         error: 'unauthorized access',
