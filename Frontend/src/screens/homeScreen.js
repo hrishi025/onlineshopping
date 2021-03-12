@@ -1,27 +1,27 @@
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getProductList } from '../actions/productActions'
-import { addToCart } from '../actions/cartActions'
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductList } from "../actions/productActions";
+import { addToCart } from "../actions/cartActions";
 
 const HomeScreen = (props) => {
-  const allProductStore = useSelector((state) => state.allProductStore)
-  const { response, loading, error } = allProductStore
+  const allProductStore = useSelector((state) => state.allProductStore);
+  const { response, loading, error } = allProductStore;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('in use effect')
-    dispatch(getProductList())
-  }, [])
+    console.log("in use effect");
+    dispatch(getProductList());
+  }, []);
 
   const onAddToCart = (p) => {
-    dispatch(addToCart(p.prod_id))
-  }
+    dispatch(addToCart(p.prod_id));
+  };
 
   return (
     <div>
-      {' '}
+      {" "}
       Homescreen
       <div>
         {response &&
@@ -39,13 +39,14 @@ const HomeScreen = (props) => {
                 <div>{p.prod_qty}</div>
                 <button
                   onClick={() => {
-                    onAddToCart(p)
+                    onAddToCart(p);
                   }}
-                  className="btn btn-sm btn-success btn-add-to-cart">
+                  className="btn btn-sm btn-success btn-add-to-cart"
+                >
                   Add to cart
                 </button>
               </div>
-            )
+            );
           })}
       </div>
       <div>
@@ -54,8 +55,11 @@ const HomeScreen = (props) => {
       <div>
         <Link to="/signup">SignUp</Link>
       </div>
+      <div>
+        <Link to="/add-product">Add Product</Link>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;

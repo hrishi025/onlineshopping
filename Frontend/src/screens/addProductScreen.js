@@ -1,129 +1,142 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addProductList } from '../actions/productActions'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProduct,
+  getAllCategories,
+  getAllCompanies,
+} from "../actions/productActions";
+import { PRODUCT_POST_RESET } from "../constants/productConstants";
 
-const categorylist = ['cat1', 'cat2', 'cat3']
 const AddProductScreen = (props) => {
-  const [prod_title, setProd_title] = useState('')
-  const [prod_description, setProd_description] = useState('')
-  const [cat_id, setCat_id] = useState('')
-  const [prod_price, setProd_price] = useState('')
-  const [comp_id, setComp_id] = useState('')
-  const [prod_qty, setProd_qty] = useState('')
+  const addProductStore = useSelector((state) => state.addProductStore);
+  const { response, loading, error } = addProductStore;
 
-  const dispatch = useDispatch()
+  const companyFetchStore = useSelector((state) => state.companyFetchStore);
 
-  const addProductStore = useSelector((store) => store.addProductStore)
-  const { loading, response, error } = addProductStore
+  const categoryFetchStore = useSelector((state) => state.categoryFetchStore);
+
+  const [company, setCompany] = useState("");
+  const [category, setCategory] = useState("");
+  const [prodtitle, setProdtitle] = useState("");
+  const [proddesc, setProddesc] = useState("");
+  const [prodprice, setProdprice] = useState("");
+  const [prodqty, setProdqty] = useState("");
+
+  const categoryChangeHandler = (e) => setCategory(e.target.value);
+  const companyChangeHandler = (e) => setCompany(e.target.value);
+
+  const dispatch = useDispatch();
+
+  const addnewProduct = () => {
+    console.log("in add Product button function");
+    dispatch(
+      addProduct(prodtitle, proddesc, category, prodprice, company, prodqty)
+    );
+  };
 
   useEffect(() => {
-    if (response && response.status == 'success') {
-      props.history.push('/home')
+    dispatch(getAllCategories());
+    dispatch(getAllCompanies());
+  }, []);
+
+  useEffect(() => {
+    if (response && response.status == "success") {
+      dispatch({ type: PRODUCT_POST_RESET });
+      props.history.push("/");
     } else if (error) {
-      alert('error')
+      // there is an error while making the API call
+      dispatch({ type: PRODUCT_POST_RESET });
+      console.log(error);
+      alert("error while making API call");
     }
-  }, [loading, response, error])
-
-  const onAdd = () => {
-    dispatch(
-      addProductList(
-        prod_title,
-        prod_description,
-        cat_id,
-        prod_price,
-        comp_id,
-        prod_qty
-      )
-    )
-  }
-
-  const onCancel = () => {
-    props.history.push('/home')
-  }
+  }, [response, loading, error]);
 
   return (
-    <div className="container">
-      <div className="form">
-        <div className="mb-3">
-          <label className="form-label">Product Title</label>
-          <input
-            onChange={(e) => {
-              setProd_title(e.target.value)
-            }}
-            type="text"
-            className="form-control"
-            placeholder="title"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Product Description</label>
-          <textarea
-            onChange={(e) => {
-              setProd_description(e.target.value)
-            }}
-            className="form-control"
-            rows="3"></textarea>
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Product Price</label>
-          <input
-            onChange={(e) => {
-              setProd_price(e.target.value)
-            }}
-            className="form-control"></input>
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Product Quentity</label>
-          <input
-            onChange={(e) => {
-              setProd_qty(e.target.value)
-            }}
-            className="form-control"></input>
-        </div>
-        <div className="mb-3">
-          <label for="product" className="form-label">
-            Product Category
-          </label>
-          <select
-            id="product"
-            onChange={(e) => {
-              setCat_id(e.target.value)
-            }}
-            className="form-control">
-            <option value="1">Electronics</option>
-            <option value="2">Clothing</option>
-            <option value="3">Utensils</option>
-            <option value="4">Makeup</option>
-          </select>
-        </div>
-        <div className="mb-3">
-          <label for="product" className="form-label">
-            Company
-          </label>
-          <select
-            id="product"
-            onChange={(e) => {
-              setComp_id(e.target.value)
-            }}
-            className="form-control">
-            <option value="1">Apple</option>
-            <option value="2">Zara</option>
-            <option value="3">Usha</option>
-            <option value="4">Lackme</option>
-          </select>
-        </div>
+    <div>
+      <h1>Add Product Screen</h1>
 
-        <div className="mb-3">
-          <button onClick={onAdd} className="btn btn-success">
-            Add
-          </button>
-          <button onClick={onCancel} className="btn btn-danger float-end">
-            Cancel
-          </button>
-        </div>
+      <div>
+        <label>Product Title</label>
+        <input
+          type="text"
+          onChange={(e) => setProdtitle(e.target.value)}
+        ></input>
+      </div>
+
+      <div>
+        <label>Product Description</label>
+        <input
+          type="text"
+          onChange={(e) => setProddesc(e.target.value)}
+        ></input>
+      </div>
+
+      <div>
+        <label>Product Price</label>
+        <input
+          type="number"
+          onChange={(e) => setProdprice(e.target.value)}
+        ></input>
+      </div>
+
+      <div>
+        <label>Product Quantity</label>
+        <input
+          type="number"
+          onChange={(e) => setProdqty(e.target.value)}
+        ></input>
+      </div>
+
+      <div>
+        <label>Product Category</label>
+        {console.log(categoryFetchStore.response)}
+        <select id="catTitle" size="0" onChange={categoryChangeHandler}>
+          <option value="default">Choose</option>
+          {categoryFetchStore.response &&
+            categoryFetchStore.response.data &&
+            categoryFetchStore.response.data.map((cat) => {
+              return (
+                <option
+                  key={cat.cat_id}
+                  value={cat.cat_id}
+                  onChange={categoryChangeHandler}
+                >
+                  {cat.cat_title}
+                </option>
+              );
+            })}
+        </select>
+      </div>
+
+      <div>
+        <label>Product Company</label>
+        {console.log(companyFetchStore.response)}
+        <select id="compTitle" size="0" onChange={companyChangeHandler}>
+          <option value="default">Choose</option>
+          {companyFetchStore.response &&
+            companyFetchStore.response.data &&
+            companyFetchStore.response.data.map((comp) => {
+              return (
+                <option
+                  key={comp.comp_id}
+                  value={comp.comp_id}
+                  onChange={categoryChangeHandler}
+                >
+                  {comp.comp_title}
+                </option>
+              );
+            })}
+        </select>
+      </div>
+
+      <div>
+        <button type="submit" onClick={addnewProduct}>
+          addProduct
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddProductScreen
+export default AddProductScreen;
