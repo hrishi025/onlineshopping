@@ -1,55 +1,77 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../actions/userActions'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signin } from "../actions/userActions";
+import { Link } from "react-router-dom";
 
 const SigninScreen = (props) => {
-  const userSigninStore = useSelector((state) => state.userSigninStore)
-  const { response, loading, error } = userSigninStore
+  const userSigninStore = useSelector((state) => state.userSigninStore);
+  const { response, loading, error } = userSigninStore;
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const signinButton = () => {
-    console.log('in signin button function')
-    dispatch(signin(email, password))
-  }
+    console.log("in signin button function");
+    dispatch(signin(email, password));
+  };
 
   useEffect(() => {
-    if (response && response.status == 'success') {
-      sessionStorage.setItem('token', response.data.token)
-      props.history.push('/')
+    if (response && response.status == "success") {
+      sessionStorage.setItem("token", response.data.token);
+      props.history.push("/");
     } else if (error) {
       // there is an error while making the API call
-      console.log(error)
-      alert('error while making API call')
+      console.log(error);
+      alert("error while making API call");
     }
-  }, [response, loading, error])
+  }, [response, loading, error]);
 
   return (
-    <div>
-      <h1>Signin Screen</h1>
-
-      <div>
-        <label>Email</label>
-        <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
+    <div class="signin-form">
+      <h2>Sign In</h2>
+      <hr />
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Email Address"
+          required="required"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
 
-      <div>
-        <label>Password</label>
+      <div class="form-group">
         <input
           type="password"
-          onChange={(e) => setPassword(e.target.value)}></input>
+          class="form-control"
+          name="password"
+          placeholder="Password"
+          required="required"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
 
-      <div>
-        <button type="submit" onClick={signinButton}>
-          Signin
+      <div class="form-group">
+        <button
+          type="submit"
+          onClick={signinButton}
+          class="btn btn-primary btn-block btn-lg"
+        >
+          Sign In
         </button>
       </div>
-    </div>
-  )
-}
 
-export default SigninScreen
+      <div class="text-center">
+        New User?{" "}
+        <Link to="/signup" style={{ color: "blue" }}>
+          SignUp here
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default SigninScreen;

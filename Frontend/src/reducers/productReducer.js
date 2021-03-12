@@ -14,6 +14,7 @@ import {
   PRODUCT_POST_SUCCESS,
   PRODUCT_POST_FAIL,
   PRODUCT_POST_RESET,
+  PRODUCT_FETCH_RESET,
 } from "./../constants/productConstants";
 
 export const getProductReducer = (state = {}, action) => {
@@ -26,6 +27,9 @@ export const getProductReducer = (state = {}, action) => {
 
     case PRODUCT_FETCH_FAIL:
       return { loading: false, error: action.payload };
+
+    case PRODUCT_FETCH_RESET:
+      return {};
 
     default:
       return state;

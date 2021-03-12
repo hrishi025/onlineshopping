@@ -7,14 +7,15 @@ import {
   getProductReducer,
   productPostReducer,
 } from "./productReducer";
-import cartReducer from "./cartReducer";
+import { cartFetchReducer, cartReducer } from "./cartReducer";
 
 const reducers = combineReducers({
   userSignupStore: userSignupReducer,
   userSigninStore: userSigninReducer,
   allProductStore: getProductReducer,
   addProductStore: productPostReducer,
-  cart: cartReducer,
+  cartStore: cartReducer,
+  cartItemsStore: cartFetchReducer,
   categoryFetchStore: categoryFetchReducer,
   companyFetchStore: companyFetchReducer,
 });

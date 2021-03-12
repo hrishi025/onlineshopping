@@ -59,7 +59,6 @@ app.use((request, response, next) => {
       // call the next handler
       next();
     } catch (ex) {
-      console.log(token);
       response.send({
         status: "error",
         error: "unauthorized access",

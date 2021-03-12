@@ -150,3 +150,33 @@ export const getAllCompanies = () => {
       });
   };
 };
+
+export const getProductDetails = (prod_id) => {
+  return (dispatch) => {
+    dispatch({
+      type: PRODUCT_FETCH_REQUEST,
+    });
+
+    const url = `http://localhost:4000/productdetails/${prod_id}`;
+    console.log(url);
+    const header = {
+      "Content-Type": "application/json",
+      token: sessionStorage["token"],
+    };
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: PRODUCT_FETCH_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: PRODUCT_FETCH_FAIL,
+          payload: error,
+        });
+      });
+  };
+};
