@@ -24,7 +24,9 @@ export const getProductList = () => {
     const url = "http://localhost:4000/product";
 
     const header = {
-      "Content-Type": "application/json",
+      headers: {
+        "Content-Type": "application/json",
+      }
     };
 
     axios
@@ -68,8 +70,10 @@ export const addProduct = (
       prod_qty,
     };
     const header = {
-      "Content-Type": "application/json",
-      token: sessionStorage["token"],
+      headers: {
+        "Content-Type": "application/json",
+        token: sessionStorage["token"],
+      }
     };
 
     axios

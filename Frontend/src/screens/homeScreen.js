@@ -15,8 +15,9 @@ const HomeScreen = (props) => {
     dispatch(getProductList());
   }, []);
 
-  const onAddToCart = (p) => {
-    dispatch(addToCart(p.prod_id));
+  const addToCartHandler = (p) => {
+    console.log("in addToCartHandler :" + p);
+    dispatch(addToCart(p.prod_id, "1"));
   };
 
   return (
@@ -52,9 +53,7 @@ const HomeScreen = (props) => {
                       <div>{p.prod_price}</div>
                       <div>{p.prod_qty}</div>
                       <button
-                        onClick={() => {
-                          onAddToCart(p);
-                        }}
+                        onClick={() => addToCartHandler(p)}
                         className="btn btn-sm btn-success btn-add-to-cart"
                       >
                         Add to cart

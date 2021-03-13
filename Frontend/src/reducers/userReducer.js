@@ -9,53 +9,67 @@ import {
   USER_PROFILE_REQUEST,
   USER_PROFILE_FAIL,
   USER_PROFILE_SUCCESS,
-} from './../constants/userConstants'
+  USER_PROFILE_RESET,
+  USER_SIGNUP_RESET,
+  USER_FETCH_REQUEST,
+  USER_FETCH_SUCCESS,
+  USER_FETCH_FAIL,
+  USER_FETCH_RESET,
+} from "./../constants/userConstants";
 
 export const userSignupReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_SIGNUP_REQUEST:
-      return { loading: true }
+      return { loading: true };
 
     case USER_SIGNUP_SUCCESS:
-      return { loading: false, response: action.payload }
+      return { loading: false, response: action.payload };
 
     case USER_SIGNUP_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
+
+    case USER_SIGNUP_RESET:
+      return {};
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userSigninReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_SIGNIN_REQUEST:
-      return { loading: true }
+      return { loading: true };
 
     case USER_SIGNIN_SUCCESS:
-      return { loading: false, response: action.payload }
+      return { loading: false, response: action.payload };
 
     case USER_SIGNIN_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
+
     case USER_SIGNOUT:
-      return {}
+      return {};
+
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const userProfileReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_PROFILE_REQUEST:
-      return { loading: true }
+      return { loading: true };
 
     case USER_PROFILE_SUCCESS:
-      return { loading: false, response: action.payload }
+      return { loading: false, response: action.payload };
 
     case USER_PROFILE_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: action.payload };
+
+    case USER_PROFILE_RESET:
+      return {};
 
     default:
-      return state
+      return state;
   }
-}
+};

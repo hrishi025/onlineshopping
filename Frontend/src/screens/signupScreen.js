@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../actions/userActions";
 import { Link } from "react-router-dom";
+import { USER_SIGNUP_RESET } from "../constants/userConstants";
 
 const SignupScreen = (props) => {
   const userSignupStore = useSelector((state) => state.userSignupStore);
@@ -21,6 +22,7 @@ const SignupScreen = (props) => {
 
   useEffect(() => {
     if (response && response.status == "success") {
+      dispatch({ type: USER_SIGNUP_RESET });
       props.history.push("/");
     } else if (error) {
       // there is an error while making the API call

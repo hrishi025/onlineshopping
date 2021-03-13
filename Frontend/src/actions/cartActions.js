@@ -17,7 +17,7 @@ export const addToCart = (prod_id, cart_quantity) => {
     console.log("in add to cart");
     console.log(prod_id + " token: " + sessionStorage["token"]);
 
-    const url = "http://localhost:4000/company";
+    const url = "http://localhost:4000/addtocart";
 
     const body = {
       prod_id,
@@ -25,8 +25,10 @@ export const addToCart = (prod_id, cart_quantity) => {
     };
 
     const header = {
-      "Content-Type": "application/json",
-      token: sessionStorage["token"],
+      headers: {
+        "Content-Type": "application/json",
+        token: sessionStorage["token"],
+      },
     };
 
     axios
