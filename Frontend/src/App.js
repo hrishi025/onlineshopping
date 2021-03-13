@@ -6,7 +6,6 @@ import SignupScreen from "./screens/signupScreen";
 import SigninScreen from "./screens/signinScreen";
 import Navigation from "./components/Navigation";
 import addProductList from "./screens/addProductScreen";
-import CartScreen from "./screens/cartScreen";
 import ProductDetailsScreen from "./screens/productDetailsScreen";
 import EditProfileScreen from "./screens/editProfileScreen";
 import AdminScreen from "./screens/adminScreen";
