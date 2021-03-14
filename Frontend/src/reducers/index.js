@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { userSignupReducer } from './userReducer';
+import { userApproveReducer, userListReducer, userSignupReducer, userSuspendReducer } from './userReducer';
 import { userSigninReducer, userProfileReducer } from './userReducer';
 import {
 	categoryFetchReducer,
@@ -14,12 +14,22 @@ import {
 import { viewOrderDetailsReducer, viewOrderReducer } from './orderReducer';
 import { cartFetchReducer, cartReducer, updateCartReducer } from './cartReducer';
 import { getMyorderReducer } from './myorderReducer';
+import { addCompanyReducer, deleteCompanyReducer, getCompanyReducer, updateCompanyReducer } from './companyReducer';
+import {
+	addCategoryReducer,
+	deleteCategoryReducer,
+	getCategoryReducer,
+	updateCategoryReducer
+} from './categoryReducer';
 
 const reducers = combineReducers({
 	//user stores
 	userSignupStore: userSignupReducer,
 	userSigninStore: userSigninReducer,
 	editProfileStore: userProfileReducer,
+	userListStore: userListReducer,
+	userApproveStore: userApproveReducer,
+	userSuspendStore: userSuspendReducer,
 
 	//product stores
 	allProductStore: getProductReducer,
@@ -35,6 +45,16 @@ const reducers = combineReducers({
 	//category and company store
 	categoryFetchStore: categoryFetchReducer,
 	companyFetchStore: companyFetchReducer,
+
+	getComponyStore: getCompanyReducer,
+	updateComponyStore: updateCompanyReducer,
+	deleteComponyStore: deleteCompanyReducer,
+	addComponyStore: addCompanyReducer,
+
+	getCategoryStore: getCategoryReducer,
+	updateCategoryStore: updateCategoryReducer,
+	deleteCategoryStore: deleteCategoryReducer,
+	addCategoryStore: addCategoryReducer,
 
 	//seller
 	//sellerProfileStore:sellerProfileReducer,

@@ -28,12 +28,12 @@ router.get('/productdetails/:prod_id', (request, response) => {
 });
 
 // Add New Product
-router.post('/product', (request, response) => {
+router.post('/addproduct', (request, response) => {
 	const { prod_title, prod_description, cat_id, prod_price, comp_id, prod_qty } = request.body;
 	const statement = `INSERT INTO product (prod_title, 
     prod_description, cat_id, prod_price,
-      comp_id, prod_qty) VALUES 
-         ('${prod_title}','${prod_description}', '${cat_id}', '${prod_price}', '${comp_id}','${prod_qty}')`;
+      comp_id, prod_qty,seller_id) VALUES 
+         ('${prod_title}','${prod_description}', '${cat_id}', '${prod_price}', '${comp_id}','${prod_qty}',${request.id})`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
@@ -65,6 +65,26 @@ router.delete('/product/:prod_id', (request, response) => {
 		response.send(utils.createResult(error, data));
 	});
 });
+
+// router.patch("/product/quantity/:prod_id", (request, response) => {
+//   const { prod_id } = request.params;
+//   const { quantity } = request.body;
+
+//   const statement = `update product set prod_qty = ${quantity} where prod_id = ${prod_id}`;
+//   db.execute(statement, (error, data) => {
+//     response.send(utils.createResult(error, data));
+//   });
+// });
+
+// router.patch("/product/price/:prod_id", (request, response) => {
+//   const { prod_id } = request.params;
+//   const { price } = request.body;
+
+//   const statement = `update product set prod_price = ${price} where prod_id = ${prod_id}`;
+//   db.execute(statement, (error, data) => {
+//     response.send(utils.createResult(error, data));
+//   });
+// });
 
 router.post('/product/update', (request, response) => {
 	// const { prod_id } = request.params;

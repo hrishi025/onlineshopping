@@ -18,14 +18,8 @@ const sellerScreen = (props) => {
 
 				<div class="mb-3">
 					<label for="exampleFormControlInput1" class="form-label">
-						<strong>Update Price</strong>
-					</label>
-				</div>
-
-				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">
 						<Link to="/show-product">
-							<span className="nav-link">Show All Products</span>
+							<span className="nav-link">Show And Update Products</span>
 						</Link>
 					</label>
 				</div>
@@ -43,12 +37,6 @@ const sellerScreen = (props) => {
 						<Link to="/add-product">
 							<span className="nav-link">Add Product</span>
 						</Link>
-					</label>
-				</div>
-
-				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">
-						<strong>Change Order Status</strong>
 					</label>
 				</div>
 			</div>

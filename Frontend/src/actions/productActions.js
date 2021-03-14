@@ -56,7 +56,7 @@ export const addProduct = (prod_title, prod_description, cat_id, prod_price, com
 			type: PRODUCT_POST_REQUEST
 		});
 
-		const url = `http://localhost:4000/product`;
+		const url = `http://localhost:4000/addproduct`;
 
 		const body = {
 			prod_title,
@@ -161,10 +161,8 @@ export const getProductDetails = (prod_id) => {
 		const url = `http://localhost:4000/productdetails/${prod_id}`;
 		console.log(url);
 		const header = {
-			headers: {
-				'Content-Type': 'application/json',
-				token: sessionStorage['token']
-			}
+			'Content-Type': 'application/json',
+			token: sessionStorage['token']
 		};
 
 		axios

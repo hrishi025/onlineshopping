@@ -15,7 +15,14 @@ import {
 	USER_FETCH_REQUEST,
 	USER_FETCH_SUCCESS,
 	USER_FETCH_FAIL,
-	RESET_STORE
+	USER_APPROVE_REQUEST,
+	USER_APPROVE_SUCCESS,
+	USER_APPROVE_FAIL,
+	USER_APPROVE_RESET,
+	USER_SUSPEND_SUCCESS,
+	USER_SUSPEND_REQUEST,
+	USER_SUSPEND_FAIL,
+	USER_SUSPEND_RESET
 } from '../constants/userConstants';
 import { USER_SIGNUP_FAIL } from './../constants/userConstants';
 
@@ -135,6 +142,225 @@ export const editprofile = (password, name, phone) => {
 			.catch((error) => {
 				dispatch({
 					type: USER_PROFILE_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+//get all user
+
+export const getAllUsers = () => {
+	return (dispatch) => {
+		dispatch({
+			type: USER_FETCH_REQUEST
+		});
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+
+		const url = 'http://localhost:4000/admin/user';
+		axios
+			.get(url, header)
+			.then((response) => {
+				dispatch({
+					type: USER_FETCH_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: USER_FETCH_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+export const approveUser = (id) => {
+	return (dispatch) => {
+		dispatch({
+			type: USER_APPROVE_REQUEST
+		});
+
+		const url = 'http://localhost:4000/user/approve-user';
+
+		const body = {
+			id
+		};
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+
+		console.log(sessionStorage['token']);
+		console.log(id);
+		axios
+			.post(url, body, header)
+			.then((response) => {
+				dispatch({
+					type: USER_APPROVE_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: USER_APPROVE_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+export const suspendUser = (id) => {
+	return (dispatch) => {
+		dispatch({
+			type: USER_SUSPEND_REQUEST
+		});
+
+		const url = 'http://localhost:4000/user/suspend-user';
+
+		const body = {
+			id
+		};
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+		console.log(sessionStorage['token']);
+		console.log(id);
+		axios
+			.post(url, body, header)
+			.then((response) => {
+				dispatch({
+					type: USER_SUSPEND_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: USER_SUSPEND_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+//get seller , approve seller , suspend seller
+
+//get all user
+
+export const getAllSellers = () => {
+	return (dispatch) => {
+		dispatch({
+			type: USER_FETCH_REQUEST
+		});
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+
+		const url = 'http://localhost:4000/admin/seller';
+		axios
+			.get(url, header)
+			.then((response) => {
+				dispatch({
+					type: USER_FETCH_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: USER_FETCH_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+export const approveSeller = (id) => {
+	return (dispatch) => {
+		dispatch({
+			type: USER_APPROVE_REQUEST
+		});
+
+		const url = 'http://localhost:4000/admin/approve-seller';
+
+		const body = {
+			user_id: id
+		};
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+
+		console.log(sessionStorage['token']);
+		console.log(body.user_id);
+		axios
+			.post(url, body, header)
+			.then((response) => {
+				dispatch({
+					type: USER_APPROVE_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: USER_APPROVE_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+export const suspendSelller = (id) => {
+	return (dispatch) => {
+		dispatch({
+			type: USER_SUSPEND_REQUEST
+		});
+
+		const url = 'http://localhost:4000/admin/suspend-seller';
+
+		const body = {
+			user_id: id
+		};
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+
+		console.log(sessionStorage['token']);
+		console.log(id);
+		axios
+			.post(url, body, header)
+			.then((response) => {
+				dispatch({
+					type: USER_SUSPEND_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: USER_SUSPEND_FAIL,
 					payload: error
 				});
 			});

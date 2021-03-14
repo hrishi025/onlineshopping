@@ -13,24 +13,38 @@ router.get('/admin/user', (request, response) => {
    WHEN user_status = 0 THEN 'not verified'
    WHEN user_status = 1 THEN 'verified'
    ELSE 'suspended'
-  END AS user_status from user order by user_role asc`;
+  END AS user_status from user where user_role = 'CUSTOMER'`;
+	db.execute(statement, (error, data) => {
+		response.send(utils.createResult(error, data));
+	});
+});
+
+// show list of all seller
+router.get('/admin/seller', (request, response) => {
+	const statement = `select user_id,user_name,user_email,user_role,	
+   CASE
+   WHEN user_status = 0 THEN 'not verified'
+   WHEN user_status = 1 THEN 'verified'
+   ELSE 'suspended'
+  END AS user_status from user where user_role = 'SELLER' OR user_role ='CUSTSELL'`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
 });
 
 //approve seller request
-router.patch('/admin/approve_seller/:user_id', (request, response) => {
-	const { user_id } = request.params;
-	const statement = `update user set user_role = 'SELLER' where user_id ='${user_id}'`;
+router.post('/admin/approve-seller', (request, response) => {
+	const { user_id } = request.body;
+	const statement = `update user set user_role = 'SELLER' where user_id =${user_id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
 });
 
-//reject seller request
-router.patch('/seller/reject_seller/:user_id', (request, response) => {
-	const { user_id } = request.params;
+//suspend seller request
+router.post('/admin/suspend-seller', (request, response) => {
+	const { user_id } = request.body;
+
 	const statement = `update user set user_role ='CUSTOMER' where user_id = ${user_id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
