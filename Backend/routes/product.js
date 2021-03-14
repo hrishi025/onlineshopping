@@ -46,7 +46,7 @@ router.post("/product", (request, response) => {
   });
 });
 
-// Update Product
+// Update Products
 router.put("/product/:prod_id", (request, response) => {
   const { prod_id } = request.params;
   const {
@@ -80,21 +80,33 @@ router.delete("/product/:prod_id", (request, response) => {
   });
 });
 
-router.patch("/product/quantity/:prod_id", (request, response) => {
-  const { prod_id } = request.params;
-  const { quantity } = request.body;
+// router.patch("/product/quantity/:prod_id", (request, response) => {
+//   const { prod_id } = request.params;
+//   const { quantity } = request.body;
 
-  const statement = `update product set prod_qty = ${quantity} where prod_id = ${prod_id}`;
-  db.execute(statement, (error, data) => {
-    response.send(utils.createResult(error, data));
-  });
-});
+//   const statement = `update product set prod_qty = ${quantity} where prod_id = ${prod_id}`;
+//   db.execute(statement, (error, data) => {
+//     response.send(utils.createResult(error, data));
+//   });
+// });
 
-router.patch("/product/price/:prod_id", (request, response) => {
-  const { prod_id } = request.params;
-  const { price } = request.body;
+// router.patch("/product/price/:prod_id", (request, response) => {
+//   const { prod_id } = request.params;
+//   const { price } = request.body;
 
-  const statement = `update product set prod_price = ${price} where prod_id = ${prod_id}`;
+//   const statement = `update product set prod_price = ${price} where prod_id = ${prod_id}`;
+//   db.execute(statement, (error, data) => {
+//     response.send(utils.createResult(error, data));
+//   });
+// });
+
+
+router.post("/product/update", (request, response) => {
+ // const { prod_id } = request.params;
+ console.log("put method")
+  const {prod_id,prod_title, prod_price , prod_qty} = request.body;
+  console.log(`prod_id--->${prod_id} prod_title--->${prod_title}  prod_price--->${prod_price} prod_qty--->${prod_qty}`)
+  const statement = `update product set prod_price = ${prod_price},prod_title='${prod_title}', prod_qty=${prod_qty} where prod_id = ${prod_id}`;
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data));
   });
