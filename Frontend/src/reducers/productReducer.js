@@ -15,6 +15,14 @@ import {
   PRODUCT_POST_FAIL,
   PRODUCT_POST_RESET,
   PRODUCT_FETCH_RESET,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
+  PRODUCT_UPDATE_RESET,
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_RESET,
+  PRODUCT_DELETE_SUCCESS,
 } from "./../constants/productConstants";
 
 export const getProductReducer = (state = {}, action) => {
@@ -86,6 +94,49 @@ export const categoryFetchReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
 
     case CATEGORY_FETCH_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+
+
+export const productUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_UPDATE_REQUEST:
+      return { loading: true };
+
+    case PRODUCT_UPDATE_SUCCESS:
+      return { loading: false, response: action.payload };
+
+    case PRODUCT_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case PRODUCT_UPDATE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+
+
+
+export const productDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_DELETE_REQUEST:
+      return { loading: true };
+
+    case PRODUCT_DELETE_SUCCESS:
+      return { loading: false, response: action.payload };
+
+    case PRODUCT_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case PRODUCT_DELETE_RESET:
       return {};
 
     default:
