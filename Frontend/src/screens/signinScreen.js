@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetStore, signin } from '../actions/userActions';
 import { Link } from 'react-router-dom';
+import { getAllCartItems } from '../actions/cartActions';
 
 const SigninScreen = (props) => {
 	const userSigninStore = useSelector((state) => state.userSigninStore);
@@ -21,6 +22,7 @@ const SigninScreen = (props) => {
 		() => {
 			if (response && response.status == 'success') {
 				sessionStorage.setItem('token', response.data.token);
+				dispatch(getAllCartItems());
 				props.history.push('/');
 			} else if (error) {
 				// there is an error while making the API call

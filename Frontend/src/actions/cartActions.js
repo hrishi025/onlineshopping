@@ -8,7 +8,10 @@ import {
 	CART_ADD_FAIL,
 	CART_REMOVE_REQUEST,
 	CART_REMOVE_SUCCESS,
-	CART_REMOVE_FAIL
+	CART_REMOVE_FAIL,
+	CART_UPDATE_REQUEST,
+	CART_UPDATE_SUCCESS,
+	CART_UPDATE_FAIL
 } from './../constants/cartConstants';
 
 export const addToCart = (prod_id, cart_quantity) => {
@@ -108,6 +111,43 @@ export const removeFromCart = (cart_id) => {
 			.catch((error) => {
 				dispatch({
 					type: CART_REMOVE_FAIL,
+					payload: error
+				});
+			});
+	};
+};
+
+export const updateCart = (cart_id, cart_quantity) => {
+	return (dispatch) => {
+		dispatch({
+			type: CART_UPDATE_REQUEST
+		});
+
+		const header = {
+			headers: {
+				'Content-Type': 'application/json',
+				token: sessionStorage['token']
+			}
+		};
+
+		const url = 'http://localhost:4000/cart';
+
+		const body = {
+			cart_id,
+			cart_quantity
+		};
+
+		axios
+			.put(url, body, header)
+			.then((response) => {
+				dispatch({
+					type: CART_UPDATE_SUCCESS,
+					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: CART_UPDATE_FAIL,
 					payload: error
 				});
 			});

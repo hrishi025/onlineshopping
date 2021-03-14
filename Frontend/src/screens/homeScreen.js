@@ -23,6 +23,7 @@ const HomeScreen = (props) => {
 	const addToCartHandler = (p) => {
 		console.log('in addToCartHandler :' + p);
 		dispatch(addToCart(p.prod_id, '1'));
+		props.history.push('/cart');
 	};
 
 	return (

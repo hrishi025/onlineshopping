@@ -42,9 +42,8 @@ router.post('/addtocart', (request, response) => {
 });
 
 //Update Cart
-router.put('/cart/:cart_id', (request, response) => {
-	const { cart_quantity } = request.body;
-	const { cart_id } = request.params;
+router.put('/cart', (request, response) => {
+	const { cart_id, cart_quantity } = request.body;
 	const statement = `UPDATE cart SET cart_quantity = '${cart_quantity}' WHERE cart_id = '${cart_id}' and user_id=${request.id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));

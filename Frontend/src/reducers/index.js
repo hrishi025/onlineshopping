@@ -11,8 +11,8 @@ import {
 	// sellerProfileReducer
 } from './productReducer';
 
-import { viewOrderReducer } from './orderReducer';
-import { cartFetchReducer, cartReducer } from './cartReducer';
+import { updateOrderReducer, viewOrderReducer } from './orderReducer';
+import { cartFetchReducer, cartReducer, updateCartReducer } from './cartReducer';
 
 const reducers = combineReducers({
 	//user stores
@@ -29,6 +29,7 @@ const reducers = combineReducers({
 	//cart stores
 	cartStore: cartReducer,
 	cartItemsStore: cartFetchReducer,
+	updateCartStore: updateCartReducer,
 
 	//category and company store
 	categoryFetchStore: categoryFetchReducer,

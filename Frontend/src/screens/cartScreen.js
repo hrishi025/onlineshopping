@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCartItems, removeFromCart } from '../actions/cartActions';
+import { getAllCartItems, removeFromCart, updateCart } from '../actions/cartActions';
+import { Link } from 'react-router-dom';
 
 const CartScreen = (props) => {
 	const userSigninStore = useSelector((state) => state.userSigninStore);
@@ -35,15 +36,16 @@ const CartScreen = (props) => {
 				sessionStorage.removeItem('token');
 				props.history.push('/signin');
 			}
-
-			setTotal(0);
-			console.log('qty updated');
-			console.log(cartItems);
-			cartItems.map((c) => {
-				console.log(total + ' + ' + c.cart_quantity + ' * ' + c.prod_price);
-				total = total + c.cart_quantity * c.prod_price;
-				setTotal(total);
-			});
+			if (cartItems != null) {
+				setTotal(0);
+				console.log('qty updated');
+				console.log(cartItems);
+				cartItems.map((c) => {
+					console.log(total + ' + ' + c.cart_quantity + ' * ' + c.prod_price);
+					total = total + c.cart_quantity * c.prod_price;
+					setTotal(total);
+				});
+			}
 		},
 		[ cartItems ]
 	);
@@ -78,11 +80,19 @@ const CartScreen = (props) => {
 		props.history.push('/signin');
 	};
 
+	const continueShopping = () => {
+		cartItems.map((c) => {
+			dispatch(updateCart(c.cart_id, c.cart_quantity));
+		});
+		props.history.push('/');
+	};
+
 	return (
 		<div className="App">
 			<section class="section-pagetop bg">
 				<div class="container">
 					<h2 class="title-page">Shopping cart</h2>
+					<hr />
 				</div>
 			</section>
 
@@ -118,9 +128,12 @@ const CartScreen = (props) => {
 															<figure class="itemside">
 																<div class="aside" />
 																<figcaption class="info">
-																	<a href="#" class="title text-dark">
+																	<Link
+																		to={`/productdetails/${c.prod_id}`}
+																		class="title text-dark"
+																	>
 																		{c.prod_title}
-																	</a>
+																	</Link>
 																</figcaption>
 															</figure>
 														</td>
@@ -182,7 +195,7 @@ const CartScreen = (props) => {
 									<button
 										class="btn btn-light"
 										onClick={() => {
-											props.history.push('/');
+											continueShopping();
 										}}
 									>
 										Continue shopping{' '}

@@ -237,3 +237,25 @@ body {
 .signin-form form a:hover {
   text-decoration: underline;
 }
+
+ul li a {
+  font-size: 1.1rem;
+  color: #343a40;
+}
+
+ul li a.cart:hover {
+  text-decoration: none;
+  color: #d60e96;
+}
+
+ul li a.cart .cart-basket {
+  font-size: .8rem;
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  color: #fff;
+  background-color: green;
+  border-radius: 50%;
+}
