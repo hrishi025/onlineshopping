@@ -13,6 +13,10 @@ import {
   PRODUCT_POST_REQUEST,
   PRODUCT_POST_FAIL,
   PRODUCT_POST_SUCCESS,
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_RESET,
+  PRODUCT_DELETE_SUCCESS,
 } from "./../constants/productConstants";
 
 export const getProductList = () => {
@@ -52,14 +56,14 @@ export const addProduct = (
   cat_id,
   prod_price,
   comp_id,
-  prod_qty
+  prod_qty,
 ) => {
   return (dispatch) => {
     dispatch({
       type: PRODUCT_POST_REQUEST,
     });
 
-    const url = "http://localhost:4000/product";
+    const url = `http://localhost:4000/product`;
 
     const body = {
       prod_title,
@@ -184,3 +188,38 @@ export const getProductDetails = (prod_id) => {
       });
   };
 };
+
+
+//delete seller product
+export const deleteProduct = (prod_id) => {
+  return (dispatch) => {
+    dispatch({
+      type: PRODUCT_DELETE_REQUEST,
+    });
+
+    const url = `http://localhost:4000/product/${prod_id}`;
+    console.log(url);
+    const header = {
+      headers :{
+      "Content-Type": "application/json",
+      token: sessionStorage["token"],
+      }
+    };
+
+    axios
+      .delete(url, header)
+      .then((response) => {
+        dispatch({
+          type: PRODUCT_DELETE_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: PRODUCT_DELETE_FAIL,
+          payload: error,
+        });
+      });
+  };
+};
+
