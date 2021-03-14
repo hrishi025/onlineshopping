@@ -1,44 +1,44 @@
-import { combineReducers } from "redux";
-import { userDetailsReducer, userSignupReducer } from "./userReducer";
-import { userSigninReducer, userProfileReducer } from "./userReducer";
+import { combineReducers } from 'redux';
+import { userSignupReducer } from './userReducer';
+import { userSigninReducer, userProfileReducer } from './userReducer';
 import {
-  categoryFetchReducer,
-  companyFetchReducer,
-  getProductReducer,
-  productPostReducer,
-  productUpdateReducer,
-  productDeleteReducer,
- // sellerProfileReducer
-} from "./productReducer";
+	categoryFetchReducer,
+	companyFetchReducer,
+	getProductReducer,
+	productPostReducer,
+	productUpdateReducer,
+	productDeleteReducer
+	// sellerProfileReducer
+} from './productReducer';
 
-import { viewOrderReducer } from "./orderReducer";
-import { cartFetchReducer, cartReducer } from "./cartReducer";
+import { viewOrderReducer } from './orderReducer';
+import { cartFetchReducer, cartReducer } from './cartReducer';
 
 const reducers = combineReducers({
-  //user stores
-  userSignupStore: userSignupReducer,
-  userSigninStore: userSigninReducer,
-  editProfileStore: userProfileReducer,
+	//user stores
+	userSignupStore: userSignupReducer,
+	userSigninStore: userSigninReducer,
+	editProfileStore: userProfileReducer,
 
-  //product stores
-  allProductStore: getProductReducer,
-  addProductStore: productPostReducer,
-  updateProductStore: productUpdateReducer,
-  deleteProductStore:productDeleteReducer,
-  //cart stores
-  cartStore: cartReducer,
-  cartItemsStore: cartFetchReducer,
+	//product stores
+	allProductStore: getProductReducer,
+	addProductStore: productPostReducer,
+	updateProductStore: productUpdateReducer,
+	deleteProductStore: productDeleteReducer,
 
-  //category and company store
-  categoryFetchStore: categoryFetchReducer,
-  companyFetchStore: companyFetchReducer,
+	//cart stores
+	cartStore: cartReducer,
+	cartItemsStore: cartFetchReducer,
 
-  //seller
-  //sellerProfileStore:sellerProfileReducer,
+	//category and company store
+	categoryFetchStore: categoryFetchReducer,
+	companyFetchStore: companyFetchReducer,
 
-  //order
-  viewOrderStore:viewOrderReducer
+	//seller
+	//sellerProfileStore:sellerProfileReducer,
 
+	//order
+	viewOrderStore: viewOrderReducer
 });
 
 export default reducers;
