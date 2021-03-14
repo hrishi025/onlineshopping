@@ -53,6 +53,18 @@ const Navigation = (props) => {
                   </li>
                  
                 ))}
+              
+              {(userSigninStore.response &&
+                userSigninStore.response.status &&
+                userSigninStore.response.status == "success" && (
+               
+                  <li className="nav-item">
+                    <Link to="/seller">
+                      <span className="nav-link">Seller</span>
+                    </Link>
+                  </li>
+                 
+                ))}
 
              {userSigninStore.response &&
               userSigninStore.response.status &&
