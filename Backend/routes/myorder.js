@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Get myorder Details
 router.get('/myorder', (request, response) => {
+	console.log('inside get myorder list');
 	const statement = `SELECT myorder_id, orderDate, 
 	CASE
 		WHEN myorder.status = 0 THEN 'not delivered'
@@ -20,10 +21,10 @@ router.get('/myorder', (request, response) => {
 });
 
 //Update myorder
-router.put('/myorder/:myorder_id', (request, response) => {
-	const { status } = request.body;
-	const { myorder_id } = request.params;
-	const statement = `UPDATE myorder SET status = 'CANCELLED WHERE myorder_id = '${myorder_id}'`;
+router.put('/updateMyorder', (request, response) => {
+	const { myorder_id, status } = request.body;
+	console.log('inside updateMyorder ' + myorder_id + ' ' + status);
+	const statement = `UPDATE myorder SET status = ${status} WHERE myorder_id = ${myorder_id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});

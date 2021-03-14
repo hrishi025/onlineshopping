@@ -1,22 +1,22 @@
 import {
-	ORDER_FETCH_REQUEST,
-	ORDER_FETCH_SUCCESS,
-	ORDER_FETCH_FAIL,
-	ORDER_FETCH_RESET
+	ORDERDETAILS_FETCH_REQUEST,
+	ORDERDETAILS_FETCH_SUCCESS,
+	ORDERDETAILS_FETCH_FAIL,
+	ORDERDETAILS_FETCH_RESET
 } from '../constants/orderConstants';
 
-export const viewOrderReducer = (state = {}, action) => {
+export const viewOrderDetailsReducer = (state = {}, action) => {
 	switch (action.type) {
-		case ORDER_FETCH_REQUEST:
+		case ORDERDETAILS_FETCH_REQUEST:
 			return { loading: true };
 
-		case ORDER_FETCH_SUCCESS:
+		case ORDERDETAILS_FETCH_SUCCESS:
 			return { loading: false, response: action.payload };
 
-		case ORDER_FETCH_FAIL:
+		case ORDERDETAILS_FETCH_FAIL:
 			return { loading: false, error: action.payload };
 
-		case ORDER_FETCH_RESET:
+		case ORDERDETAILS_FETCH_RESET:
 			return {};
 
 		default:

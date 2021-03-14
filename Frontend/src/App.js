@@ -10,10 +10,11 @@ import ProductDetailsScreen from './screens/productDetailsScreen';
 import EditProfileScreen from './screens/editProfileScreen';
 import AdminScreen from './screens/adminScreen';
 import sellerScreen from './screens/sellerScreen';
-import viewOrderScreen from './screens/viewOrderScreen';
 import sellerProductScreen from './screens/sellerProductScreen';
 import EditSellerProductScreen from './screens/editSellerProductScreen';
 import CartScreen from './screens/cartScreen';
+import MyOrderScreen from './screens/myorderScreen';
+import OrderDetailsScreen from './screens/orderDetailsScreen';
 function App() {
 	return (
 		<div className="App">
@@ -28,10 +29,11 @@ function App() {
 				<Route exact path="/cart" component={CartScreen} />
 				<Route path="/admin" component={AdminScreen} />
 				<Route path="/seller" component={sellerScreen} />
-				<Route path="/view-order" component={viewOrderScreen} />
+				<Route path="/order-details" component={OrderDetailsScreen} />
 				<Route path="/show-product" component={sellerProductScreen} />
 				<Route path="/seller-update-product" component={EditSellerProductScreen} />
 				<Route exact path="/productdetails/:id" component={ProductDetailsScreen} />
+				<Route path="/view-myorders" component={MyOrderScreen} />
 			</Router>
 		</div>
 	);

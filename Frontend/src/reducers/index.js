@@ -11,8 +11,9 @@ import {
 	// sellerProfileReducer
 } from './productReducer';
 
-import { updateOrderReducer, viewOrderReducer } from './orderReducer';
+import { viewOrderDetailsReducer, viewOrderReducer } from './orderReducer';
 import { cartFetchReducer, cartReducer, updateCartReducer } from './cartReducer';
+import { getMyorderReducer } from './myorderReducer';
 
 const reducers = combineReducers({
 	//user stores
@@ -38,8 +39,11 @@ const reducers = combineReducers({
 	//seller
 	//sellerProfileStore:sellerProfileReducer,
 
-	//order
-	viewOrderStore: viewOrderReducer
+	//order Details
+	viewOrderDetailsStore: viewOrderDetailsReducer,
+
+	//My Order
+	viewMyOrderStore: getMyorderReducer
 });
 
 export default reducers;
