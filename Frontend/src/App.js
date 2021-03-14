@@ -9,7 +9,10 @@ import addProductList from "./screens/addProductScreen";
 import ProductDetailsScreen from "./screens/productDetailsScreen";
 import EditProfileScreen from "./screens/editProfileScreen";
 import AdminScreen from "./screens/adminScreen";
-
+import sellerScreen from "./screens/sellerScreen"
+import viewOrderScreen from "./screens/viewOrderScreen"
+import sellerProductScreen from "./screens/sellerProductScreen"
+import EditSellerProductScreen from "./screens/editSellerProductScreen"
 function App() {
   return (
     <div className="App">
@@ -22,6 +25,10 @@ function App() {
         <Route exact path="/add-product" component={addProductList} />
         <Route exact path="/edit-profile" component={EditProfileScreen} />
         <Route path="/admin" component={AdminScreen} />
+        <Route path="/seller" component={sellerScreen} />
+        <Route path="/view-order" component={viewOrderScreen} />
+        <Route path="/show-product" component={sellerProductScreen} />
+        <Route path="/seller-update-product" component={EditSellerProductScreen} />
         <Route
           exact
           path="/productdetails/:id"
