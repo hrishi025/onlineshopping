@@ -22,7 +22,7 @@ const OrderDetailsScreen = (props) => {
 
 	return (
 		<div>
-			Order Details Screen
+			<h2><strong>Order Details Screen</strong></h2>
 			<table className="table table-striped">
 				<thead>
 					<tr>
@@ -33,6 +33,7 @@ const OrderDetailsScreen = (props) => {
 						<th>Quantity</th>
 						<th>Rating</th>
 						<th>Comment</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,15 +65,6 @@ const OrderDetailsScreen = (props) => {
 						})}
 				</tbody>
 			</table>
-			<div>
-				<Link to="/signin">SignIn</Link>
-			</div>
-			<div>
-				<Link to="/signup">SignUp</Link>
-			</div>
-			<div>
-				<Link to="/add-product">Add Product</Link>
-			</div>
 		</div>
 	);
 };

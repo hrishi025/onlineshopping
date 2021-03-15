@@ -29,6 +29,7 @@ const CategoryListScreen = (props) => {
 
   const onDelete = (c) => {
     dispatch(deleteCategory(c.cat_id))
+    props.history.push('/admin')
   }
   const onAddCategory = () => {
     props.history.push('/add-category')

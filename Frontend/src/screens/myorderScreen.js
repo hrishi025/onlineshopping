@@ -39,6 +39,7 @@ const MyOrderScreen = (props) => {
             <th>MyOrder ID</th>
             <th>Order Date</th>
             <th>Order Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -56,16 +57,15 @@ const MyOrderScreen = (props) => {
                       onClick={() => {
                         onCancelOrder(p)
                       }}
-                      className="btn btn-sm btn-danger btn-add-to-cart">
+                      className="btn btn-sm btn-danger">
                       Cancel
                     </button>
-                  </td>
-                  <td>
+
                     <button
                       onClick={() => {
                         onDeliverOrder(p)
                       }}
-                      className="btn btn-sm btn-success btn-add-to-cart">
+                      className="btn btn-sm btn-success float-end">
                       Deliver Order
                     </button>
                   </td>

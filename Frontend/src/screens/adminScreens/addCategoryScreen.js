@@ -44,7 +44,9 @@ const AddCategoryScreen = (props) => {
   return (
     <div>
       <div className="my-5">
-        <h1 className="text-center">Edit Category Details</h1>
+        <h2 className="text-center">
+          <strong>Add Category Details</strong>
+        </h2>
       </div>
 
       <div className="container contact_div">
