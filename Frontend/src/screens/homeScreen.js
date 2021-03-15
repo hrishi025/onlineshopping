@@ -52,10 +52,13 @@ const HomeScreen = (props) => {
 												<strong>{p.prod_id}</strong>
 											</h5>
 											<div>
-												<Link to={`/productdetails/${p.prod_id}`}>{p.prod_title}</Link>
+												<Link to={`/productdetails/${p.prod_id}`}><h4><strong>{p.prod_title}</strong></h4></Link>
 											</div>
-											<div>{p.prod_price}</div>
-											<div>{p.prod_qty}</div>
+											<div><h4>₹ 
+											{p.prod_price}
+                                               </h4>
+											 </div>
+											
 											<button
 												onClick={() => addToCartHandler(p)}
 												className="btn btn-sm btn-success btn-add-to-cart"

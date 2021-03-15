@@ -22,6 +22,12 @@ import {
 	updateCategoryReducer
 } from './categoryReducer';
 
+import {
+paymentReducer,
+dataReducer
+} from './adminDashBoardReducer';
+
+
 const reducers = combineReducers({
 	//user stores
 	userSignupStore: userSignupReducer,
@@ -49,7 +55,7 @@ const reducers = combineReducers({
 	getComponyStore: getCompanyReducer,
 	updateComponyStore: updateCompanyReducer,
 	deleteComponyStore: deleteCompanyReducer,
-	addComponyStore: addCompanyReducer,
+	addCompanyStore: addCompanyReducer,
 
 	getCategoryStore: getCategoryReducer,
 	updateCategoryStore: updateCategoryReducer,
@@ -63,7 +69,11 @@ const reducers = combineReducers({
 	viewOrderDetailsStore: viewOrderDetailsReducer,
 
 	//My Order
-	viewMyOrderStore: getMyorderReducer
+	viewMyOrderStore: getMyorderReducer,
+
+	//payment
+	paymentStore:paymentReducer,
+	dataStore:dataReducer,
 });
 
 export default reducers;

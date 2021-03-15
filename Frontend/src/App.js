@@ -17,6 +17,15 @@ import UserListScreen from './screens/adminScreens/userListScreen';
 import SellerListScreen from './screens/adminScreens/sellerListScreen';
 import AdminScreen from './screens/adminScreens/adminScreen';
 import SellerProductScreen from './screens/sellerProductScreen';
+import addCompanyScreen from './screens/adminScreens/addCompanyScreen';
+import showCompanyScreen from './screens/adminScreens/showCompanysScreen';
+import updateCompanyScreen from './screens/adminScreens/updateCompanyScreen';
+import categoryScreen from './screens/adminScreens/categoryListScreen'
+import updateCategoryScreen from './screens/adminScreens/updateCategoryScreen'
+import addCategoryScreen from './screens/adminScreens/addCategoryScreen'
+import ShowAllProductAdminScreen from './screens/adminScreens/showAllProductAdminScreen'
+import EditAdminProductScreen from './screens/adminScreens/editProductAdminScreen'
+
 function App() {
 	return (
 		<div className="App">
@@ -36,9 +45,16 @@ function App() {
 				<Route path="/seller-update-product" component={EditSellerProductScreen} />
 				<Route exact path="/productdetails/:id" component={ProductDetailsScreen} />
 				<Route path="/view-myorders" component={MyOrderScreen} />
-
 				<Route path="/get-users" component={UserListScreen} />
 				<Route path="/get-seller" component={SellerListScreen} />
+				<Route path="/add-company" component={addCompanyScreen} />
+				<Route path="/show-company" component={showCompanyScreen} />
+				<Route path="/update-company" component={updateCompanyScreen} />
+				<Route path="/get-category" component={categoryScreen} />
+                <Route path="/update-category" component={updateCategoryScreen} />
+                <Route path="/add-category" component={addCategoryScreen} />
+				<Route path="/get-product-admin" component={ShowAllProductAdminScreen} />
+				<Route path="/update-product-admin" component={EditAdminProductScreen} />
 			</Router>
 		</div>
 	);

@@ -66,6 +66,18 @@ const Navigation = (props) => {
 								</li>
 							)}
 
+
+                           {userSigninStore.response &&
+							userSigninStore.response.status &&
+							userSigninStore.response.status == 'success' && (
+								<li className="nav-item">
+									<Link to="/admin">
+										<span className="nav-link">Admin</span>
+									</Link>
+								</li>
+							)}
+
+
 							{userSigninStore.response &&
 							userSigninStore.response.status &&
 							userSigninStore.response.status == 'success' && (

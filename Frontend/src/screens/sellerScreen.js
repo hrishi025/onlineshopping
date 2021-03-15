@@ -7,8 +7,8 @@ const sellerScreen = (props) => {
 				<h1 className="text-center">Seller Profile</h1>
 			</div>
 
-			<div className="col-md-6" col-10 mx-auto>
-				<div class="mb-3">
+			<div className="col-md-6"  col-10 mx-auto>
+				<div class="mb-3" class="seller-link">
 					<label for="exampleFormControlInput1" class="form-label">
 						<Link to="/order-details">
 							<span className="nav-link">View Order</span>

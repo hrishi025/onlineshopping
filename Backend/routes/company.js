@@ -16,20 +16,18 @@ router.get('/company', (request, response) => {
 //Insert new categoty
 router.post('/company', (request, response) => {
 	console.log('in post compnay');
-	const { title, description } = request.body;
-	console.log(`title-->${title} desciption-->${description}`);
-	const statement = `INSERT INTO company(comp_title, comp_description) VALUES('${title}', '${description}')`;
+	const { comp_title, comp_description } = request.body;
+	const statement = `INSERT INTO company(comp_title, comp_description) VALUES('${comp_title}', '${comp_description}')`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
 });
 
-//Update Category
-router.put('/company/:id', (request, response) => {
-	const { title, description } = request.body;
-	const { id } = request.params;
-	console.log(`title-->${title} desciption-->${description}`);
-	const statement = `UPDATE company SET comp_title = '${title}', comp_description = '${description}' WHERE comp_id = '${id}'`;
+//Update Company
+router.post('/company/update', (request, response) => {
+	const {comp_id, comp_title, comp_description } = request.body;
+	console.log(`title-->${comp_title} desciption-->${comp_description}`);
+	const statement = `UPDATE company SET comp_title = '${comp_title}', comp_description = '${comp_description}' WHERE comp_id = '${comp_id}'`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});

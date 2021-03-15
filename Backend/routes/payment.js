@@ -13,4 +13,14 @@ router.get('/payment', (request, response) => {
 	});
 });
 
+
+
+// Get Payment Details
+router.get('/payment/total', (request, response) => {
+	const statement = `select sum(pay_amount) as TotalRevenue from payment;`;
+	db.execute(statement, (error, data) => {
+		response.send(utils.createResult(error, data));
+	});
+});
+
 module.exports = router;

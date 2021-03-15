@@ -67,11 +67,14 @@ export const addCompany = (comp_title,
       type: COMPANY_ADD_REQUEST,
     });
 
+    
+
     const url = "http://localhost:4000/company";
 
     const header = {
       headers: {
         "Content-Type": "application/json",
+        token:sessionStorage['token']
       }
     };
     const body ={
@@ -79,7 +82,7 @@ export const addCompany = (comp_title,
       comp_description
 
     }
-
+  console.log(`in add company action ${body.comp_title}  ${body.comp_description}`)
     axios
       .post(url,body, header)
       .then((response) => {
@@ -97,30 +100,30 @@ export const addCompany = (comp_title,
   };
 };
 
-
-export const updateCompany = (comp_id ,comp_description,
-   comp_title) => {
+//update company
+export const updateCompany = (comp_id ,comp_title,comp_description,
+   ) => {
    return (dispatch) => {
      dispatch({
        type: COMPANY_UPDATE_REQUEST,
      });
- 
-     const url = "http://localhost:4000/company";
+    console.log(`in update action`)
+     const url = "http://localhost:4000/company/update";
     const body ={
        comp_id,
-       comp_description,
-       comp_title
+       comp_title,
+       comp_description
+      
     }
      const header = {
        headers: {
          "Content-Type": "application/json",
          token:sessionStorage['token']
-
        }
      };
  
      axios
-       .put(url,body, header)
+       .post(url,body, header)
        .then((response) => {
          dispatch({
            type: COMPANY_UPDATE_SUCCESS,

@@ -13,24 +13,24 @@ router.get('/category', (request, response) => {
 	});
 });
 
-//Insert new categoty
+//Insert new category
 router.post('/category', (request, response) => {
-	const { title, description } = request.body;
-	const statement = `INSERT INTO category(cat_title, cat_description) VALUES('${title}', '${description}')`;
+	const { cat_title, cat_description } = request.body
+	const statement = `INSERT INTO category(cat_title, cat_description) VALUES('${cat_title}', '${cat_description}')`
 	db.execute(statement, (error, data) => {
-		response.send(utils.createResult(error, data));
-	});
-});
+	  response.send(utils.createResult(error, data))
+	})
+  })
+
 
 //Update Category
-router.put('/category/:id', (request, response) => {
-	const { title, description } = request.body;
-	const { id } = request.params;
-	const statement = `UPDATE category SET cat_title = '${title}', cat_description = '${description}' WHERE cat_id = '${id}'`;
-	db.execute(statement, (error, data) => {
-		response.send(utils.createResult(error, data));
-	});
-});
+router.put('/category', (request, response) => {
+  const { cat_id, cat_title, cat_description } = request.body
+  const statement = `UPDATE category SET cat_title = '${cat_title}', cat_description = '${cat_description}' WHERE cat_id = '${cat_id}'`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
 
 // Delete Category
 router.delete('/category/:id', (request, response) => {

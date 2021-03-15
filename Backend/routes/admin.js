@@ -60,4 +60,16 @@ router.patch('/admin/suspend_user/:user_id', (request, response) => {
 	});
 });
 
+//Get All Products For Admin
+router.get('/admin/product', (request, response) => {
+	const statement = `SELECT  prod_id, prod_title, 
+	 prod_description, prod_price, cat_id,
+	 comp_id, prod_qty FROM product`;
+	db.execute(statement, (error, data) => {
+		response.send(utils.createResult(error, data));
+	});
+});
+
+
+
 module.exports = router;
