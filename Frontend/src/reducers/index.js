@@ -24,7 +24,10 @@ import {
 
 import {
 paymentReducer,
-dataReducer
+dataReducer,
+ratingReducer,
+maxSaleProductReducer,
+monthWiseRevenueReducer
 } from './adminDashBoardReducer';
 
 
@@ -74,6 +77,9 @@ const reducers = combineReducers({
 	//payment
 	paymentStore:paymentReducer,
 	dataStore:dataReducer,
+	ratingStore:ratingReducer,
+	maxSaleProductStore:maxSaleProductReducer,
+	monthWiseRevenueStore:monthWiseRevenueReducer
 });
 
 export default reducers;

@@ -259,7 +259,7 @@ ul li a.cart .cart-basket {
   background-color: green;
   border-radius: 50%;
 }
-
+/* 
 .seller-link{
   background-color: #5fcaba;
   top: auto;
@@ -267,29 +267,6 @@ ul li a.cart .cart-basket {
   width: 70px;
   height: auto;
   
-}
-/* unvisited link */
-a:link {
-  color:blue;
-}
-
-/* visited link */
-/* a:visited {
-  color: #d60e96;
-} */
-
-/* mouse over link */
-a:hover {
-  color:blue;
-}
-
-/* selected link */
-a:active {
-  color: aqua;
-}
-
-.revenue-div{
-  background-color: green;
 }
 
 .card{
@@ -308,4 +285,12 @@ a:active {
  flex-wrap: wrap;
  border: 5px outset red;
 }
-
+ */
+ .card-link{
+  max-width: 18rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+ 
+ }
