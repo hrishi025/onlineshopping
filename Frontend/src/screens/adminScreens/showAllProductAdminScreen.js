@@ -2,13 +2,12 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductListAdmin } from '../../actions/adminAction'
 import { deleteProduct } from '../../actions/productActions'
+import { PRODUCT_UPDATE_RESET } from '../../constants/productConstants'
 
 const ShowAllProductAdminScreen = (props) => {
   const dispatch = useDispatch()
 
-  const allProductStore = useSelector(
-    (store) => store.allProductStore
-  )
+  const allProductStore = useSelector((store) => store.allProductStore)
   const { error, response, loading } = allProductStore
 
   useEffect(() => {
@@ -31,10 +30,19 @@ const ShowAllProductAdminScreen = (props) => {
 
   const onDelete = (p) => {
     dispatch(deleteProduct(p.prod_id))
-    window.location.reload(false)
-
-    // props.history.push('/seller')
+    props.history.push('admin')
   }
+
+  // useEffect(() => {
+  //   if (response && response.status == 'success') {
+  //     dispatch({ type: PRODUCT_UPDATE_RESET })
+  //     props.history.push('/get-product-admin')
+  //   } else if (error) {
+  //     // there is an error while making the API call
+  //     console.log(error)
+  //     alert('error while making API call')
+  //   }
+  // }, [response, loading, error])
 
   return (
     <div>

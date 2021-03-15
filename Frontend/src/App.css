@@ -258,6 +258,7 @@ ul li a.cart .cart-basket {
   color: #fff;
   background-color: green;
   border-radius: 50%;
+<<<<<<< HEAD
 }
 /* 
 .seller-link{
@@ -294,3 +295,6 @@ ul li a.cart .cart-basket {
   flex-wrap: wrap;
  
  }
+=======
+}
+>>>>>>> cde8909518e4cbb53fd5ead63a34de5dc13d2a23
