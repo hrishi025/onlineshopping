@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductListAdmin } from '../../actions/adminAction'
 import { deleteProduct } from '../../actions/productActions'
-import { PRODUCT_UPDATE_RESET } from '../../constants/productConstants'
 
 const ShowAllProductAdminScreen = (props) => {
   const dispatch = useDispatch()
@@ -23,7 +22,7 @@ const ShowAllProductAdminScreen = (props) => {
   const onUpdate = (p) => {
     console.log('in onUpdate')
     props.history.push({
-      pathname: '/update-product-admin',
+      pathname: '/seller-update-product',
       state: p, // your data array of objects
     })
   }

@@ -198,7 +198,9 @@ const AdminScreen = (props) => {
                     <div className="card-container">
                       <div className="card-link bg-success mb-4">
                         <div className="card-header">
-                          <h3><strong>Max Sold Product</strong></h3>
+                          <h3>
+                            <strong>Max Sold Product</strong>
+                          </h3>
                         </div>
                         <tr>
                           <td>Product Title</td>

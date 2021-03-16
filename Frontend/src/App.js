@@ -24,7 +24,6 @@ import categoryScreen from './screens/adminScreens/categoryListScreen'
 import updateCategoryScreen from './screens/adminScreens/updateCategoryScreen'
 import addCategoryScreen from './screens/adminScreens/addCategoryScreen'
 import ShowAllProductAdminScreen from './screens/adminScreens/showAllProductAdminScreen'
-import EditAdminProductScreen from './screens/adminScreens/editProductAdminScreen'
 import productRatingScreen from './screens/productRatingScreen'
 import showAllOrdersAdminScreen from './screens/adminScreens/showAllOrdersAdminScree'
 import UserOrderDetailsScreen from './screens/userOrderDetailsScreen'
@@ -36,12 +35,12 @@ function App() {
       <Router>
         <Navigation />
         <Route exact path="/" component={HomeScreen} />
-        <Route exact path="/home" component={HomeScreen} />
-        <Route exact path="/signup" component={SignupScreen} />
-        <Route exact path="/signin" component={SigninScreen} />
-        <Route exact path="/add-product" component={addProductList} />
-        <Route exact path="/edit-profile" component={EditProfileScreen} />
-        <Route exact path="/cart" component={CartScreen} />
+        <Route path="/home" component={HomeScreen} />
+        <Route path="/signup" component={SignupScreen} />
+        <Route path="/signin" component={SigninScreen} />
+        <Route path="/add-product" component={addProductList} />
+        <Route path="/edit-profile" component={EditProfileScreen} />
+        <Route path="/cart" component={CartScreen} />
         <Route path="/admin" component={AdminScreen} />
         <Route path="/seller" component={sellerScreen} />
         <Route path="/order-details" component={OrderDetailsScreen} />
@@ -50,11 +49,7 @@ function App() {
           path="/seller-update-product"
           component={EditSellerProductScreen}
         />
-        <Route
-          exact
-          path="/productdetails/:id"
-          component={ProductDetailsScreen}
-        />
+        <Route path="/productdetails/:id" component={ProductDetailsScreen} />
         <Route path="/view-myorders" component={MyOrderScreen} />
         <Route path="/get-users" component={UserListScreen} />
         <Route path="/get-seller" component={SellerListScreen} />
@@ -67,10 +62,6 @@ function App() {
         <Route
           path="/get-product-admin"
           component={ShowAllProductAdminScreen}
-        />
-        <Route
-          path="/update-product-admin"
-          component={EditAdminProductScreen}
         />
         <Route path="/rate-product" component={productRatingScreen} />
         <Route
