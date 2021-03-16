@@ -19,7 +19,6 @@ import {
   getMaxSalesProduct,
   getMonthWiseRevenue,
 } from '../../actions/adminDashBoardActions'
-import { Chart } from 'react-google-charts'
 
 const AdminScreen = (props) => {
   // const cartItemsStore = useSelector((store) => store.cartItemsStore);
@@ -53,107 +52,181 @@ const AdminScreen = (props) => {
     <div>
       <table className="table table-bordered table-hover">
         <tr>
-          <td aria-colspan="10%">
-            <div className="col-md-4" col-10 mx-auto>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
-                  <button className="btn btn-secondary">
-                    {' '}
-                    <Link className="link" to="/get-users">
-                      <span className="nav-link">
-                        <strong>Show All User</strong>
-                      </span>
-                    </Link>
-                  </button>
-                </label>
-              </div>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
-                  <button className="btn btn-secondary">
-                    <Link className="link" to="/get-seller">
-                      <span className="nav-link">
-                        <strong>Show All Seller</strong>
-                      </span>
-                    </Link>
-                  </button>
-                </label>
-              </div>
+          <td>
+            <table style={{ width: '100%' }}>
+              <tr>
+                <td>
+                  <div>
+                    <div className="mb-1">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="form-label">
+                        <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
+                          {' '}
+                          <Link className="link" to="/get-users">
+                            <span className="nav-link">
+                              <strong>Show All User</strong>
+                            </span>
+                          </Link>
+                        </button>
+                      </label>
+                    </div>
+                  </div>
+                </td>
 
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
-                  <button className="btn btn-secondary">
-                    <Link className="link" to="/get-product-admin">
-                      <span className="nav-link">
-                        <strong>Show All Product</strong>
-                      </span>
-                    </Link>
-                  </button>
-                </label>
-              </div>
-
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
-                  <button className="btn btn-secondary">
-                    <Link className="link" to="/show-company">
-                      <span className="nav-link">
-                        <strong>show Companies</strong>
-                      </span>
-                    </Link>
-                  </button>
-                </label>
-              </div>
-
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
-                  <button className="btn btn-secondary">
-                    <Link className="link" to="/get-category">
-                      <span className="nav-link">
-                        <strong>Show Categories</strong>
-                      </span>
-                    </Link>
-                  </button>
-                </label>
-              </div>
-            </div>
+                <td>
+                  <div>
+                    <div className="mb-1">
+                      <label for="exampleFormControlInput1" class="form-label">
+                        <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
+                          <Link className="link" to="/get-seller">
+                            <span className="nav-link">
+                              <strong>Show All Seller</strong>
+                            </span>
+                          </Link>
+                        </button>
+                      </label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <table style={{ width: '100%' }}>
+              <tr>
+                <td>
+                  <div>
+                    <div class="mb-1">
+                      <label for="exampleFormControlInput1" class="form-label">
+                        <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
+                          <Link className="link" to="/get-product-admin">
+                            <span className="nav-link">
+                              <strong>Show All Product</strong>
+                            </span>
+                          </Link>
+                        </button>
+                      </label>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="mb-1">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
+                        <Link className="link" to="/show-company">
+                          <span className="nav-link">
+                            <strong>show Companies</strong>
+                          </span>
+                        </Link>
+                      </button>
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <table style={{ width: '100%' }}>
+              <tr>
+                <td>
+                  <div class="mb-1">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
+                        <Link className="link" to="/get-category">
+                          <span className="nav-link">
+                            <strong>Show Categories</strong>
+                          </span>
+                        </Link>
+                      </button>
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <div class="mb-1">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
+                        <Link className="link" to="/admin-order-details">
+                          <span className="nav-link">
+                            <strong>Show All Orders</strong>
+                          </span>
+                        </Link>
+                      </button>
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <td style={{ width: '70px' }}>
+                  <div className="card-container">
+                    <div className="card-link bg-success mb-4">
+                      <div className="card-header">Total Revenue</div>
+                      <div className="revenue-div">
+                        {paymentStore.response &&
+                          paymentStore.response.data &&
+                          paymentStore.response.data.length >= 0 &&
+                          paymentStore.response.data.map((p) => {
+                            return (
+                              <div>
+                                <div>₹ {p.TotalRevenue}</div>
+                              </div>
+                            )
+                          })}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td style={{ width: '70px' }}>
+                  <div className="card-container">
+                    <div className="card-link bg-success mb-4">
+                      <div className="card-header">Customer Satisfaction</div>
+                      <div className="revenue-div">
+                        {ratingStore.response &&
+                          ratingStore.response.data &&
+                          ratingStore.response.data.length >= 0 &&
+                          ratingStore.response.data.map((p) => {
+                            return (
+                              <div>
+                                <div>{p.Customer_satisfaction}%</div>
+                              </div>
+                            )
+                          })}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td style={{ width: '400px' }}>
+                  <table>
+                    <div className="card-container">
+                      <div className="card-link bg-success mb-4">
+                        <div className="card-header">
+                          <h3><strong>Max Sold Product</strong></h3>
+                        </div>
+                        <tr>
+                          <td>Product Title</td>
+                          <td>Qty Sold</td>
+                        </tr>
+                        <div className="revenue-div">
+                          {maxSaleProductStore.response &&
+                            maxSaleProductStore.response.data &&
+                            maxSaleProductStore.response.data.length >= 0 &&
+                            maxSaleProductStore.response.data.map((p) => {
+                              return (
+                                <tr>
+                                  <div>
+                                    <td>{p.prod_title}</td>
+                                    <td>{p.no_of_sale_product}</td>
+                                  </div>
+                                </tr>
+                              )
+                            })}
+                        </div>
+                      </div>
+                    </div>
+                  </table>
+                </td>
+              </tr>
+            </table>
           </td>
-
-          <td width="60%">
-            <div className="card-container">
-              <div className="card-link bg-success mb-4">
-                <div className="card-header">Total Revenue</div>
-                <div className="revenue-div">
-                  {paymentStore.response &&
-                    paymentStore.response.data &&
-                    paymentStore.response.data.length >= 0 &&
-                    paymentStore.response.data.map((p) => {
-                      return (
-                        <div>
-                          <div>₹ {p.TotalRevenue}</div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </div>
-            </div>
-
-            <div className="card-container">
-              <div className="card-link bg-success mb-4">
-                <div className="card-header">Customer Satisfaction</div>
-                <div className="revenue-div">
-                  {ratingStore.response &&
-                    ratingStore.response.data &&
-                    ratingStore.response.data.length >= 0 &&
-                    ratingStore.response.data.map((p) => {
-                      return (
-                        <div>
-                          <div>{p.Customer_satisfaction}%</div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </div>
-            </div>
-
+          <td>
             <div style={{ paddingLeft: 110 }}>
               <h3>Month Wise Revenue Report</h3>
               <BarChart
@@ -186,44 +259,6 @@ const AdminScreen = (props) => {
                 />
               </BarChart>
             </div>
-
-            <div className="card-container">
-              <div className="card-link bg-success mb-4">
-                <div className="card-header"> Max Sales Product </div>
-                <div className="revenue-div">
-                  {maxSaleProductStore.response &&
-                    maxSaleProductStore.response.data &&
-                    maxSaleProductStore.response.data.length >= 0 &&
-                    maxSaleProductStore.response.data.map((p) => {
-                      return (
-                        <div>
-                          <div>{p.prod_title}</div>
-                          <div>{p.no_of_sale_product}</div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </div>
-            </div>
-
-            {/* <div className="card-container">
-              <div className="card-link bg-primary mb-4">
-                <div className="card-header"> Month Wise Revenue </div>
-                <div className="revenue-div">
-                  {monthWiseRevenueStore.response &&
-                    monthWiseRevenueStore.response.data &&
-                    monthWiseRevenueStore.response.data.length >= 0 &&
-                    monthWiseRevenueStore.response.data.map((p) => {
-                      return (
-                        <div>
-                          <div>{p.month}</div>
-                          <div>{p.revenue}</div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </div>
-            </div> */}
           </td>
         </tr>
       </table>

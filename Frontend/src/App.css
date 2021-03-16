@@ -274,3 +274,13 @@ ul li a.cart .cart-basket {
   display: flex;
   flex-wrap: wrap;
 }
+
+.btn-admin-fn {
+  width: 200px;
+  height: 100px;
+}
+table,
+th,
+td {
+  border: 0px;
+}

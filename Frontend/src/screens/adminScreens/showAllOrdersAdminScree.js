@@ -1,25 +1,22 @@
 import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { viewOrderDetails } from '../actions/orderActions'
+import { viewOrderDetailsAdmin } from '../../actions/orderActions'
 
-const OrderDetailsScreen = (props) => {
+const OrderDetailsAdminScreen = (props) => {
   const viewOrderDetailsStore = useSelector(
     (store) => store.viewOrderDetailsStore
   )
 
-  const myorder_id = props.location.state.myorder_id
-
   const dispatch = useDispatch()
 
-  const onSellerHome = () => {
-    props.history.push('/seller')
+  const onAdminHome = () => {
+    props.history.push('/admin')
   }
 
   useEffect(() => {
-    console.log('in use effect of viewOrderDetails')
-    console.log('myorderid' + myorder_id)
-    dispatch(viewOrderDetails(myorder_id))
+    console.log('in use effect of viewOrderDetails to Admin')
+    dispatch(viewOrderDetailsAdmin())
   }, [])
 
   return (
@@ -57,10 +54,10 @@ const OrderDetailsScreen = (props) => {
                   <td>
                     <button
                       onClick={() => {
-                        onSellerHome()
+                        onAdminHome()
                       }}
                       className="btn btn-sm btn-success btn-add-to-cart">
-                      Go To Seller Home
+                      Go To Admin Home
                     </button>
                   </td>
                 </tr>
@@ -72,4 +69,4 @@ const OrderDetailsScreen = (props) => {
   )
 }
 
-export default OrderDetailsScreen
+export default OrderDetailsAdminScreen

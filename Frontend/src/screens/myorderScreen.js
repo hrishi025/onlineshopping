@@ -5,6 +5,12 @@ import { getMyOrderList, updateMyOrder } from '../actions/myorderActions'
 const MyOrderScreen = (props) => {
   const viewMyOrderStore = useSelector((store) => store.viewMyOrderStore)
 
+  const onOrderDetails = (p) => {
+    props.history.push({
+      pathname: '/order-details',
+      state: p, // your data array of objects
+    })
+  }
   const onCancelOrder = (p) => {
     console.log('inside cancel my order' + p)
     dispatch(updateMyOrder(p.myorder_id, 2))
@@ -65,8 +71,16 @@ const MyOrderScreen = (props) => {
                       onClick={() => {
                         onDeliverOrder(p)
                       }}
-                      className="btn btn-sm btn-success float-end">
+                      className="btn btn-sm btn-success">
                       Deliver Order
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        onOrderDetails(p)
+                      }}
+                      className="btn btn-sm btn-success">
+                      Order Details
                     </button>
                   </td>
                 </tr>
