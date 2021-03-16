@@ -295,6 +295,6 @@ td {
 
 /* input type */
 input[type='text'] {
-  background-color: #3cbc8d;
+  background-color: lightgray;
   color: white;
 }
