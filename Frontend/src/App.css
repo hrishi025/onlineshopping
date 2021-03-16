@@ -292,3 +292,9 @@ th,
 td {
   border: 0px;
 }
+
+/* input type */
+input[type='text'] {
+  background-color: #3cbc8d;
+  color: white;
+}
