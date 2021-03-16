@@ -22,10 +22,12 @@ const UserListScreen = (props) => {
 
   const onApprove = (u) => {
     dispatch(approveUser(u.user_id))
+    props.history.push('/admin')
   }
 
   const onSuspend = (u) => {
     dispatch(suspendUser(u.user_id))
+    props.history.push('/admin')
   }
 
   return (

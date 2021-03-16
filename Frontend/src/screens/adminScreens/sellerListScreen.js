@@ -25,18 +25,16 @@ const SellerListScreen = (props) => {
 
   const onApprove = (u) => {
     dispatch(approveSeller(u.user_id))
+    props.history.push('/admin')
   }
 
   const onSuspend = (u) => {
     dispatch(suspendSelller(u.user_id))
+    props.history.push('/admin')
   }
 
   return (
     <div>
-      {/* <button onClick={onAddProduct} className="btn btn-primary float-end">
-        Add Product
-      </button> */}
-
       <table className="table table-striped">
         <thead>
           <tr>
