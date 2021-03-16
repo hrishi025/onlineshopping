@@ -88,6 +88,13 @@ nav a {
   color: black;
 }
 
+.link {
+  color: #ffff;
+}
+.link:hover {
+  color: #4bc800;
+}
+
 /* signup css */
 
 body {
