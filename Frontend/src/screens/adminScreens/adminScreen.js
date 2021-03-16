@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCartItems } from '../../actions/cartActions'
+
 import {
-  PieChart,
-  Pie,
   Tooltip,
   BarChart,
   XAxis,
@@ -229,10 +227,10 @@ const AdminScreen = (props) => {
             </table>
           </td>
           <td>
-            <div style={{ paddingLeft: 110 }}>
+            <div style={{ paddingLeft: 10 }}>
               <h3>Month Wise Revenue Report</h3>
               <BarChart
-                width={500}
+                width={750}
                 height={300}
                 data={
                   monthWiseRevenueStore.response &&

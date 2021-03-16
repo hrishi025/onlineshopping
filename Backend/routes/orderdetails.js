@@ -53,9 +53,9 @@ select p.prod_title,sum(o.quantity) as no_of_sale_product from orderdetails as o
   })
 })
 
-//Get max product Contents
+//Get Bar Chart Revenue Contents
 router.get('/month/revenue', (request, response) => {
-  const statement = `select  substring(m.orderDate,1,7) as month,sum(o.price) as revenue from orderdetails as o inner join myorder as m on o.myorder_id=m.myorder_id group by month`
+  const statement = `select  substring(pay_date, 1, 7) as month, sum(pay_amount) as revenue from payment group by month ORDER BY 1 DESC LIMIT 12`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
