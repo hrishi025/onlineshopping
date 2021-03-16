@@ -3,31 +3,36 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../actions/sellerActions';
 import { USER_PROFILE_SUCCESS } from '../constants/userConstants';
-import { PRODUCT_UPDATE_SUCCESS } from '../constants/productConstants';
+import { PRODUCT_UPDATE_RESET, PRODUCT_UPDATE_SUCCESS } from '../constants/productConstants';
 
 const EditSellerProductScreen = (props) => {
-	console.log(`props.location.state--->${props.location.state.prod_id}`);
-
-	// const {prod_title,prod_price,prod_qty} = props.location.state
+	console.log(`props.location.state--->${props.location.state.photo}`);
 
 	const prod_id = props.location.state.prod_id;
 	const prod_title = props.location.state.prod_title;
 	const prod_price = props.location.state.prod_price;
 	const prod_qty = props.location.state.prod_qty;
+	const photo = props.location.state.photo;
+
 
 	const updateProductStore = useSelector((state) => state.updateProductStore);
 	const { response, loading, error } = updateProductStore;
 
 	const dispatch = useDispatch();
 
-	const [ productTitle, setProductTitle ] = useState('' + prod_title);
-	const [ productPrice, setProductPrice ] = useState('' + prod_price);
-	const [ productQuantity, setproductQuantity ] = useState('' + prod_qty);
+	const [productTitle, setProductTitle] = useState('' + prod_title);
+	const [productPrice, setProductPrice] = useState('' + prod_price);
+	const [productQuantity, setproductQuantity] = useState('' + prod_qty);
+	const [productPhoto, setProductPhoto] = useState('' + photo)
+
+	const photoChangeHandler = (e) => {
+		setProductPhoto(e.target.files[0])
+	}
 
 	useEffect(
 		() => {
 			if (response && response.status == 'success') {
-				dispatch({ type: PRODUCT_UPDATE_SUCCESS });
+				dispatch({ type: PRODUCT_UPDATE_RESET });
 				props.history.push('/show-product');
 			} else if (error) {
 				// there is an error while making the API call
@@ -35,13 +40,13 @@ const EditSellerProductScreen = (props) => {
 				alert('error while making API call');
 			}
 		},
-		[ response, loading, error ]
+		[response, loading, error]
 	);
 
 	//  console.log(`state---> ${state}`)
 	const saveButton = () => {
 		console.log(`in saveButton Method`);
-		dispatch(updateProduct(prod_id, productTitle, productPrice, productQuantity));
+		dispatch(updateProduct(prod_id, productTitle, productPrice, productQuantity, productPhoto));
 	};
 
 	return (
@@ -54,9 +59,9 @@ const EditSellerProductScreen = (props) => {
 				<div className="row">
 					<div className="col-md-6" col-10 mx-auto>
 						<img
-							src={Profile}
+							src={'http://localhost:4000/' + `${productPhoto}`}
 							className="img-fluid contact-img"
-							alt="profile img"
+							alt="no image avaliable"
 							height="250"
 							width="250"
 						/>
@@ -98,6 +103,18 @@ const EditSellerProductScreen = (props) => {
 								class="form-control"
 								id="exampleFormControlInput1"
 								onChange={(e) => setproductQuantity(e.target.value)}
+							/>
+						</div>
+
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">
+								<strong>Product Photo</strong>
+							</label>
+							<input
+								type="file"
+								class="form-control"
+								id="exampleFormControlInput1"
+								onChange={photoChangeHandler}
 							/>
 						</div>
 

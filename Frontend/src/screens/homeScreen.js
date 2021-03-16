@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductList } from '../actions/productActions';
 import { addToCart } from '../actions/cartActions';
+import { request_url } from '../config/url';
 
 const HomeScreen = (props) => {
 	const allProductStore = useSelector((state) => state.allProductStore);
@@ -36,29 +37,30 @@ const HomeScreen = (props) => {
 					response.data &&
 					response.data.length > 0 &&
 					response.data.map((p) => {
+						{
+							console.log("image url")
+							console.log('http://localhost:4000/' + p.photo);
+						}
 						return (
 							<div>
 								<div className="product-container">
 									<div className="card">
 										<img
-											src={`https://media.wired.com/photos/5e9f56f143e5800008514457/1:1/w_1277,h_1277,c_limit/Gear-Feature-Apple_new-iphone-se-white_04152020.jpg`}
-											className="rounded mx-auto d-block img-fluid"
+											src={'http://localhost:4000/' + `${p.photo}`}
+											className=" cover rounded mx-auto d-block img-fluid"
 											alt="Image Loading Failed"
 											width="300px"
 											height="300px"
 										/>
 										<div className="card-body">
-											<h5 className="card-title font-weight-bold">
-												<strong>{p.prod_id}</strong>
-											</h5>
 											<div>
-												<Link to={`/productdetails/${p.prod_id}`}><h4><strong>{p.prod_title}</strong></h4></Link>
+												<Link to={`/productdetails/${p.prod_id}`}><h6><strong>{p.prod_title}</strong></h6></Link>
 											</div>
-											<div><h4>₹ 
+											<div><h4>₹
 											{p.prod_price}
-                                               </h4>
-											 </div>
-											
+											</h4>
+											</div>
+
 											<button
 												onClick={() => addToCartHandler(p)}
 												className="btn btn-sm btn-success btn-add-to-cart"

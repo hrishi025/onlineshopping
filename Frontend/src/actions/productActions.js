@@ -33,9 +33,9 @@ export const getProductList = () => {
     const header = {
       headers: {
         'Content-Type': 'application/json',
+        token: sessionStorage['token'],
       },
     }
-
     axios
       .get(url, header)
       .then((response) => {
@@ -59,23 +59,26 @@ export const addProduct = (
   cat_id,
   prod_price,
   comp_id,
-  prod_qty
+  prod_qty,
+  photo
 ) => {
   return (dispatch) => {
+    const formData = new FormData()
+
+    formData.append('prod_title', prod_title)
+    formData.append('prod_description', prod_description)
+    formData.append('cat_id', cat_id)
+    formData.append('prod_price', prod_price)
+    formData.append('comp_id', comp_id)
+    formData.append('prod_qty', prod_qty)
+    formData.append('photo', photo)
+
     dispatch({
       type: PRODUCT_POST_REQUEST,
     })
 
     const url = `http://localhost:4000/addproduct`
 
-    const body = {
-      prod_title,
-      prod_description,
-      cat_id,
-      prod_price,
-      comp_id,
-      prod_qty,
-    }
     const header = {
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +87,7 @@ export const addProduct = (
     }
 
     axios
-      .post(url, body, header)
+      .post(url, formData, header)
       .then((response) => {
         dispatch({
           type: PRODUCT_POST_SUCCESS,

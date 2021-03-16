@@ -47,7 +47,7 @@ const CategoryListScreen = (props) => {
             <th>Category Id</th>
             <th>Category Title</th>
             <th>Category Description</th>
-            <td>Actions</td>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -65,13 +65,13 @@ const CategoryListScreen = (props) => {
                       onClick={() => onUpdate(c)}
                       type="button"
                       className="btn btn-primary ">
-                      Update
+                      Update Category
                     </button>
                     <button
                       onClick={() => onDelete(c)}
                       type="button"
                       className="btn btn-danger float-end ">
-                      Delete
+                      Delete Category
                     </button>
                   </td>
                 </tr>

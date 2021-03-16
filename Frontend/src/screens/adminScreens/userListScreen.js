@@ -1,38 +1,36 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {Link} from 'react-router-dom'
-import{getAllUsers,approveUser,suspendUser} from '../../actions/userActions'
+import { Link } from 'react-router-dom'
+import {
+  getAllUsers,
+  approveUser,
+  suspendUser,
+} from '../../actions/userActions'
 
 const UserListScreen = (props) => {
-
   const dispatch = useDispatch()
   const userListStore = useSelector((store) => store.userListStore)
   const { error, response, loading } = userListStore
 
-//   const { error, response, loading } = deleteProductStore
+  //   const { error, response, loading } = deleteProductStore
   // call this only once (when the page has loaded successfully)
   useEffect(() => {
     dispatch(getAllUsers())
   }, [])
 
-  useEffect(() => {
-  }, [error, response, loading])
+  useEffect(() => {}, [error, response, loading])
 
   const onApprove = (u) => {
-   dispatch(approveUser(u.user_id))
+    dispatch(approveUser(u.user_id))
   }
 
-  const onSuspend=(u)=>{
+  const onSuspend = (u) => {
     dispatch(suspendUser(u.user_id))
-
   }
-
- 
 
   return (
     <div>
-      
-   {/* <button onClick={onAddProduct} className="btn btn-primary float-end">
+      {/* <button onClick={onAddProduct} className="btn btn-primary float-end">
         Add Product
       </button> */}
 
@@ -43,7 +41,7 @@ const UserListScreen = (props) => {
             <th>User Name</th>
             <th>Email</th>
             <th>Status</th>
-            <td>Actions</td>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -58,12 +56,18 @@ const UserListScreen = (props) => {
                   <td>{u.user_email}</td>
                   <td>{u.user_status}</td>
                   <td>
-                  <button onClick={()=>onApprove(u)} type="button" className="btn btn-primary ">
+                    <button
+                      onClick={() => onApprove(u)}
+                      type="button"
+                      className="btn btn-primary ">
                       Approve User
-                   </button>
-                 <button onClick={()=>onSuspend(u)} type="button" className="btn btn-danger float-end ">
+                    </button>
+                    <button
+                      onClick={() => onSuspend(u)}
+                      type="button"
+                      className="btn btn-danger float-end ">
                       Suspend User
-                 </button> 
+                    </button>
                   </td>
                 </tr>
               )
@@ -75,4 +79,3 @@ const UserListScreen = (props) => {
 }
 
 export default UserListScreen
-

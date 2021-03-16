@@ -42,56 +42,38 @@ const UpdateCategoryScreen = (props) => {
   }
 
   return (
-    <div>
-      <div className="my-5">
-        <h1 className="text-center">Edit Category Details</h1>
+    <div className="signup-form">
+      <h2>
+        {' '}
+        <strong>Update Category Details</strong>{' '}
+      </h2>
+      <hr />
+      <div className="form-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Category Title"
+          required="required"
+          onChange={(e) => setCatTitle(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Category description"
+          required="required"
+          onChange={(e) => setCatDesc(e.target.value)}
+        />
       </div>
 
-      <div className="container contact_div">
-        <div className="row">
-          <div className="col-md-6" col-10 mx-auto>
-            {/* <img
-              src={Profile}
-              className="img-fluid contact-img"
-              alt="profile img"
-              height="250"
-              width="250"
-            /> */}
-          </div>
-
-          <div className="col-md-6" col-10 mx-auto>
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">
-                <strong>Category Title</strong>
-              </label>
-              <input
-                defaultValue={cat_title}
-                type="text"
-                class="form-control"
-                onChange={(e) => setCatTitle(e.target.value)}
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">
-                <strong>Category Description</strong>
-              </label>
-
-              <input
-                defaultValue={cat_desc}
-                type="text"
-                class="form-control"
-                onChange={(e) => setCatDesc(e.target.value)}
-              />
-            </div>
-
-            <div class="col-12">
-              <button class="btn btn-success " onClick={saveButton}>
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </div>
+      <div className="form-group">
+        <button
+          type="submit"
+          onClick={saveButton}
+          className="btn btn-primary btn-block btn-lg">
+          SAVE
+        </button>
       </div>
     </div>
   )

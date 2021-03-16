@@ -22,6 +22,7 @@ const AddProductScreen = (props) => {
   const [proddesc, setProddesc] = useState("");
   const [prodprice, setProdprice] = useState("");
   const [prodqty, setProdqty] = useState("");
+  let [selectedFile, setSelectedFile] = useState([])
 
   const categoryChangeHandler = (e) => setCategory(e.target.value);
   const companyChangeHandler = (e) => setCompany(e.target.value);
@@ -31,9 +32,13 @@ const AddProductScreen = (props) => {
   const addnewProduct = () => {
     console.log("in add Product button function");
     dispatch(
-      addProduct(prodtitle, proddesc, category, prodprice, company, prodqty)
+      addProduct(prodtitle, proddesc, category, prodprice, company, prodqty, selectedFile)
     );
   };
+
+  const onFileSelected = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -128,6 +133,11 @@ const AddProductScreen = (props) => {
               );
             })}
         </select>
+      </div>
+
+      <div>
+        <label>Photo</label>
+        <input onChange={onFileSelected} type='file' />
       </div>
 
       <div>

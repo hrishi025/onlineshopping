@@ -32,9 +32,7 @@ const ShowCompanyScreen = (props) => {
 
   const onDelete = (comp_id) => {
     dispatch(deleteCompany(comp_id))
-    window.location.reload(false)
-
-    props.history.push('/show-company')
+    props.history.push('/admin')
   }
   const onAddCompany = (c) => {
     props.history.push('/add-company')
