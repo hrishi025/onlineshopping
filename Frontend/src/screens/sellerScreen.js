@@ -30,11 +30,21 @@ const sellerScreen = () => {
             </Link>
           </label>
         </div>
-
+        <hr />
         <div class="mb-3" class="seller-link">
           <label for="exampleFormControlInput1" class="form-label">
             <Link to="/user-order-details">
-              <span className="nav-link">View User Order</span>
+              <span className="nav-link">
+                View User Order Details Hide from User Screen
+              </span>
+            </Link>
+          </label>
+        </div>
+
+        <div class="mb-3" class="seller-link">
+          <label for="exampleFormControlInput1" class="form-label">
+            <Link to="/user-myorder">
+              <span className="nav-link">View User My Order</span>
             </Link>
           </label>
         </div>

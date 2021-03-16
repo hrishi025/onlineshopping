@@ -1,12 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { viewOrderDetailsAdmin } from '../actions/orderActions'
+import { viewOrderDetails } from '../actions/orderActions'
 
 const UserOrderDetailsScreen = (props) => {
   const viewOrderDetailsStore = useSelector(
     (store) => store.viewOrderDetailsStore
   )
+const myorder_id = props.location.state.myorder_id
 
   const dispatch = useDispatch()
 
@@ -19,7 +20,7 @@ const UserOrderDetailsScreen = (props) => {
 
   useEffect(() => {
     console.log('in use effect of User viewOrderDetails')
-    dispatch(viewOrderDetailsAdmin())
+    dispatch(viewOrderDetails(myorder_id))
   }, [])
 
   return (
