@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { getAllCartItems } from '../../actions/cartActions'
 import {
+  PieChart,
+  Pie,
   Tooltip,
   BarChart,
   XAxis,
@@ -46,223 +48,237 @@ const AdminScreen = (props) => {
     dispatch(getMonthWiseRevenue())
   }, [])
 
-  return (
-    <div>
-      <table className="table table-bordered table-hover">
-        <tr>
-          <td>
-            <table style={{ width: '100%' }}>
-              <tr>
-                <td>
-                  <div>
-                    <div className="mb-1">
-                      <label
-                        for="exampleFormControlInput1"
-                        className="form-label">
-                        <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
-                          {' '}
-                          <Link className="link" to="/get-users">
-                            <span className="nav-link">
-                              <strong>Show All User</strong>
-                            </span>
-                          </Link>
-                        </button>
-                      </label>
-                    </div>
-                  </div>
-                </td>
+  const showAllUsersHandler = () => {
+    props.history.push("/get-users")
+  }
 
-                <td>
-                  <div>
-                    <div className="mb-1">
-                      <label for="exampleFormControlInput1" class="form-label">
-                        <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
-                          <Link className="link" to="/get-seller">
-                            <span className="nav-link">
-                              <strong>Show All Seller</strong>
-                            </span>
-                          </Link>
-                        </button>
-                      </label>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </table>
-            <table style={{ width: '100%' }}>
-              <tr>
-                <td>
-                  <div>
-                    <div class="mb-1">
-                      <label for="exampleFormControlInput1" class="form-label">
-                        <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
-                          <Link className="link" to="/get-product-admin">
-                            <span className="nav-link">
-                              <strong>Show All Product</strong>
-                            </span>
-                          </Link>
-                        </button>
-                      </label>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="mb-1">
-                    <label for="exampleFormControlInput1" class="form-label">
-                      <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
-                        <Link className="link" to="/show-company">
-                          <span className="nav-link">
-                            <strong>show Companies</strong>
-                          </span>
-                        </Link>
-                      </button>
-                    </label>
-                  </div>
-                </td>
-              </tr>
-            </table>
-            <table style={{ width: '100%' }}>
-              <tr>
-                <td>
-                  <div class="mb-1">
-                    <label for="exampleFormControlInput1" class="form-label">
-                      <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
-                        <Link className="link" to="/get-category">
-                          <span className="nav-link">
-                            <strong>Show Categories</strong>
-                          </span>
-                        </Link>
-                      </button>
-                    </label>
-                  </div>
-                </td>
-                <td>
-                  <div class="mb-1">
-                    <label for="exampleFormControlInput1" class="form-label">
-                      <button className="btn btn-secondary btn-admin-fn shadow-lg p-3 mb-3 bg-black rounded">
-                        <Link className="link" to="/admin-order-details">
-                          <span className="nav-link">
-                            <strong>Show All Orders</strong>
-                          </span>
-                        </Link>
-                      </button>
-                    </label>
-                  </div>
-                </td>
-              </tr>
-            </table>
-            <table>
-              <tr>
-                <td style={{ width: '70px' }}>
-                  <div className="card-container">
-                    <div className="card-link bg-success mb-4">
-                      <div className="card-header">Total Revenue</div>
-                      <div className="revenue-div">
-                        {paymentStore.response &&
-                          paymentStore.response.data &&
-                          paymentStore.response.data.length >= 0 &&
-                          paymentStore.response.data.map((p) => {
-                            return (
-                              <div>
-                                <div>₹ {p.TotalRevenue}</div>
-                              </div>
-                            )
-                          })}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td style={{ width: '70px' }}>
-                  <div className="card-container">
-                    <div className="card-link bg-success mb-4">
-                      <div className="card-header">Customer Satisfaction</div>
-                      <div className="revenue-div">
-                        {ratingStore.response &&
-                          ratingStore.response.data &&
-                          ratingStore.response.data.length >= 0 &&
-                          ratingStore.response.data.map((p) => {
-                            return (
-                              <div>
-                                <div>{p.Customer_satisfaction}%</div>
-                              </div>
-                            )
-                          })}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td style={{ width: '400px' }}>
-                  <table>
-                    <div className="card-container">
-                      <div className="card-link bg-success mb-4">
-                        <div className="card-header">
-                          <h3>
-                            <strong>Max Sold Product</strong>
-                          </h3>
+  const showAllSeller = () => {
+    props.history.push("/get-seller")
+  }
+
+  const showAllProducts = () => {
+    props.history.push("/get-product-admin")
+  }
+
+  const showAllCompanies = () => {
+    props.history.push("/show-company")
+  }
+
+  const showAllCategories = () => {
+    props.history.push("/get-category")
+  }
+
+  const showAllOrders = () => {
+    props.history.push("/admin-order-details")
+  }
+
+  return (
+    <div id="wrapper">
+      <div className="d-flex flex-column container" id="content-wrapper">
+        <div id="content">
+          <div className="container-fluid">
+            <div className="d-sm-flex justify-content-between align-items-center mb-4">
+              <h3 className="text-dark mb-0">Admin Dashboard</h3>
+            </div>
+            <div className="row">
+              <div className="col-md-6 col-xl-3 mb-4">
+                <div className="card shadow border-left-primary py-2">
+                  <div className="card-body">
+                    <div className="row align-items-center no-gutters">
+                      <div className="col mr-2">
+                        <div className="text-uppercase text-primary font-weight-bold text-xs mb-1">
+                          <span>Total Revenue</span>
                         </div>
-                        <tr>
-                          <td>Product Title</td>
-                          <td>Qty Sold</td>
-                        </tr>
-                        <div className="revenue-div">
-                          {maxSaleProductStore.response &&
-                            maxSaleProductStore.response.data &&
-                            maxSaleProductStore.response.data.length >= 0 &&
-                            maxSaleProductStore.response.data.map((p) => {
-                              return (
-                                <tr>
-                                  <div>
-                                    <td>{p.prod_title}</td>
-                                    <td>{p.no_of_sale_product}</td>
-                                  </div>
-                                </tr>
-                              )
+                        <div className="text-dark font-weight-bold h5 mb-0">
+                          {paymentStore.response &&
+                            paymentStore.response.data &&
+                            paymentStore.response.data.length >= 0 &&
+                            paymentStore.response.data.map((p) => {
+                              return (<span>₹ {p.TotalRevenue}</span>)
                             })}
                         </div>
                       </div>
                     </div>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td>
-            <div style={{ paddingLeft: 10 }}>
-              <h3>Month Wise Revenue Report</h3>
-              <BarChart
-                width={750}
-                height={300}
-                data={
-                  monthWiseRevenueStore.response &&
-                  monthWiseRevenueStore.response.data
-                }
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 80,
-                  bottom: 5,
-                }}
-                barSize={20}>
-                <XAxis
-                  dataKey="month"
-                  scale="point"
-                  padding={{ left: 40, right: 10 }}
-                />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Bar
-                  dataKey="revenue"
-                  fill="#8884d8"
-                  background={{ fill: '#eee' }}
-                />
-              </BarChart>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6 col-xl-3 mb-4">
+                <div className="card shadow border-left-success py-2">
+                  <div className="card-body">
+                    <div className="row align-items-center no-gutters">
+                      <div className="col mr-2">
+                        <div className="text-uppercase text-success font-weight-bold text-xs mb-1">
+                          <span>Cust. Satisfaction</span>
+                        </div>
+                        <div className="text-dark font-weight-bold h5 mb-0">
+                          {ratingStore.response &&
+                            ratingStore.response.data &&
+                            ratingStore.response.data.length >= 0 &&
+                            ratingStore.response.data.map((p) => {
+                              return (
+                                <span>{p.Customer_satisfaction}%</span>
+                              )
+                            })}
+                        </div>
+                      </div>
+                      <div className="col-auto"><i className="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-xl-3 mb-4">
+                <div className="card shadow border-left-info py-2">
+                  <div className="card-body">
+                    <div className="row align-items-center no-gutters">
+                      <div className="col mr-2">
+                        <div className="text-uppercase text-info font-weight-bold text-xs mb-1">
+                          <span>Max Sales (Product)</span>
+                        </div>
+                        <div className="row no-gutters align-items-center">
+                          <div className="col-auto">
+                            <div className="text-dark font-weight-bold h5 mb-0 mr-3" >
+                              {maxSaleProductStore.response &&
+                                maxSaleProductStore.response.data &&
+                                maxSaleProductStore.response.data.length >= 0 &&
+                                maxSaleProductStore.response.data.map((p) => {
+                                  return (
+                                    <span >{p.prod_title}</span>
+                                  )
+                                })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-xl-3 mb-4">
+                <div className="card shadow border-left-warning py-2">
+                  <div className="card-body">
+                    <div className="row align-items-center no-gutters">
+                      <div className="col mr-2">
+                        <div className="text-uppercase text-warning font-weight-bold text-xs mb-1">
+                          <span>Monthly Revenue</span>
+                        </div>
+                        <div className="text-dark font-weight-bold h5 mb-0"><span>0</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </td>
-        </tr>
-      </table>
-    </div>
+
+            <div className="row">
+              <div className="col-lg-7 col-xl-8" style={{ "max-width": "auto" }}>
+                <div className="card shadow mb-4">
+
+                  <div className="card-header d-flex justify-content-between align-items-center">
+                    <h6 className="text-primary font-weight-bold m-0">Earnings Overview</h6>
+                  </div>
+
+                  <div className="card-body">
+                    <BarChart
+                      width={500}
+                      height={300}
+                      data={
+                        monthWiseRevenueStore.response &&
+                        monthWiseRevenueStore.response.data
+                      }
+                      margin={{
+                        top: 5,
+                        right: 30,
+                        left: 80,
+                        bottom: 5,
+                      }}
+                      barSize={20}>
+                      <XAxis
+                        dataKey="month"
+                        scale="point"
+                        padding={{ left: 40, right: 10 }}
+                      />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <Bar
+                        dataKey="revenue"
+                        fill="#8884d8"
+                        background={{ fill: '#eee' }}
+                      />
+                    </BarChart>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-5 col-xl-4">
+                <div className="card shadow mb-4"></div>
+                <div className="row">
+                  <div className="col-lg-6 mb-4">
+                    <div className="card text-white bg-primary shadow">
+                      <div className="card-body">
+                        <button className="btn btn-primary" onClick={showAllUsersHandler}>
+                          Show All Users
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="card text-white bg-success shadow">
+                      <div className="card-body">
+                        <button className="btn btn-success" onClick={showAllSeller}>
+                          Show All Seller
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 mb-4">
+                    <div className="card text-white bg-info shadow">
+                      <div className="card-body">
+                        <button className="btn btn-info" onClick={showAllProducts}>
+                          Show All Products
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 mb-4">
+                    <div className="card text-white bg-warning shadow">
+                      <div className="card-body">
+                        <button className="btn btn-warning" onClick={showAllCompanies}>
+                          Show All Comp.
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 mb-4">
+                    <div className="card text-white bg-danger shadow">
+                      <div className="card-body">
+                        <button className="btn btn-danger" onClick={showAllCategories}>
+                          Show All Category
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 mb-4">
+                    <div className="card text-white bg-secondary shadow">
+                      <div className="card-body">
+                        <button className="btn btn-secondary" onClick={showAllOrders}>
+                          Show All Orders
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div >
   )
 }
 

@@ -37,7 +37,7 @@ router.post('/rateProduct', (request, response) => {
 //Get rating Contents
 router.get('/rating', (request, response) => {
   const statement = `
-	select round(avg(rating)*(100/count(rating)),2) as Customer_satisfaction from orderdetails`
+	select round((sum(rating)/(count(rating) * 5 ) * 100 ), 2) as Customer_satisfaction from orderdetails`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
@@ -45,9 +45,7 @@ router.get('/rating', (request, response) => {
 
 //Get max product Contents
 router.get('/max/product/sales', (request, response) => {
-  const statement = `
-	
-select p.prod_title,sum(o.quantity) as no_of_sale_product from orderdetails as o inner join product as p on o.product_id=p.prod_id group by product_id order by 2 desc`
+  const statement = `select p.prod_title,sum(o.quantity) as no_of_sale_product from orderdetails as o inner join product as p on o.product_id=p.prod_id group by product_id order by 2 desc LIMIT 1`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

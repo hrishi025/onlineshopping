@@ -30,7 +30,7 @@ const UpdateCompanyScreen = (props) => {
 
   return (
     <div className="signup-form">
-      <h2>Add Company</h2>
+      <h2>Update Company</h2>
       <hr />
       <div className="form-group">
         <input

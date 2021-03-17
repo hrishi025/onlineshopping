@@ -13,7 +13,7 @@ const ShowAllProductAdminScreen = (props) => {
     dispatch(getProductListAdmin())
   }, [])
 
-  useEffect(() => {}, [error, response, loading])
+  useEffect(() => { }, [error, response, loading])
 
   const onAddProduct = () => {
     props.history.push('/add-product')
@@ -27,71 +27,96 @@ const ShowAllProductAdminScreen = (props) => {
     })
   }
 
+  // to render page after delete button is pressed
+  const deleteProductStore = useSelector(state => state.deleteProductStore)
+  useEffect(async () => {
+    if (deleteProductStore.response && deleteProductStore.response.status == "success") {
+      dispatch(getProductListAdmin());
+    }
+  }, [deleteProductStore.response, deleteProductStore.error, deleteProductStore.loading])
+
   const onDelete = (p) => {
     dispatch(deleteProduct(p.prod_id))
-    props.history.push('admin')
   }
 
-  // useEffect(() => {
-  //   if (response && response.status == 'success') {
-  //     dispatch({ type: PRODUCT_UPDATE_RESET })
-  //     props.history.push('/get-product-admin')
-  //   } else if (error) {
-  //     // there is an error while making the API call
-  //     console.log(error)
-  //     alert('error while making API call')
-  //   }
-  // }, [response, loading, error])
+  const goBackHandler = () => {
+    props.history.push('/admin')
+  }
 
   return (
-    <div>
-      <button onClick={onAddProduct} className="btn btn-primary float-end">
-        Add Product
-      </button>
+    <div className="container">
+      <div className="text-left border border-light p-3 mb-2" >
+        <button className="text-left btn btn-outline-success" style={{ flex: "left" }} onClick={goBackHandler}>Go Back</button>
+      </div>
 
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Product ID</th>
-            <th>Title</th>
-            <th>Desc</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {response &&
-            response.data &&
-            response.data.length > 0 &&
-            response.data.map((p) => {
-              return (
-                <tr>
-                  <td>{p.prod_id}</td>
-                  <td>{p.prod_title}</td>
-                  <td>{p.prod_description}</td>
-                  <td>{p.prod_price}</td>
-                  <td>{p.prod_qty}</td>
-                  <td>
-                    <button
-                      onClick={() => onUpdate(p)}
-                      type="button"
-                      className="btn btn-primary ">
-                      Update Product
-                    </button>
-                    <button
-                      onClick={() => onDelete(p)}
-                      type="button"
-                      className="btn btn-danger float-end ">
-                      Delete Product
-                    </button>
-                  </td>
-                </tr>
-              )
-            })}
-        </tbody>
-      </table>
+      <div id="wrapper">
+        <div className="d-flex flex-column" id="content-wrapper">
+          <div id="content">
+            <div className="container-fluid">
+              <div className="card shadow">
+                <div className="card-header py-3">
+                  <p className="text-primary m-0 fw-bold">Product's List</p>
+                </div>
+                <div className="card-body">
+                  <div className="table-responsive table mt-2" id="dataTable" role="grid"
+                    aria-describedby="dataTable_info">
+                    <table className="table my-0" id="dataTable">
+                      <thead>
+                        <tr>
+                          <th>Product ID</th>
+                          <th>Title</th>
+                          <th>Desc</th>
+                          <th>Price</th>
+                          <th>Quantity</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {response &&
+                          response.data &&
+                          response.data.length > 0 &&
+                          response.data.map((p) => {
+                            return (
+                              <tr>
+                                <td>{p.prod_id}</td>
+                                <td>{p.prod_title}</td>
+                                <td>{p.prod_description}</td>
+                                <td>{p.prod_price}</td>
+                                <td>{p.prod_qty}</td>
+                                <td>
+                                  <button
+                                    onClick={() => onUpdate(p)}
+                                    type="button"
+                                    className="btn btn-outline-success">
+                                    Update Product</button>
+
+                                  <button
+                                    onClick={() => onDelete(p)}
+                                    type="button"
+                                    className="btn btn-outline-danger float-end ">
+                                    Delete Product</button>
+                                </td>
+                              </tr>
+                            )
+                          })}
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border border-light p-3 mb-4">
+        <div className="text-center">
+          <button onClick={onAddProduct} className="btn btn-secondary float-end">
+            Add New Product</button>
+        </div>
+      </div>
     </div>
+
   )
 }
 

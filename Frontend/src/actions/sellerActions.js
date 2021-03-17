@@ -19,6 +19,13 @@ import {
   PRODUCT_UPDATE_RESET,
 } from './../constants/productConstants'
 
+import {
+  SELLER_APPLY_REQUEST,
+  SELLER_APPLY_SUCCESS,
+  SELLER_APPLY_FAIL,
+  SELLER_APPLY_RESET,
+} from './../constants/userConstants'
+
 export const getProductList = () => {
   return (dispatch) => {
     dispatch({
@@ -95,6 +102,41 @@ export const updateProduct = (
       .catch((error) => {
         dispatch({
           type: PRODUCT_UPDATE_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+export const applyForSeller = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SELLER_APPLY_REQUEST
+    })
+
+    const url = 'http://localhost:4000/seller/apply'
+
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: sessionStorage['token'],
+      },
+    }
+    console.log(sessionStorage.token)
+
+    const body = {}
+
+    axios
+      .patch(url, body, header)
+      .then((response) => {
+        dispatch({
+          type: SELLER_APPLY_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: SELLER_APPLY_FAIL,
           payload: error,
         })
       })

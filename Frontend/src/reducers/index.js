@@ -7,17 +7,17 @@ import {
 } from './userReducer'
 import { userSigninReducer, userProfileReducer } from './userReducer'
 import {
-  categoryFetchReducer,
   companyFetchReducer,
   getProductReducer,
   productPostReducer,
   productUpdateReducer,
   productDeleteReducer,
+  categoryFetchReducer,
   // sellerProfileReducer
 } from './productReducer'
 
 import { viewOrderDetailsReducer } from './orderReducer'
-import { cartFetchReducer, cartReducer, updateCartReducer } from './cartReducer'
+import { cartFetchAtLoginReducer, cartFetchReducer, cartReducer, cartRemoveReducer, updateCartReducer } from './cartReducer'
 import { getMyorderReducer } from './myorderReducer'
 import {
   addCompanyReducer,
@@ -40,6 +40,8 @@ import {
   monthWiseRevenueReducer,
 } from './adminDashBoardReducer'
 
+import { sellerApplyReducer } from './sellerReducer'
+
 const reducers = combineReducers({
   //user stores
   userSignupStore: userSignupReducer,
@@ -56,9 +58,11 @@ const reducers = combineReducers({
   deleteProductStore: productDeleteReducer,
 
   //cart stores
-  cartStore: cartReducer,
+  cartStore: cartReducer, // cart add reducer
+  cartRemoveStore: cartRemoveReducer, //cart item remove store & reducer
   cartItemsStore: cartFetchReducer,
   updateCartStore: updateCartReducer,
+  cartLoginStore: cartFetchAtLoginReducer,
 
   //category and company store
   categoryFetchStore: categoryFetchReducer,
@@ -75,6 +79,7 @@ const reducers = combineReducers({
   addCategoryStore: addCategoryReducer,
 
   //seller
+  sellerApplyStore: sellerApplyReducer,
   //sellerProfileStore:sellerProfileReducer,
 
   //order Details

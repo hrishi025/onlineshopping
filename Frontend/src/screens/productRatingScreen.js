@@ -14,7 +14,7 @@ const ProductRatigScreen = (props) => {
     console.log(`in saveButton Method`)
     console.log('prod_id' + orderdetails_id)
     dispatch(rateProduct(orderdetails_id, rating, comment))
-    props.history.push('/seller')
+    props.history.push('/user-myorder')
   }
 
   return (

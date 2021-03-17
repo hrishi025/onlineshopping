@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCartItems, removeFromCart, updateCart } from '../actions/cartActions';
+import { getAllCartItems, getAllCartItemsAtLogin, removeFromCart, updateCart } from '../actions/cartActions';
 import { Link } from 'react-router-dom';
+import { CART_REMOVE_RESET, CART_UPDATE_RESET } from '../constants/cartConstants';
 
 const CartScreen = (props) => {
 	const userSigninStore = useSelector((state) => state.userSigninStore);
 
 	const cartItemsStore = useSelector((state) => state.cartItemsStore);
 	const { response, loading, error } = cartItemsStore;
+
+	// to remove items from cart 
+	const cartRemoveStore = useSelector(state => state.cartRemoveStore)
 
 	let cartItems = [];
 
@@ -16,13 +20,13 @@ const CartScreen = (props) => {
 		console.log(cartItems);
 	}
 
-	let [ total, setTotal ] = useState(0);
-	let [ count, setCount ] = useState(0);
+	let [total, setTotal] = useState(0);
+	let [count, setCount] = useState(0);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log('in use effect');
+		console.log('in cart screen use effect');
 		if (userSigninStore) {
 			dispatch(getAllCartItems());
 			setTotal(0);
@@ -47,8 +51,19 @@ const CartScreen = (props) => {
 				});
 			}
 		},
-		[ cartItems ]
+		[cartItems]
 	);
+
+	//when we remove items from cart check status if success then redirect to home and update the cart icon number
+	useEffect(async () => {
+		if (cartRemoveStore.response && cartRemoveStore.response.status == 'success') {
+			dispatch({
+				type: CART_REMOVE_RESET
+			})
+			await dispatch(getAllCartItemsAtLogin());
+			await props.history.push('/');
+		}
+	}, [cartRemoveStore.response, cartRemoveStore.loading, cartRemoveStore.error])
 
 	const onIncrement = (product) => {
 		if (product.cart_quantity < 5) {
@@ -77,12 +92,14 @@ const CartScreen = (props) => {
 
 	const removeItemHandler = (cart_id) => {
 		dispatch(removeFromCart(cart_id));
-		props.history.push('/signin');
 	};
 
 	const continueShopping = () => {
 		cartItems.map((c) => {
 			dispatch(updateCart(c.cart_id, c.cart_quantity));
+			dispatch({
+				type: CART_UPDATE_RESET
+			})
 		});
 		props.history.push('/');
 	};
