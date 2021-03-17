@@ -41,4 +41,108 @@ router.get('/seller/product', (request, response) => {
   })
 })
 
+
+//Get  All Max Selling Products for seller
+router.get('/seller/Max/product', (request, response) => {
+  console.log(`in backend seller/max/product`)
+  const statement = `
+  SELECT
+    product.prod_title, 
+    sum(orderdetails.quantity) as
+     no_of_qty
+  FROM
+    product
+    INNER JOIN
+    orderdetails
+    ON 
+      product.prod_id = orderdetails.product_id
+  WHERE
+    product.seller_id = '${request.id}'
+  GROUP BY
+    product.prod_title
+  ORDER BY
+    2 desc
+  LIMIT 5;`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
+
+//getting total revenue
+
+//Get  All Max Selling Products for seller
+router.get('/seller/total/revenue', (request, response) => {
+  console.log(`in backend seller/max/product`)
+  const statement = `
+SELECT
+product.seller_id,
+      sum( orderdetails.price*
+orderdetails.quantity) as total_price
+FROM
+product
+INNER JOIN
+orderdetails
+ON 
+  product.prod_id = orderdetails.product_id
+WHERE
+product.seller_id = '${request.id}'`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
+
+
+//Get  All Max Selling Products for seller
+router.get('/seller/avg/rating', (request, response) => {
+  console.log(`in backend /seller/avg/rating`)
+  const statement = `
+SELECT
+product.seller_id, 
+
+round(
+(avg(orderdetails.rating)/5)*100 ,2)as rating_per
+FROM
+product
+INNER JOIN
+orderdetails
+ON 
+  product.prod_id = orderdetails.product_id
+WHERE
+product.seller_id = '${request.id}'`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
+//getting monthly revenue
+router.get('/seller/month/revenue', (request, response) => {
+  console.log(`in backend /seller/month/revenue`)
+  const statement = `
+  SELECT
+	sum( orderdetails.price* 
+	orderdetails.quantity) as total, 
+	
+	product.seller_id
+FROM
+	orderdetails
+	INNER JOIN
+	myorder
+	ON 
+		orderdetails.myorder_id = myorder.myorder_id
+	INNER JOIN
+	product
+	ON 
+		orderdetails.product_id = product.prod_id
+WHERE
+	 substring(now(),1,7)=substring(myorder.orderDate,1,7) and
+	product.seller_id = '${request.id}'`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
+
+
 module.exports = router

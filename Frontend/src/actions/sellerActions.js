@@ -26,6 +26,25 @@ import {
   SELLER_APPLY_RESET,
 } from './../constants/userConstants'
 
+import {
+  SELLER_MAX_SELLING_PROD_REQUEST,
+  SELLER_MAX_SELLING_PROD_SUCCESS,
+  SELLER_MAX_SELLING_PROD_FAIL,
+  SELLER_MAX_SELLING_PROD_RESET,
+  SELLER_TOTAL_REVENUE_REQUEST,
+  SELLER_TOTAL_REVENUE_SUCCESS,
+  SELLER_TOTAL_REVENUE_FAIL,
+  SELLER_TOTAL_REVENUE_RESET,
+  SELLER_CUST_RATING_REQUEST,
+  SELLER_CUST_RATING_SUCCESS,
+  SELLER_CUST_RATING_FAIL,
+  SELLER_CUST_RATING_RESET,
+  SELLER_MONTHLY_REVENUE_REQUEST,
+  SELLER_MONTHLY_REVENUE_SUCCESS,
+  SELLER_MONTHLY_REVENUE_FAIL,
+  SELLER_MONTHLY_REVENUE_RESET,
+} from './../constants/sellerConstants'
+
 export const getProductList = () => {
   return (dispatch) => {
     dispatch({
@@ -111,7 +130,7 @@ export const updateProduct = (
 export const applyForSeller = () => {
   return (dispatch) => {
     dispatch({
-      type: SELLER_APPLY_REQUEST
+      type: SELLER_APPLY_REQUEST,
     })
 
     const url = 'http://localhost:4000/seller/apply'
@@ -137,6 +156,136 @@ export const applyForSeller = () => {
       .catch((error) => {
         dispatch({
           type: SELLER_APPLY_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+export const getSellerMaxSaleProducts = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SELLER_MAX_SELLING_PROD_REQUEST,
+    })
+
+    const url = 'http://localhost:4000/seller/Max/product'
+    console.log(`in get seller max sale productss`)
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: sessionStorage['token'],
+      },
+    }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: SELLER_MAX_SELLING_PROD_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: SELLER_MAX_SELLING_PROD_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+export const getSellerTotalRevenue = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SELLER_TOTAL_REVENUE_REQUEST,
+    })
+
+    const url = 'http://localhost:4000/seller/total/revenue'
+    console.log(`in get seller max sale productss`)
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: sessionStorage['token'],
+      },
+    }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: SELLER_TOTAL_REVENUE_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: SELLER_TOTAL_REVENUE_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+//get seller customer satisfaction
+export const getSellerCustAvgRating = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SELLER_CUST_RATING_REQUEST,
+    })
+
+    const url = 'http://localhost:4000/seller/avg/rating'
+    console.log(`in get seller max sale productss`)
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: sessionStorage['token'],
+      },
+    }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: SELLER_CUST_RATING_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: SELLER_CUST_RATING_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+//get seller customer satisfaction
+export const getSellerMonthlyRevenue = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SELLER_MONTHLY_REVENUE_REQUEST,
+    })
+
+    const url = 'http://localhost:4000/seller/month/revenue'
+    console.log(`in get seller max sale productss`)
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: sessionStorage['token'],
+      },
+    }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: SELLER_MONTHLY_REVENUE_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: SELLER_MONTHLY_REVENUE_FAIL,
           payload: error,
         })
       })

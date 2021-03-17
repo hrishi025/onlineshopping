@@ -17,7 +17,13 @@ import {
 } from './productReducer'
 
 import { viewOrderDetailsReducer } from './orderReducer'
-import { cartFetchAtLoginReducer, cartFetchReducer, cartReducer, cartRemoveReducer, updateCartReducer } from './cartReducer'
+import {
+  cartFetchAtLoginReducer,
+  cartFetchReducer,
+  cartReducer,
+  cartRemoveReducer,
+  updateCartReducer,
+} from './cartReducer'
 import { getMyorderReducer } from './myorderReducer'
 import {
   addCompanyReducer,
@@ -40,7 +46,13 @@ import {
   monthWiseRevenueReducer,
 } from './adminDashBoardReducer'
 
-import { sellerApplyReducer } from './sellerReducer'
+import {
+  sellerApplyReducer,
+  gettingSellerMaxProductReducer,
+  getSellerTotalRevenue,
+  getSellerCustAvgRating,
+  getSellerMontlyRevenueReducer,
+} from './sellerReducer'
 
 const reducers = combineReducers({
   //user stores
@@ -78,9 +90,12 @@ const reducers = combineReducers({
   deleteCategoryStore: deleteCategoryReducer,
   addCategoryStore: addCategoryReducer,
 
-  //seller
+  //seller apply store
   sellerApplyStore: sellerApplyReducer,
-  //sellerProfileStore:sellerProfileReducer,
+  gettingSellerMaxProductStore: gettingSellerMaxProductReducer,
+  getSellerTotalStore: getSellerTotalRevenue,
+  getSellerCustAvgStore: getSellerCustAvgRating,
+  getSellerMontlyRevenueStore: getSellerMontlyRevenueReducer,
 
   //order Details
   viewOrderDetailsStore: viewOrderDetailsReducer,
