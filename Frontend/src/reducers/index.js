@@ -24,7 +24,7 @@ import {
   cartRemoveReducer,
   updateCartReducer,
 } from './cartReducer'
-import { getMyorderReducer } from './myorderReducer'
+import { getMyorderReducer, updateMyorderReducer } from './myorderReducer'
 import {
   addCompanyReducer,
   deleteCompanyReducer,
@@ -102,6 +102,7 @@ const reducers = combineReducers({
 
   //My Order
   viewMyOrderStore: getMyorderReducer,
+  updateMyOrderStore: updateMyorderReducer,
 
   //payment
   paymentStore: paymentReducer,

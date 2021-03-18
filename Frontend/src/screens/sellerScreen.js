@@ -188,17 +188,6 @@ const SellerScreen = (props) => {
                 <div className="col-lg-5 col-xl-4">
                   <div className="card shadow mb-4"></div>
                   <div className="row">
-                    <div className="col-lg-6 mb-4">
-                      <div className="card text-white bg-primary shadow">
-                        <div className="card-body">
-                          <button
-                            className="btn btn-primary"
-                            onClick={viewOrder}>
-                            View Order
-                          </button>
-                        </div>
-                      </div>
-                    </div>
 
                     <div className="col-lg-6 mb-4">
                       <div className="card text-white bg-success shadow">
