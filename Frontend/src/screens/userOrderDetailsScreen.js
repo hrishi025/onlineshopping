@@ -122,16 +122,15 @@ const UserOrderDetailsScreen = (props) => {
                                 <td>{p.rating}</td>
                                 <td>{p.comment}</td>{' '}
                                 <td>
-                                  {p.rating != null ||
-                                    (p.comment != null && (
-                                      <button
-                                        onClick={() => {
-                                          onRateProduct(p)
-                                        }}
-                                        className="btn btn-sm btn-success btn-add-to-cart">
-                                        Rate Product
-                                      </button>
-                                    ))}
+                                  {(p.rating == null || p.comment == null) && (
+                                    <button
+                                      onClick={() => {
+                                        onRateProduct(p)
+                                      }}
+                                      className="btn btn-sm btn-success btn-add-to-cart">
+                                      Rate Product
+                                    </button>
+                                  )}
                                 </td>
                               </tr>
                             )
