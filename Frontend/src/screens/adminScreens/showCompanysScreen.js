@@ -67,7 +67,7 @@ const ShowCompanyScreen = (props) => {
                         <tr>
                           <th>Company ID</th>
                           <th>Title</th>
-                          <th>Desc</th>
+                          <th className="description">Desc</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -80,7 +80,7 @@ const ShowCompanyScreen = (props) => {
                               <tr>
                                 <td>{c.comp_id}</td>
                                 <td>{c.comp_title}</td>
-                                <td>{c.comp_description}</td>
+                                <td className="description">{c.comp_description}</td>
                                 <td>
                                   <button
                                     onClick={() => onUpdate(c)}

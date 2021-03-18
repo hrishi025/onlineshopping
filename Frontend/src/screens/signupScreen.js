@@ -88,14 +88,14 @@ const SignupScreen = (props) => {
           </button>
         </div>
       </form>
-      <p className="small text-center">
+      <p className="small text-center" >
         By clicking the Sign Up button, you agree to our <br />
-        <a href="#">Terms &amp; Conditions</a>, and{" "}
-        <a href="#">Privacy Policy</a>.
+        <a href="#" style={{ color: "blue" }}>Terms &amp; Conditions</a>, and{" "}
+        <a href="#" style={{ color: "blue" }}>Privacy Policy</a>.
       </p>
 
       <div className="text-center">
-        Already have an account? <Link to="/signin">Signin here</Link>
+        Already have an account? <Link to="/signin" style={{ color: "blue" }}>Signin here</Link>
       </div>
     </div>
   );

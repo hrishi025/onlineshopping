@@ -9,18 +9,19 @@ import { COMPANY_UPDATE_FAIL } from '../../constants/productConstants'
 const UpdateCompanyScreen = (props) => {
   console.log(`props.location.state--->${props.location.state.comp_id}`)
 
-  // const {prod_title,prod_price,prod_qty} = props.location.state
-
   const comp_title = props.location.state.comp_title
   const comp_description = props.location.state.comp_description
   const comp_id = props.location.state.comp_id
+
+  // constants
+  const [compTitle, setCompTitle] = useState('' + comp_title)
+  const [compDescription, setCompDescription] = useState('' + comp_description)
+
+  // store
   const updateComponyStore = useSelector((state) => state.updateComponyStore)
   const { response, loading, error } = updateComponyStore
 
   const dispatch = useDispatch()
-
-  const [compTitle, setCompTitle] = useState('' + comp_title)
-  const [compDescription, setCompDescription] = useState('' + comp_description)
 
   const updateButton = () => {
     console.log(`in saveButton Method`)
@@ -32,22 +33,24 @@ const UpdateCompanyScreen = (props) => {
     <div className="signup-form">
       <h2>Update Company</h2>
       <hr />
-      <div className="form-group">
+      <div className="form-group" style={{ textAlign: "left" }}>
+        <label><strong>Company Name</strong></label>
         <input
+          defaultValue={compTitle}
           type="text"
           className="form-control"
           name="company_name"
-          placeholder="Company Name"
           required="required"
           onChange={(e) => setCompTitle(e.target.value)}
         />
       </div>
-      <div className="form-group">
-        <input
-          type="text"
+
+      <div className="form-group" style={{ textAlign: "left" }}>
+        <label><strong>Company description</strong></label>
+        <textarea
+          defaultValue={compDescription}
           className="form-control"
           name="company_desc"
-          placeholder="Company description"
           required="required"
           onChange={(e) => setCompDescription(e.target.value)}
         />

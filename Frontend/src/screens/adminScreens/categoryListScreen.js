@@ -77,7 +77,7 @@ const CategoryListScreen = (props) => {
                         <tr>
                           <th>Category Id	</th>
                           <th>Category Title</th>
-                          <th>Category Description	</th>
+                          <th className="description">Category Description	</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -90,7 +90,7 @@ const CategoryListScreen = (props) => {
                               <tr>
                                 <td>{c.cat_id}</td>
                                 <td>{c.cat_title}</td>
-                                <td>{c.cat_description}</td>
+                                <td className="description">{c.cat_description}</td>
                                 <td>
                                   <button
                                     onClick={() => onUpdate(c)}

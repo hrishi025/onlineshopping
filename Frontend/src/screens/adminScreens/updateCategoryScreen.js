@@ -11,6 +11,7 @@ import {
 
 const UpdateCategoryScreen = (props) => {
   console.log(`props.location.state--->${props.location.state.cat_id}`)
+  console.log(`props.location.state--->${props.location.state.cat_title}`)
 
   const cat_id = props.location.state.cat_id
   const cat_title = props.location.state.cat_title
@@ -48,8 +49,10 @@ const UpdateCategoryScreen = (props) => {
         <strong>Update Category Details</strong>{' '}
       </h2>
       <hr />
-      <div className="form-group">
+      <div className="form-group" style={{ textAlign: "left" }}>
+        <label><strong>Category Title</strong></label>
         <input
+          defaultValue={catTitle}
           type="text"
           className="form-control"
           placeholder="Category Title"
@@ -57,9 +60,10 @@ const UpdateCategoryScreen = (props) => {
           onChange={(e) => setCatTitle(e.target.value)}
         />
       </div>
-      <div className="form-group">
-        <input
-          type="text"
+      <div className="form-group" style={{ textAlign: "left" }}>
+        <label><strong>Category Description</strong></label>
+        <textarea
+          defaultValue={catDesc}
           className="form-control"
           placeholder="Category description"
           required="required"

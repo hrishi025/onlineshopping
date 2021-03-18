@@ -108,7 +108,7 @@ nav a {
 body {
   color: black;
   background: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .form-control {
   min-height: 41px;
@@ -293,12 +293,6 @@ td {
   border: 0px;
 }
 
-/* input type */
-input[type='text'] {
-  background-color: lightgray;
-  color: white;
-}
-
 /* Admin Dashboard */
 
 .col-xl-8 {
@@ -327,4 +321,10 @@ input[type='text'] {
 
 .seller-div {
   background-color: #3fc0ad;
+}
+
+/* Category details screen desc td */
+
+.description {
+  width: 40%;
 }
