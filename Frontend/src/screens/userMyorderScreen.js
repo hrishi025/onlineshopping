@@ -4,7 +4,7 @@ import { getMyOrderList, updateMyOrder } from '../actions/myorderActions'
 
 const UserMyOrderScreen = (props) => {
   const viewMyOrderStore = useSelector((store) => store.viewMyOrderStore)
-
+  const updateMyOrderStore = useSelector((store) => store.updateMyOrderStore)
   const onOrderDetails = (p) => {
     props.history.push({
       pathname: '/user-order-details',
@@ -14,9 +14,6 @@ const UserMyOrderScreen = (props) => {
   const onCancelOrder = (p) => {
     console.log('inside cancel my order' + p)
     dispatch(updateMyOrder(p.myorder_id, 2))
-
-    alert('Order Cancelled Successfully')
-    props.history.push('/seller')
   }
 
   const dispatch = useDispatch()
@@ -25,6 +22,14 @@ const UserMyOrderScreen = (props) => {
     console.log('in use effect of MyOrderScreen')
     dispatch(getMyOrderList())
   }, [])
+
+  useEffect(() => {
+    dispatch(getMyOrderList())
+  }, [
+    updateMyOrderStore.response,
+    updateMyOrderStore.error,
+    updateMyOrderStore.loading,
+  ])
 
   return (
     <div className="container">
