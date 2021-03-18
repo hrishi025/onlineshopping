@@ -329,8 +329,12 @@ td {
   width: 40%;
 }
 
+.adminproductdesc {
+  width: 30%;
+}
+
 /* Product details screen desc td */
 
-.product-description {
+.admintitle {
   width: 25%;
 }

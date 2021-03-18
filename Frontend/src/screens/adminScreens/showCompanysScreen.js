@@ -81,7 +81,7 @@ const ShowCompanyScreen = (props) => {
                       <thead>
                         <tr>
                           <th>Company ID</th>
-                          <th className="description">Title</th>
+                          <th className="admintitle">Title</th>
                           <th className="description">Desc</th>
                           <th>Actions</th>
                         </tr>
@@ -94,7 +94,7 @@ const ShowCompanyScreen = (props) => {
                             return (
                               <tr>
                                 <td>{c.comp_id}</td>
-                                <td className="description">{c.comp_title}</td>
+                                <td className="admintitle">{c.comp_title}</td>
                                 <td className="description">
                                   {c.comp_description}
                                 </td>

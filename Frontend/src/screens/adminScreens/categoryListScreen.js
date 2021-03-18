@@ -87,7 +87,7 @@ const CategoryListScreen = (props) => {
                       <thead>
                         <tr>
                           <th>Category Id </th>
-                          <th className="description">Category Title</th>
+                          <th className="admintitle">Category Title</th>
                           <th className="description">Category Description </th>
                           <th>Actions</th>
                         </tr>
@@ -100,7 +100,7 @@ const CategoryListScreen = (props) => {
                             return (
                               <tr>
                                 <td>{c.cat_id}</td>
-                                <td className="description">{c.cat_title}</td>
+                                <td className="admintitle">{c.cat_title}</td>
                                 <td className="description">
                                   {c.cat_description}
                                 </td>

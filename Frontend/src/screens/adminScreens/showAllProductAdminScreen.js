@@ -79,8 +79,8 @@ const ShowAllProductAdminScreen = (props) => {
                       <thead>
                         <tr>
                           <th>Product ID</th>
-                          <th className="product-description">Title</th>
-                          <th className="product-description">Desc</th>
+                          <th className="admintitle">Title</th>
+                          <th className="adminproductdesc">Desc</th>
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Actions</th>
@@ -94,10 +94,8 @@ const ShowAllProductAdminScreen = (props) => {
                             return (
                               <tr>
                                 <td>{p.prod_id}</td>
-                                <td className="product-description">
-                                  {p.prod_title}
-                                </td>
-                                <td className="product-description">
+                                <td className="admintitle">{p.prod_title}</td>
+                                <td className="adminproductdesc">
                                   {p.prod_description}
                                 </td>
                                 <td>{p.prod_price}</td>
