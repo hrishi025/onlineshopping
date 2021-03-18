@@ -19,6 +19,10 @@ import {
   CART_REMOVE_SUCCESS,
   CART_REMOVE_FAIL,
   CART_REMOVE_RESET,
+  CART_CHECKOUT_REQUEST,
+  CART_CHECKOUT_SUCCESS,
+  CART_CHECKOUT_FAIL,
+  CART_CHECKOUT_RESET,
 } from '../constants/cartConstants'
 
 export const cartReducer = (state = {}, action) => {
@@ -109,6 +113,25 @@ export const cartFetchAtLoginReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
 
     case CART_FETCH_RESET_AT_LOGIN:
+      return {}
+
+    default:
+      return state
+  }
+}
+
+export const cartCheckoutReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CART_CHECKOUT_REQUEST:
+      return { loading: true }
+
+    case CART_CHECKOUT_SUCCESS:
+      return { loading: false, response: action.payload }
+
+    case CART_CHECKOUT_FAIL:
+      return { loading: false, error: action.payload }
+
+    case CART_CHECKOUT_RESET:
       return {}
 
     default:

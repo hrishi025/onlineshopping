@@ -53,7 +53,7 @@ const OrderDetailsAdminScreen = (props) => {
                         <tr>
                           <th>Order Details ID</th>
                           <th>MyOrder ID</th>
-                          <th>Product ID</th>
+                          <th>Product Title</th>
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Rating</th>
@@ -69,7 +69,7 @@ const OrderDetailsAdminScreen = (props) => {
                               <tr>
                                 <td>{p.orderdetails_id}</td>
                                 <td>{p.myorder_id}</td>
-                                <td>{p.product_id}</td>
+                                <td>{p.prod_title}</td>
                                 <td>{p.price}</td>
                                 <td>{p.quantity}</td>
                                 <td>{p.rating}</td>

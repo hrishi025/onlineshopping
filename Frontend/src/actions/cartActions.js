@@ -15,6 +15,9 @@ import {
   CART_FETCH_REQUEST_AT_LOGIN,
   CART_FETCH_SUCCESS_AT_LOGIN,
   CART_FETCH_FAIL_AT_LOGIN,
+  CART_CHECKOUT_REQUEST,
+  CART_CHECKOUT_SUCCESS,
+  CART_CHECKOUT_FAIL,
 } from './../constants/cartConstants'
 
 export const addToCart = (prod_id, cart_quantity) => {
@@ -182,6 +185,40 @@ export const getAllCartItemsAtLogin = () => {
       .catch((error) => {
         dispatch({
           type: CART_FETCH_FAIL_AT_LOGIN,
+          payload: error,
+        })
+      })
+  }
+}
+
+export const cartCheckout = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CART_CHECKOUT_REQUEST,
+    })
+
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: sessionStorage['token'],
+      },
+    }
+
+    const url = 'http://localhost:4000/user/checkout'
+
+    const body = {}
+
+    axios
+      .post(url, body, header)
+      .then((response) => {
+        dispatch({
+          type: CART_CHECKOUT_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: CART_CHECKOUT_FAIL,
           payload: error,
         })
       })

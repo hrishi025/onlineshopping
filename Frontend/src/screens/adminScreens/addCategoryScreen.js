@@ -10,12 +10,7 @@ import {
 } from '../../constants/productConstants'
 
 const AddCategoryScreen = (props) => {
-  // console.log(`props.location.state--->${props.location.state.cat_id}`)
-
-  // const cat_id = props.location.state.cat_id
-  // const cat_title = props.location.state.cat_title
-  // const cat_desc = props.location.state.cat_description
-
+  
   const [cat_title, setCat_title] = useState('')
   const [cat_description, setCat_description] = useState('')
 

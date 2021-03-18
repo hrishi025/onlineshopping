@@ -28,6 +28,7 @@ import productRatingScreen from './screens/productRatingScreen'
 import showAllOrdersAdminScreen from './screens/adminScreens/showAllOrdersAdminScree'
 import UserOrderDetailsScreen from './screens/userOrderDetailsScreen'
 import UserMyOrderScreen from './screens/userMyorderScreen'
+import AddAddressScreen from './screens/userScreens/addAddressScreen'
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
         />
         <Route path="/user-order-details" component={UserOrderDetailsScreen} />
         <Route path="/user-myorder" component={UserMyOrderScreen} />
+        <Route path="/user-address" component={AddAddressScreen} />
       </Router>
     </div>
   )

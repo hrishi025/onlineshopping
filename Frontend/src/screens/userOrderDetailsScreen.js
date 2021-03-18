@@ -28,51 +28,6 @@ const UserOrderDetailsScreen = (props) => {
   }
 
   return (
-    // <div>
-    //   <h2>
-    //     <strong>User's Order Details Screen</strong>
-    //   </h2>
-    //   <table className="table table-striped">
-    //     <thead>
-    //       <tr>
-    // <th>Product Name</th>
-    // <th>Price</th>
-    // <th>Quantity</th>
-    // <th>Rating</th>
-    // <th>Comment</th>
-    // <th>Action</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {viewOrderDetailsStore.response &&
-    //         viewOrderDetailsStore.response.data &&
-    //         viewOrderDetailsStore.response.data.length > 0 &&
-    //         viewOrderDetailsStore.response.data.map((p) => {
-    //           return (
-    //             <tr>
-    // <td>{p.prod_title}</td>
-    // <td>{p.price}</td>
-    // <td>{p.quantity}</td>
-    // <td>{p.rating}</td>
-    // <td>{p.comment}</td>
-    // <td>
-    //   {p.rating != null ||
-    //     (p.comment != null && (
-    //       <button
-    //         onClick={() => {
-    //           onRateProduct(p)
-    //         }}
-    //         className="btn btn-sm btn-success btn-add-to-cart">
-    //         Rate Product
-    //       </button>
-    //     ))}
-    // </td>
-    //             </tr>
-    //           )
-    //         })}
-    //     </tbody>
-    //   </table>
-    // </div>
     <div className="container">
       <div className="text-left border border-light p-3 mb-2">
         <button
