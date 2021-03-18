@@ -7,7 +7,7 @@ const UserOrderDetailsScreen = (props) => {
   const viewOrderDetailsStore = useSelector(
     (store) => store.viewOrderDetailsStore
   )
-const myorder_id = props.location.state.myorder_id
+  const myorder_id = props.location.state.myorder_id
 
   const dispatch = useDispatch()
 
@@ -56,13 +56,16 @@ const myorder_id = props.location.state.myorder_id
                   <td>{p.rating}</td>
                   <td>{p.comment}</td>
                   <td>
-                    <button
-                      onClick={() => {
-                        onRateProduct(p)
-                      }}
-                      className="btn btn-sm btn-success btn-add-to-cart">
-                      Rate Product
-                    </button>
+                    {p.rating != null ||
+                      (p.comment != null && (
+                        <button
+                          onClick={() => {
+                            onRateProduct(p)
+                          }}
+                          className="btn btn-sm btn-success btn-add-to-cart">
+                          Rate Product
+                        </button>
+                      ))}
                   </td>
                 </tr>
               )
