@@ -13,6 +13,8 @@ import {
   productUpdateReducer,
   productDeleteReducer,
   categoryFetchReducer,
+  getProductRatingReducer,
+  getProductCommentReducer,
   // sellerProfileReducer
 } from './productReducer'
 
@@ -75,6 +77,8 @@ const reducers = combineReducers({
   addProductStore: productPostReducer,
   updateProductStore: productUpdateReducer,
   deleteProductStore: productDeleteReducer,
+  getProductRatingStore: getProductRatingReducer,
+  getProductCommentStore: getProductCommentReducer,
 
   //cart stores
   cartStore: cartReducer, // cart add reducer

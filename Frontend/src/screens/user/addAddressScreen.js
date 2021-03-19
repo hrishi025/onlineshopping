@@ -30,7 +30,6 @@ const AddAddressScreen = (props) => {
             dispatch(
                 addAddress(street, city, state, country, pin)
             )
-            checkout();
         }
         else {
             console.log(validation)
@@ -58,6 +57,7 @@ const AddAddressScreen = (props) => {
         if (response && response.status == 'success') {
             dispatch({ type: ADD_ADDRESS_RESET })
             dispatch({ type: FETCH_ADDRESS_RESET })
+            props.history.push("/view-user-addresses")
         } else if (error) {
             // there is an error while making the API call
             dispatch({ type: ADD_ADDRESS_RESET })
@@ -66,19 +66,19 @@ const AddAddressScreen = (props) => {
         }
     }, [response, loading, error])
 
-    //to check checkout status
-    const cartCheckoutStore = useSelector(state => state.cartCheckoutStore)
-    useEffect(async () => {
-        if (cartCheckoutStore.response && cartCheckoutStore.response.status == 'success') {
-            await dispatch({ type: CART_CHECKOUT_RESET })
-            await dispatch(getAllCartItemsAtLogin());
-            await props.history.push('/user-myorder');
-        }
-    }, [cartCheckoutStore.response, cartCheckoutStore.error, cartCheckoutStore.loading])
+    // //to check checkout status
+    // const cartCheckoutStore = useSelector(state => state.cartCheckoutStore)
+    // useEffect(async () => {
+    //     if (cartCheckoutStore.response && cartCheckoutStore.response.status == 'success') {
+    //         await dispatch({ type: CART_CHECKOUT_RESET })
+    //         await dispatch(getAllCartItemsAtLogin());
+    //         await props.history.push('/user-myorder');
+    //     }
+    // }, [cartCheckoutStore.response, cartCheckoutStore.error, cartCheckoutStore.loading])
 
-    const checkout = () => {
-        dispatch(cartCheckout());
-    }
+    // const checkout = () => {
+    //     dispatch(cartCheckout());
+    // }
 
     return (
         <div className="signup-form">
@@ -168,7 +168,7 @@ const AddAddressScreen = (props) => {
                 <button
                     onClick={addnewAddress}
                     className="btn btn-primary btn-block btn-lg">
-                    Place Order</button>
+                    Save Address</button>
             </div>
         </div>
     )

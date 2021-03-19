@@ -14,13 +14,23 @@ router.get('/address', (request, response) => {
 });
 
 // Get Address Details via myorder_id for order details page
-router.get('/address/:myorder_id', (request, response) => {
+router.get('/address', (request, response) => {
   const { myorder_id } = request.params
-  const statement = `SELECT * FROM address where myorder_id=${myorder_id}`;
+  const statement = `SELECT * FROM address where user_id=${request.id}`;
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data));
   });
 });
+
+// Get Address Details via add_id from myorder table for order details page
+router.get('/address/:add_id', (request, response) => {
+  const { add_id } = request.params
+  const statement = `SELECT * FROM address where add_id=${add_id}`
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+
 
 //Insert new address
 router.post('/address', (request, response) => {

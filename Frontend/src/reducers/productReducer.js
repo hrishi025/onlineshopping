@@ -23,6 +23,14 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_RESET,
   PRODUCT_DELETE_SUCCESS,
+  PRODUCT_RATING_FETCH_REQUEST,
+  PRODUCT_RATING_FETCH_SUCCESS,
+  PRODUCT_RATING_FETCH_FAIL,
+  PRODUCT_RATING_FETCH_RESET,
+  PRODUCT_COMMENT_FETCH_REQUEST,
+  PRODUCT_COMMENT_FETCH_SUCCESS,
+  PRODUCT_COMMENT_FETCH_FAIL,
+  PRODUCT_COMMENT_FETCH_RESET,
 } from "./../constants/productConstants";
 
 export const getProductReducer = (state = {}, action) => {
@@ -37,6 +45,44 @@ export const getProductReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
 
     case PRODUCT_FETCH_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const getProductRatingReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_RATING_FETCH_REQUEST:
+      return { loading: true };
+
+    case PRODUCT_RATING_FETCH_SUCCESS:
+      return { loading: false, response: action.payload };
+
+    case PRODUCT_RATING_FETCH_FAIL:
+      return { loading: false, error: action.payload };
+
+    case PRODUCT_RATING_FETCH_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const getProductCommentReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_COMMENT_FETCH_REQUEST:
+      return { loading: true };
+
+    case PRODUCT_COMMENT_FETCH_SUCCESS:
+      return { loading: false, response: action.payload };
+
+    case PRODUCT_COMMENT_FETCH_FAIL:
+      return { loading: false, error: action.payload };
+
+    case PRODUCT_COMMENT_FETCH_RESET:
       return {};
 
     default:

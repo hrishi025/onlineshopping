@@ -191,7 +191,7 @@ export const getAllCartItemsAtLogin = () => {
   }
 }
 
-export const cartCheckout = () => {
+export const cartCheckout = (add_id) => {
   return (dispatch) => {
     dispatch({
       type: CART_CHECKOUT_REQUEST,
@@ -206,7 +206,9 @@ export const cartCheckout = () => {
 
     const url = 'http://localhost:4000/user/checkout'
 
-    const body = {}
+    const body = {
+      add_id
+    }
 
     axios
       .post(url, body, header)

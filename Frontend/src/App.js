@@ -16,6 +16,7 @@ import EditProfileScreen from './screens/user/editProfileScreen'
 import AddAddressScreen from './screens/user/addAddressScreen'
 import productRatingScreen from './screens/user/productRatingScreen'
 import UserMyOrderScreen from './screens/user/userMyorderScreen'
+import ShowUserAddresses from './screens/user/showUserAddresses'
 
 //seller screens
 import addProductList from './screens/seller/addProductScreen'
@@ -77,7 +78,8 @@ function App() {
           component={showAllOrdersAdminScreen}
         />
         <Route path="/user-myorder" component={UserMyOrderScreen} />
-        <Route path="/user-address" component={AddAddressScreen} />
+        <Route path="/add-new-address" component={AddAddressScreen} />
+        <Route path="/view-user-addresses" component={ShowUserAddresses} />
       </Router>
     </div>
   )

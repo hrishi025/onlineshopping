@@ -190,7 +190,7 @@ router.get('/orders', (request, response) => {
 })
 
 router.post('/checkout', (request, response) => {
-  let { pay_type } = request.body
+  let { pay_type, add_id } = request.body
     // closure
     ; (async () => {
       // step 1:
@@ -218,13 +218,14 @@ router.post('/checkout', (request, response) => {
 
         // steps 2:
         // - add these products to an order
-        const date = moment().format('DD/MM/YYYY')
+        const date = moment().format('YYYY-MM-DD, hh:mm:ss');
         const statementMyOrder = `
-			insert into myorder 
-				(user_id, total_price, orderDate)
-			values
-				(${request.id}, ${total}, '${date}')
-			`
+          insert into myorder 
+            (user_id, total_price, orderDate, add_id)
+          values
+            (${request.id}, ${total}, '${date}', ${add_id})
+          `
+
         console.log(statementMyOrder)
 
         // place an order

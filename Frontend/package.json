@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@progress/kendo-drawing": "^1.9.4",
     "@progress/kendo-react-charts": "^4.4.0",
     "@progress/kendo-react-grid": "^4.4.0",

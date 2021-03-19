@@ -20,6 +20,12 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
+  PRODUCT_RATING_FETCH_REQUEST,
+  PRODUCT_RATING_FETCH_SUCCESS,
+  PRODUCT_RATING_FETCH_FAIL,
+  PRODUCT_COMMENT_FETCH_FAIL,
+  PRODUCT_COMMENT_FETCH_SUCCESS,
+  PRODUCT_COMMENT_FETCH_REQUEST,
 } from './../constants/productConstants'
 
 export const getProductList = () => {
@@ -227,6 +233,68 @@ export const getProductDetails = (prod_id) => {
       .catch((error) => {
         dispatch({
           type: PRODUCT_FETCH_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+export const getProductRatings = (prod_id) => {
+  return (dispatch) => {
+    dispatch({
+      type: PRODUCT_RATING_FETCH_REQUEST,
+    })
+
+    const url = request_url + `/productRatingAvg/${prod_id}`
+
+    console.log(url)
+    const header = {
+      'Content-Type': 'application/json',
+      token: sessionStorage['token'],
+    }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: PRODUCT_RATING_FETCH_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: PRODUCT_RATING_FETCH_FAIL,
+          payload: error,
+        })
+      })
+  }
+}
+
+export const getProductComments = (prod_id) => {
+  return (dispatch) => {
+    dispatch({
+      type: PRODUCT_COMMENT_FETCH_REQUEST,
+    })
+
+    const url = request_url + `/productComment/${prod_id}`
+
+    console.log(url)
+    const header = {
+      'Content-Type': 'application/json',
+      token: sessionStorage['token'],
+    }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: PRODUCT_COMMENT_FETCH_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: PRODUCT_COMMENT_FETCH_FAIL,
           payload: error,
         })
       })

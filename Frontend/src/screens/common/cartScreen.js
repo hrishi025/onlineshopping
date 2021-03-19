@@ -105,7 +105,7 @@ const CartScreen = (props) => {
 	};
 
 	const shippingDetails = () => {
-		props.history.push("/user-address")
+		props.history.push("/view-user-addresses")
 	}
 
 	return (

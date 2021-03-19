@@ -14,6 +14,7 @@ router.get('/myorder', (request, response) => {
     orderdetails.rating,
     orderdetails.comment,   
     product.prod_price, 
+    myorder.add_id,
     myorder.user_id, 
     myorder.total_price,
     myorder.orderDate, 	

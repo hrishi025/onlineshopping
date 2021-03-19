@@ -14,6 +14,7 @@ const OrderDetailsScreen = (props) => {
     (store) => store.userSigninStore
   )
 
+  const add_id = props.location.state.add_id
   const myorder_id = props.location.state.myorder_id
   const prod_title = props.location.state.prod_title
   const prod_price = props.location.state.prod_price
@@ -36,8 +37,8 @@ const OrderDetailsScreen = (props) => {
 
   useEffect(() => {
     console.log('in use effect of viewOrderDetails')
-    console.log('myorderid' + myorder_id)
-    dispatch(fetchAddressForOrderDetails(myorder_id))
+    console.log('add_id' + add_id)
+    dispatch(fetchAddressForOrderDetails(add_id))
   }, [])
 
   return (

@@ -41,7 +41,9 @@ app.use((request, response, next) => {
     request.url == '/user/signup' ||
     request.url.startsWith('/user/verify') ||
     request.url == '/product' ||
-    request.url.startsWith('/productdetails')
+    request.url.startsWith('/productdetails') ||
+    request.url.startsWith('/productRatingAvg') ||
+    request.url.startsWith('/productComment')
   ) {
     // skip checking the token
     next()

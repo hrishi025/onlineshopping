@@ -30,6 +30,43 @@ router.get('/productdetails/:prod_id', (request, response) => {
 	});
 });
 
+//Get Product Comments
+router.get('/productComment/:prod_id', (request, response) => {
+	const { prod_id } = request.params;
+	const statement = `
+	SELECT
+		user.user_name, 
+		orderdetails.rating, 
+		orderdetails.comment, 
+		orderdetails.product_id,
+		myorder.orderDate
+	FROM
+		user
+		INNER JOIN
+		myorder
+		ON 
+			user.user_id = myorder.user_id
+		INNER JOIN
+		orderdetails
+		ON 
+			myorder.myorder_id = orderdetails.myorder_id
+	WHERE
+		product_id = ${prod_id}`
+
+	db.execute(statement, (error, data) => {
+		response.send(utils.createResult(error, data));
+	});
+});
+
+//Get Product Ratings
+router.get('/productRatingAvg/:prod_id', (request, response) => {
+	const { prod_id } = request.params;
+	const statement = `SELECT AVG(rating) as rating FROM orderdetails WHERE product_id = ${prod_id}`;
+	db.execute(statement, (error, data) => {
+		response.send(utils.createResult(error, data));
+	});
+});
+
 // Add New Product
 router.post('/addproduct', upload.single('photo'), (request, response) => {
 	const { prod_title, prod_description, cat_id, prod_price, comp_id, prod_qty } = request.body;
@@ -47,13 +84,13 @@ router.put('/product/:prod_id', (request, response) => {
 	const { prod_id } = request.params;
 	const { prod_title, prod_description, cat_id, prod_price, comp_id, prod_qty } = request.body;
 	const statement = `UPDATE product SET 
-   prod_title = '${prod_title}',
-   prod_description = '${prod_description}', 
-   cat_id = '${cat_id}',
-   prod_price = '${prod_price}',
-   comp_id = '${comp_id}',
-   prod_qty = '${prod_qty}'
-   WHERE prod_id = ${prod_id}`;
+	prod_title = '${prod_title}',
+	prod_description = '${prod_description}', 
+	cat_id = '${cat_id}',
+	prod_price = '${prod_price}',
+	comp_id = '${comp_id}',
+	prod_qty = '${prod_qty}'
+	WHERE prod_id = ${prod_id}`;
 	db.execute(statement, (error, data) => {
 		response.send(utils.createResult(error, data));
 	});
