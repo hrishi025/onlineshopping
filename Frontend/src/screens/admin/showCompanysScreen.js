@@ -28,12 +28,19 @@ const ShowCompanyScreen = (props) => {
   }
 
   // to render page after delete button is pressed
-  const deleteComponyStore = useSelector(state => state.deleteComponyStore)
+  const deleteComponyStore = useSelector((state) => state.deleteComponyStore)
   useEffect(async () => {
-    if (deleteComponyStore.response && deleteComponyStore.response.status == "success") {
+    if (
+      deleteComponyStore.response &&
+      deleteComponyStore.response.status == 'success'
+    ) {
       dispatch(getCompany())
     }
-  }, [deleteComponyStore.response, deleteComponyStore.error, deleteComponyStore.loading])
+  }, [
+    deleteComponyStore.response,
+    deleteComponyStore.error,
+    deleteComponyStore.loading,
+  ])
 
   const onDelete = (comp_id) => {
     dispatch(deleteCompany(comp_id))
@@ -48,8 +55,13 @@ const ShowCompanyScreen = (props) => {
 
   return (
     <div className="container">
-      <div className="text-left border border-light p-3 mb-2" >
-        <button className="text-left btn btn-outline-success" style={{ flex: "left" }} onClick={goBackHandler}>Go Back</button>
+      <div className="text-left border border-light p-3 mb-2">
+        <button
+          className="text-left btn btn-outline-success"
+          style={{ flex: 'left' }}
+          onClick={goBackHandler}>
+          Go Back
+        </button>
       </div>
       <div id="wrapper">
         <div className="d-flex flex-column" id="content-wrapper">
@@ -60,13 +72,16 @@ const ShowCompanyScreen = (props) => {
                   <p className="text-primary m-0 fw-bold">Company's List</p>
                 </div>
                 <div className="card-body">
-                  <div className="table-responsive table mt-2" id="dataTable" role="grid"
+                  <div
+                    className="table-responsive table mt-2"
+                    id="dataTable"
+                    role="grid"
                     aria-describedby="dataTable_info">
                     <table className="table my-0" id="dataTable">
                       <thead>
                         <tr>
                           <th>Company ID</th>
-                          <th>Title</th>
+                          <th className="admintitle">Title</th>
                           <th className="description">Desc</th>
                           <th>Actions</th>
                         </tr>
@@ -79,26 +94,29 @@ const ShowCompanyScreen = (props) => {
                             return (
                               <tr>
                                 <td>{c.comp_id}</td>
-                                <td>{c.comp_title}</td>
-                                <td className="description">{c.comp_description}</td>
+                                <td className="admintitle">{c.comp_title}</td>
+                                <td className="description">
+                                  {c.comp_description}
+                                </td>
                                 <td>
                                   <button
                                     onClick={() => onUpdate(c)}
                                     type="button"
                                     className="btn btn-outline-success ">
-                                    Update Company</button>
+                                    Update
+                                  </button>
                                   <button
                                     onClick={() => onDelete(c.comp_id)}
                                     type="button"
                                     className="btn btn-outline-danger float-end ">
-                                    Delete Company</button>
+                                    Delete
+                                  </button>
                                 </td>
                               </tr>
                             )
                           })}
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
@@ -108,13 +126,14 @@ const ShowCompanyScreen = (props) => {
       </div>
       <div className="border border-light p-3 mb-4">
         <div className="text-center">
-          <button onClick={onAddCompany} className="btn btn-secondary float-end">
-            Add New Company</button>
+          <button
+            onClick={onAddCompany}
+            className="btn btn-secondary float-end">
+            Add New Company
+          </button>
         </div>
       </div>
     </div>
-
-
   )
 }
 export default ShowCompanyScreen

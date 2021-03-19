@@ -4,7 +4,7 @@ import { getMyOrderList, updateMyOrder } from '../../actions/myorderActions'
 
 const UserMyOrderScreen = (props) => {
   const viewMyOrderStore = useSelector((store) => store.viewMyOrderStore)
-
+  const updateMyOrderStore = useSelector((store) => store.updateMyOrderStore)
   const onOrderDetails = (p) => {
     props.history.push({
       pathname: '/user-order-details',
@@ -14,9 +14,6 @@ const UserMyOrderScreen = (props) => {
   const onCancelOrder = (p) => {
     console.log('inside cancel my order' + p)
     dispatch(updateMyOrder(p.myorder_id, 2))
-
-    alert('Order Cancelled Successfully')
-    props.history.push('/seller')
   }
 
   const dispatch = useDispatch()
@@ -26,50 +23,77 @@ const UserMyOrderScreen = (props) => {
     dispatch(getMyOrderList())
   }, [])
 
-  return (
-    <div>
-      My Orders Screen
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>MyOrder ID</th>
-            <th>Order Date</th>
-            <th>Order Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {viewMyOrderStore.response &&
-            viewMyOrderStore.response.data &&
-            viewMyOrderStore.response.data.length > 0 &&
-            viewMyOrderStore.response.data.map((p) => {
-              return (
-                <tr>
-                  <td>{p.myorder_id}</td>
-                  <td>{p.orderDate}</td>
-                  <td>{p.status}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        onCancelOrder(p)
-                      }}
-                      className="btn btn-sm btn-danger">
-                      Cancel
-                    </button>
+  useEffect(() => {
+    dispatch(getMyOrderList())
+  }, [
+    updateMyOrderStore.response,
+    updateMyOrderStore.error,
+    updateMyOrderStore.loading,
+  ])
 
-                    <button
-                      onClick={() => {
-                        onOrderDetails(p)
-                      }}
-                      className="btn btn-sm btn-success">
-                      View Order Details
-                    </button>
-                  </td>
-                </tr>
-              )
-            })}
-        </tbody>
-      </table>
+  return (
+    <div className="container">
+      <div id="wrapper">
+        <div className="d-flex flex-column" id="content-wrapper">
+          <div id="content">
+            <div className="container-fluid">
+              <div className="card shadow">
+                <div className="card-header py-3">
+                  <p className="text-primary m-0 fw-bold">User Order List</p>
+                </div>
+                <div className="card-body">
+                  <div
+                    className="table-responsive table mt-2"
+                    id="dataTable"
+                    role="grid"
+                    aria-describedby="dataTable_info">
+                    <table className="table my-0" id="dataTable">
+                      <thead>
+                        <tr>
+                          <th>Order Date</th>
+                          <th>Order Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {viewMyOrderStore.response &&
+                          viewMyOrderStore.response.data &&
+                          viewMyOrderStore.response.data.length > 0 &&
+                          viewMyOrderStore.response.data.map((p) => {
+                            return (
+                              <tr>
+                                <td>{p.orderDate}</td>
+                                <td>{p.status}</td>
+                                <td>
+                                  {p.status == 'not delivered' && (
+                                    <button
+                                      onClick={() => {
+                                        onCancelOrder(p)
+                                      }}
+                                      className="btn btn-sm btn-danger mx-2">
+                                      Cancel
+                                    </button>
+                                  )}
+                                  <button
+                                    onClick={() => {
+                                      onOrderDetails(p)
+                                    }}
+                                    className="btn btn-sm btn-success mx-2">
+                                    Order Details
+                                  </button>
+                                </td>
+                              </tr>
+                            )
+                          })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

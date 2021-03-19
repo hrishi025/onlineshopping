@@ -108,7 +108,7 @@ nav a {
 body {
   color: black;
   background: white;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 .form-control {
   min-height: 41px;
@@ -327,4 +327,14 @@ td {
 
 .description {
   width: 40%;
+}
+
+.adminproductdesc {
+  width: 30%;
+}
+
+/* Product details screen desc td */
+
+.admintitle {
+  width: 25%;
 }

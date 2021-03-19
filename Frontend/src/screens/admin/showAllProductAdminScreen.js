@@ -13,7 +13,7 @@ const ShowAllProductAdminScreen = (props) => {
     dispatch(getProductListAdmin())
   }, [])
 
-  useEffect(() => { }, [error, response, loading])
+  useEffect(() => {}, [error, response, loading])
 
   const onAddProduct = () => {
     props.history.push('/add-product')
@@ -28,12 +28,19 @@ const ShowAllProductAdminScreen = (props) => {
   }
 
   // to render page after delete button is pressed
-  const deleteProductStore = useSelector(state => state.deleteProductStore)
+  const deleteProductStore = useSelector((state) => state.deleteProductStore)
   useEffect(async () => {
-    if (deleteProductStore.response && deleteProductStore.response.status == "success") {
-      dispatch(getProductListAdmin());
+    if (
+      deleteProductStore.response &&
+      deleteProductStore.response.status == 'success'
+    ) {
+      dispatch(getProductListAdmin())
     }
-  }, [deleteProductStore.response, deleteProductStore.error, deleteProductStore.loading])
+  }, [
+    deleteProductStore.response,
+    deleteProductStore.error,
+    deleteProductStore.loading,
+  ])
 
   const onDelete = (p) => {
     dispatch(deleteProduct(p.prod_id))
@@ -45,8 +52,13 @@ const ShowAllProductAdminScreen = (props) => {
 
   return (
     <div className="container">
-      <div className="text-left border border-light p-3 mb-2" >
-        <button className="text-left btn btn-outline-success" style={{ flex: "left" }} onClick={goBackHandler}>Go Back</button>
+      <div className="text-left border border-light p-3 mb-2">
+        <button
+          className="text-left btn btn-outline-success"
+          style={{ flex: 'left' }}
+          onClick={goBackHandler}>
+          Go Back
+        </button>
       </div>
 
       <div id="wrapper">
@@ -58,14 +70,17 @@ const ShowAllProductAdminScreen = (props) => {
                   <p className="text-primary m-0 fw-bold">Product's List</p>
                 </div>
                 <div className="card-body">
-                  <div className="table-responsive table mt-2" id="dataTable" role="grid"
+                  <div
+                    className="table-responsive table mt-2"
+                    id="dataTable"
+                    role="grid"
                     aria-describedby="dataTable_info">
                     <table className="table my-0" id="dataTable">
                       <thead>
                         <tr>
                           <th>Product ID</th>
-                          <th>Title</th>
-                          <th>Desc</th>
+                          <th className="admintitle">Title</th>
+                          <th className="adminproductdesc">Desc</th>
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Actions</th>
@@ -79,8 +94,10 @@ const ShowAllProductAdminScreen = (props) => {
                             return (
                               <tr>
                                 <td>{p.prod_id}</td>
-                                <td>{p.prod_title}</td>
-                                <td>{p.prod_description}</td>
+                                <td className="admintitle">{p.prod_title}</td>
+                                <td className="adminproductdesc">
+                                  {p.prod_description}
+                                </td>
                                 <td>{p.prod_price}</td>
                                 <td>{p.prod_qty}</td>
                                 <td>
@@ -88,20 +105,21 @@ const ShowAllProductAdminScreen = (props) => {
                                     onClick={() => onUpdate(p)}
                                     type="button"
                                     className="btn btn-outline-success">
-                                    Update Product</button>
+                                    Update
+                                  </button>
 
                                   <button
                                     onClick={() => onDelete(p)}
                                     type="button"
                                     className="btn btn-outline-danger float-end ">
-                                    Delete Product</button>
+                                    Delete
+                                  </button>
                                 </td>
                               </tr>
                             )
                           })}
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
@@ -111,12 +129,14 @@ const ShowAllProductAdminScreen = (props) => {
       </div>
       <div className="border border-light p-3 mb-4">
         <div className="text-center">
-          <button onClick={onAddProduct} className="btn btn-secondary float-end">
-            Add New Product</button>
+          <button
+            onClick={onAddProduct}
+            className="btn btn-secondary float-end">
+            Add New Product
+          </button>
         </div>
       </div>
     </div>
-
   )
 }
 

@@ -42,10 +42,6 @@ const SellerScreen = (props) => {
     dispatch(getSellerMonthlyRevenue())
   }, [])
 
-  const viewOrder = () => {
-    props.history.push('/admin-order-details')
-  }
-
   const showProduct = () => {
     props.history.push('/show-product')
   }

@@ -1,26 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartCheckout, getAllCartItems, getAllCartItemsAtLogin, removeFromCart, updateCart } from '../../actions/cartActions';
-import { Link } from 'react-router-dom';
-import { CART_CHECKOUT_RESET, CART_REMOVE_RESET, CART_UPDATE_RESET } from '../../constants/cartConstants';
 
-const CartScreen = (props) => {
-	const userSigninStore = useSelector((state) => state.userSigninStore);
-
-	const cartItemsStore = useSelector((state) => state.cartItemsStore);
-	const { response, loading, error } = cartItemsStore;
-
-	// to remove items from cart 
-	const cartRemoveStore = useSelector(state => state.cartRemoveStore)
-
-	let cartItems = [];
 
 	if (response) {
-		cartItems = response.data;
-		console.log(cartItems);
-	}
-
-	let [total, setTotal] = useState(0);
 	let [count, setCount] = useState(0);
 
 	const dispatch = useDispatch();

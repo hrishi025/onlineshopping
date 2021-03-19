@@ -57,6 +57,8 @@ import {
 } from './sellerReducer'
 import { addAddressReducer, fetchAddressReducer } from './AddressReducers'
 
+import { addAddressReducer, fetchAddressReducer } from './AddressReducers'
+
 const reducers = combineReducers({
   //user stores
   userSignupStore: userSignupReducer,
