@@ -13,7 +13,6 @@ import {
   productUpdateReducer,
   productDeleteReducer,
   categoryFetchReducer,
-  // sellerProfileReducer
 } from './productReducer'
 
 import { viewOrderDetailsReducer } from './orderReducer'
@@ -104,6 +103,7 @@ const reducers = combineReducers({
   getSellerTotalStore: getSellerTotalRevenue,
   getSellerCustAvgStore: getSellerCustAvgRating,
   getSellerMontlyRevenueStore: getSellerMontlyRevenueReducer,
+
   // all myorders of customers of perticular seller
   getAllCustomerMyOrdersForSellerStore: getAllCustomersMyOrderForSellerReducer,
 

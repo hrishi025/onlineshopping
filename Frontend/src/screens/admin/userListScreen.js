@@ -9,29 +9,41 @@ import {
 const UserListScreen = (props) => {
   const dispatch = useDispatch()
   const userListStore = useSelector((store) => store.userListStore)
-  const { error, response, loading } = userListStore
+  const { response } = userListStore
 
-  //   const { error, response, loading } = deleteProductStore
-  // call this only once (when the page has loaded successfully)
   useEffect(() => {
     dispatch(getAllUsers())
   }, [])
 
   // to render list after approve button is pressed
-  const userApproveStore = useSelector(state => state.userApproveStore)
+  const userApproveStore = useSelector((state) => state.userApproveStore)
   useEffect(() => {
-    if (userApproveStore.response && userApproveStore.response.status == "success") {
+    if (
+      userApproveStore.response &&
+      userApproveStore.response.status == 'success'
+    ) {
       dispatch(getAllUsers())
     }
-  }, [userApproveStore.error, userApproveStore.response, userApproveStore.loading])
+  }, [
+    userApproveStore.error,
+    userApproveStore.response,
+    userApproveStore.loading,
+  ])
 
   // to render list after approve button is pressed
-  const userSuspendStore = useSelector(state => state.userSuspendStore)
+  const userSuspendStore = useSelector((state) => state.userSuspendStore)
   useEffect(() => {
-    if (userSuspendStore.response && userSuspendStore.response.status == "success") {
+    if (
+      userSuspendStore.response &&
+      userSuspendStore.response.status == 'success'
+    ) {
       dispatch(getAllUsers())
     }
-  }, [userSuspendStore.error, userSuspendStore.response, userSuspendStore.loading])
+  }, [
+    userSuspendStore.error,
+    userSuspendStore.response,
+    userSuspendStore.loading,
+  ])
 
   const onApprove = (u) => {
     dispatch(approveUser(u.user_id))
@@ -47,12 +59,13 @@ const UserListScreen = (props) => {
 
   return (
     <div className="container">
-
-      <div className="text-left border border-light p-3 mb-2" >
+      <div className="text-left border border-light p-3 mb-2">
         <button
           className="text-left btn btn-outline-success"
-          style={{ flex: "left" }}
-          onClick={goBackHandler}>Go Back</button>
+          style={{ flex: 'left' }}
+          onClick={goBackHandler}>
+          Go Back
+        </button>
       </div>
 
       <div id="wrapper">
@@ -64,7 +77,10 @@ const UserListScreen = (props) => {
                   <p className="text-primary m-0 fw-bold">User's List</p>
                 </div>
                 <div className="card-body">
-                  <div className="table-responsive table mt-2" id="dataTable" role="grid"
+                  <div
+                    className="table-responsive table mt-2"
+                    id="dataTable"
+                    role="grid"
                     aria-describedby="dataTable_info">
                     <table className="table my-0" id="dataTable">
                       <thead>
@@ -88,26 +104,29 @@ const UserListScreen = (props) => {
                                 <td>{u.user_email}</td>
                                 <td>{u.user_status}</td>
                                 <td>
-                                  {((u.user_status == "suspended") ||
-                                    (u.user_status == "not verified")) &&
+                                  {(u.user_status == 'suspended' ||
+                                    u.user_status == 'not verified') && (
                                     <button
                                       onClick={() => onApprove(u)}
                                       type="button"
                                       className="btn btn-outline-success ">
-                                      Approve User</button>}
-                                  {u.user_status == "verified" &&
+                                      Approve User
+                                    </button>
+                                  )}
+                                  {u.user_status == 'verified' && (
                                     <button
                                       onClick={() => onSuspend(u)}
                                       type="button"
                                       className="btn btn-outline-danger">
-                                      Suspend User</button>}
+                                      Suspend User
+                                    </button>
+                                  )}
                                 </td>
                               </tr>
                             )
                           })}
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
@@ -115,9 +134,7 @@ const UserListScreen = (props) => {
           </div>
         </div>
       </div>
-
-    </div >
-
+    </div>
   )
 }
 

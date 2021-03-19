@@ -6,7 +6,6 @@ import { deleteCompany } from '../../actions/companyAction'
 
 const ShowCompanyScreen = (props) => {
   let params = useParams()
-  //console.log('params.id' + params.id);
 
   const getComponyStore = useSelector((store) => store.getComponyStore)
 

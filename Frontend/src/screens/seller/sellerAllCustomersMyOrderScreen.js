@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMyOrderList, updateMyOrder } from '../../actions/myorderActions'
+import { updateMyOrder } from '../../actions/myorderActions'
 import { getAllCustomersMyOrdersForSeller } from '../../actions/sellerActions'
 
 const SellerAllCustomersMyOrderScreen = (props) => {
-  const getAllCustomerMyOrdersForSellerStore = useSelector((store) => store.getAllCustomerMyOrdersForSellerStore)
-  const { response, loading, error } = getAllCustomerMyOrdersForSellerStore
+  const getAllCustomerMyOrdersForSellerStore = useSelector(
+    (store) => store.getAllCustomerMyOrdersForSellerStore
+  )
 
   const dispatch = useDispatch()
 
@@ -88,44 +89,47 @@ const SellerAllCustomersMyOrderScreen = (props) => {
                       <tbody>
                         {getAllCustomerMyOrdersForSellerStore.response &&
                           getAllCustomerMyOrdersForSellerStore.response.data &&
-                          getAllCustomerMyOrdersForSellerStore.response.data.length > 0 &&
-                          getAllCustomerMyOrdersForSellerStore.response.data.map((p) => {
-                            return (
-                              <tr>
-                                <td>{p.myorder_id}</td>
-                                <td>{p.orderDate}</td>
-                                <td>{p.status}</td>
-                                <td>
-                                  {p.status == 'not delivered' && (
+                          getAllCustomerMyOrdersForSellerStore.response.data
+                            .length > 0 &&
+                          getAllCustomerMyOrdersForSellerStore.response.data.map(
+                            (p) => {
+                              return (
+                                <tr>
+                                  <td>{p.myorder_id}</td>
+                                  <td>{p.orderDate}</td>
+                                  <td>{p.status}</td>
+                                  <td>
+                                    {p.status == 'not delivered' && (
+                                      <button
+                                        onClick={() => {
+                                          onCancelOrder(p)
+                                        }}
+                                        className="btn btn-sm btn-danger mx-2">
+                                        Cancel
+                                      </button>
+                                    )}
+                                    {p.status == 'not delivered' && (
+                                      <button
+                                        onClick={() => {
+                                          onDeliverOrder(p)
+                                        }}
+                                        className="btn btn-sm btn-success mx-2">
+                                        Deliver Order
+                                      </button>
+                                    )}
+
                                     <button
                                       onClick={() => {
-                                        onCancelOrder(p)
-                                      }}
-                                      className="btn btn-sm btn-danger mx-2">
-                                      Cancel
-                                    </button>
-                                  )}
-                                  {p.status == 'not delivered' && (
-                                    <button
-                                      onClick={() => {
-                                        onDeliverOrder(p)
+                                        onOrderDetails(p)
                                       }}
                                       className="btn btn-sm btn-success mx-2">
-                                      Deliver Order
+                                      Order Details
                                     </button>
-                                  )}
-
-                                  <button
-                                    onClick={() => {
-                                      onOrderDetails(p)
-                                    }}
-                                    className="btn btn-sm btn-success mx-2">
-                                    Order Details
-                                  </button>
-                                </td>
-                              </tr>
-                            )
-                          })}
+                                  </td>
+                                </tr>
+                              )
+                            }
+                          )}
                       </tbody>
                     </table>
                   </div>

@@ -1,39 +1,37 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { editprofile, getProfile } from "../../actions/userActions";
-import Profile from "../../image/profile.svg";
-import { USER_PROFILE_RESET } from "../../constants/userConstants";
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { editprofile } from '../../actions/userActions'
+import Profile from '../../image/profile.svg'
+import { USER_PROFILE_RESET } from '../../constants/userConstants'
 
 const EditProfileScreen = (props) => {
-
-  const userSigninStore = useSelector((state) => state.userSigninStore);
+  const userSigninStore = useSelector((state) => state.userSigninStore)
   const { name, email, phone } = userSigninStore.response.data
 
-  const editProfileStore = useSelector((state) => state.editProfileStore);
-  const { response, loading, error } = editProfileStore;
+  const editProfileStore = useSelector((state) => state.editProfileStore)
+  const { response, loading, error } = editProfileStore
 
-  const [uemail, setUemail] = useState("" + email);
-  const [password, setPassword] = useState("");
-  const [uname, setUname] = useState("" + name);
-  const [uphone, setUphone] = useState("" + phone);
+  const [password, setPassword] = useState('')
+  const [uname, setUname] = useState('' + name)
+  const [uphone, setUphone] = useState('' + phone)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const saveButton = () => {
-    console.log("in edit button function");
-    dispatch(editprofile(password, uname, uphone));
-  };
+    console.log('in edit button function')
+    dispatch(editprofile(password, uname, uphone))
+  }
 
   useEffect(() => {
-    if (response && response.status == "success") {
-      dispatch({ type: USER_PROFILE_RESET });
-      props.history.push("/");
+    if (response && response.status == 'success') {
+      dispatch({ type: USER_PROFILE_RESET })
+      props.history.push('/')
     } else if (error) {
       // there is an error while making the API call
-      console.log(error);
-      alert("error while making API call");
+      console.log(error)
+      alert('error while making API call')
     }
-  }, [response, loading, error]);
+  }, [response, loading, error])
 
   return (
     <div>
@@ -54,7 +52,6 @@ const EditProfileScreen = (props) => {
           </div>
 
           <div className="col-md-6" col-10 mx-auto>
-
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">
                 <strong>Full Name</strong>
@@ -112,19 +109,15 @@ const EditProfileScreen = (props) => {
             </div>
 
             <div class="col-12">
-              <button
-                class="btn btn-success "
-                onClick={saveButton}
-              >
+              <button class="btn btn-success " onClick={saveButton}>
                 Save Changes
-                </button>
+              </button>
             </div>
-
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditProfileScreen;
+export default EditProfileScreen

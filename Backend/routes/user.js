@@ -218,7 +218,7 @@ router.post('/checkout', (request, response) => {
 
         // steps 2:
         // - add these products to an order
-        const date = moment().format('DD/MM/YYYY')
+        const date = moment().format('yyyy-MM-DD')
         const statementMyOrder = `
 			insert into myorder 
 				(user_id, total_price, orderDate)

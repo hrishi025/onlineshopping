@@ -8,7 +8,6 @@ import { USER_SIGNOUT } from '../constants/userConstants'
 import { CART_FETCH_RESET_AT_LOGIN } from '../constants/cartConstants'
 
 const Navigation = () => {
-
   const dispatch = useDispatch()
   const userSigninStore = useSelector((store) => store.userSigninStore)
 
