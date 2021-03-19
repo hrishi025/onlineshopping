@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetailsScreen = (props) => {
-	let params = useParams();
-	console.log('params.id' + params.id);
+  let params = useParams()
+  console.log('params.id' + params.id)
 
 	const classes = useStyles();
 
@@ -34,7 +34,7 @@ const ProductDetailsScreen = (props) => {
 
 	const cartStore = useSelector((state) => state.cartStore);
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
 	useEffect(async () => {
 		console.log('in use effect');
@@ -43,10 +43,10 @@ const ProductDetailsScreen = (props) => {
 		await dispatch(getProductComments(params.id));
 	}, []);
 
-	const onAddToCart = (p) => {
-		console.log(p);
-		dispatch(addToCart(p.prod_id, '1'));
-	};
+  const onAddToCart = (p) => {
+    console.log(p)
+    dispatch(addToCart(p.prod_id, '1'))
+  }
 
 	//to check if reviews are avaliable or not 
 	const [reviewAvailablityToggle, setReviewAvailablityToggle] = useState(false);
@@ -185,4 +185,4 @@ const ProductDetailsScreen = (props) => {
 
 };
 
-export default ProductDetailsScreen;
+export default ProductDetailsScreen

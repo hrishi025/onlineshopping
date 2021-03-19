@@ -1,12 +1,12 @@
 //import Profile from '../image/profile.svg';
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router';
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router'
 import { rateProduct } from '../../actions/productActions'
 
 const ProductRatigScreen = (props) => {
-  let params = useParams();
-  console.log('params.id' + params.id);
+  let params = useParams()
+  console.log('params.id' + params.id)
 
   const orderdetails_id = params.id
   const dispatch = useDispatch()

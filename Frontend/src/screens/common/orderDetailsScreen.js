@@ -1,18 +1,12 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { viewOrderDetails } from '../../actions/orderActions'
 import { fetchAddressForOrderDetails } from '../../actions/addressAction'
 
 const OrderDetailsScreen = (props) => {
+  const fetchAddressStore = useSelector((store) => store.fetchAddressStore)
 
-  const fetchAddressStore = useSelector(
-    (store) => store.fetchAddressStore
-  )
-
-  const userSigninStore = useSelector(
-    (store) => store.userSigninStore
-  )
+  const userSigninStore = useSelector((store) => store.userSigninStore)
 
   const add_id = props.location.state.add_id
   const myorder_id = props.location.state.myorder_id
@@ -27,10 +21,17 @@ const OrderDetailsScreen = (props) => {
   const dispatch = useDispatch()
 
   const goBackHandler = () => {
-    if (userSigninStore && userSigninStore.response && userSigninStore.response.status == "success") {
-      if (userSigninStore.response.data.role == "CUSTOMER" || userSigninStore.response.data.role == "CUSTSELL")
+    if (
+      userSigninStore &&
+      userSigninStore.response &&
+      userSigninStore.response.status == 'success'
+    ) {
+      if (
+        userSigninStore.response.data.role == 'CUSTOMER' ||
+        userSigninStore.response.data.role == 'CUSTSELL'
+      )
         props.history.push('/user-myorder')
-      if (userSigninStore.response.data.role == "SELLER")
+      if (userSigninStore.response.data.role == 'SELLER')
         props.history.push('/seller')
     }
   }
@@ -74,16 +75,18 @@ const OrderDetailsScreen = (props) => {
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Delivery Address</th>
-                          {userSigninStore && userSigninStore.response &&
-                            userSigninStore.response.status == "success" &&
+                          {userSigninStore &&
+                            userSigninStore.response &&
+                            userSigninStore.response.status == 'success' &&
                             userSigninStore.response.data &&
-                            (userSigninStore.response.data.role == "CUSTOMER"
-                              || userSigninStore.response.data.role == "CUSTSELL") &&
-                            <>
-                              <th>rating</th>
-                              <th>comment</th>
-                            </>
-                          }
+                            (userSigninStore.response.data.role == 'CUSTOMER' ||
+                              userSigninStore.response.data.role ==
+                                'CUSTSELL') && (
+                              <>
+                                <th>rating</th>
+                                <th>comment</th>
+                              </>
+                            )}
                         </tr>
                       </thead>
                       <tbody>
@@ -99,26 +102,30 @@ const OrderDetailsScreen = (props) => {
                                 <td>
                                   {p.address}, {p.city}, {p.country}, {p.pin}
                                 </td>{' '}
-                                {userSigninStore && userSigninStore.response &&
-                                  userSigninStore.response.status == "success" &&
+                                {userSigninStore &&
+                                  userSigninStore.response &&
+                                  userSigninStore.response.status ==
+                                    'success' &&
                                   userSigninStore.response.data &&
-                                  (userSigninStore.response.data.role == "CUSTOMER" ||
-                                    userSigninStore.response.data.role == "CUSTSELL") &&
-                                  <>
-                                    <td>{rating}</td>
-                                    <td>{comment}</td>
-                                    <td>
-                                      {(rating == null || comment == null) && (
-                                        <Link
-                                          to={`/rate-product/${orderdetails_id}`}
-                                          className="btn btn-sm btn-success btn-add-to-cart">
-                                          Rate Product
-                                        </Link>
-                                      )}
-                                    </td>
-                                  </>
-                                }
-
+                                  (userSigninStore.response.data.role ==
+                                    'CUSTOMER' ||
+                                    userSigninStore.response.data.role ==
+                                      'CUSTSELL') && (
+                                    <>
+                                      <td>{rating}</td>
+                                      <td>{comment}</td>
+                                      <td>
+                                        {(rating == null ||
+                                          comment == null) && (
+                                          <Link
+                                            to={`/rate-product/${orderdetails_id}`}
+                                            className="btn btn-sm btn-success btn-add-to-cart">
+                                            Rate Product
+                                          </Link>
+                                        )}
+                                      </td>
+                                    </>
+                                  )}
                               </tr>
                             )
                           })}

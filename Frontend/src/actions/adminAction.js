@@ -1,21 +1,11 @@
 import axios from 'axios'
 import {
-  CATEGORY_FETCH_FAIL,
-  CATEGORY_FETCH_REQUEST,
-  CATEGORY_FETCH_SUCCESS,
-  COMPANY_FETCH_FAIL,
-  COMPANY_FETCH_REQUEST,
-  COMPANY_FETCH_SUCCESS,
   PRODUCT_FETCH_REQUEST,
   PRODUCT_FETCH_SUCCESS,
   PRODUCT_FETCH_FAIL,
-  PRODUCT_POST_REQUEST,
-  PRODUCT_POST_FAIL,
-  PRODUCT_POST_SUCCESS,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
-  PRODUCT_UPDATE_RESET,
 } from './../constants/productConstants'
 
 // Get All Product Details For Admin
@@ -94,96 +84,3 @@ export const updateProduct = (
       });
   };
 };
-
-// export const getAllCategories = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: CATEGORY_FETCH_REQUEST,
-//     });
-
-//     const header = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         token: sessionStorage["token"],
-//       },
-//     };
-//   };
-// };
-//     const url = "http://localhost:4000/category/";
-//     axios
-//       .get(url, header)
-//       .then((response) => {
-//         dispatch({
-//           type: CATEGORY_FETCH_SUCCESS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: CATEGORY_FETCH_FAIL,
-//           payload: error,
-//         });
-//       });
-//   };
-// };
-
-// export const getAllCompanies = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: COMPANY_FETCH_REQUEST,
-//     });
-
-//     const header = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         token: sessionStorage["token"],
-//       },
-//     };
-
-//     const url = "http://localhost:4000/company/";
-//     axios
-//       .get(url, header)
-//       .then((response) => {
-//         dispatch({
-//           type: COMPANY_FETCH_SUCCESS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: COMPANY_FETCH_FAIL,
-//           payload: error,
-//         });
-//       });
-//   };
-// };
-
-// export const getProductDetails = (prod_id) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: PRODUCT_FETCH_REQUEST,
-//     });
-
-//     const url = `http://localhost:4000/productdetails/${prod_id}`;
-//     console.log(url);
-//     const header = {
-//       "Content-Type": "application/json",
-//       token: sessionStorage["token"],
-//     };
-
-//     axios
-//       .get(url, header)
-//       .then((response) => {
-//         dispatch({
-//           type: PRODUCT_FETCH_SUCCESS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: PRODUCT_FETCH_FAIL,
-//           payload: error,
-//         });
-//       });
-//   };
-// };

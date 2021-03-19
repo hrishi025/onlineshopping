@@ -2,15 +2,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCategory } from '../../actions/categoryAction'
-import {
-  CATEGORY_ADD_FAIL,
-  CATEGORY_ADD_REQUEST,
-  CATEGORY_ADD_SUCCESS,
-  CATEGORY_ADD_RESET,
-} from '../../constants/productConstants'
+import { CATEGORY_ADD_SUCCESS } from '../../constants/productConstants'
 
 const AddCategoryScreen = (props) => {
-  
   const [cat_title, setCat_title] = useState('')
   const [cat_description, setCat_description] = useState('')
 

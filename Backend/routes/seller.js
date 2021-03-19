@@ -41,7 +41,6 @@ router.get('/seller/product', (request, response) => {
   })
 })
 
-
 //Get  All Max Selling Products for seller
 router.get('/seller/Max/product', (request, response) => {
   console.log(`in backend seller/max/product`)
@@ -68,7 +67,6 @@ router.get('/seller/Max/product', (request, response) => {
   })
 })
 
-
 //getting total revenue
 
 //Get  All Max Selling Products for seller
@@ -91,8 +89,6 @@ product.seller_id = '${request.id}'`
     response.send(utils.createResult(error, data))
   })
 })
-
-
 
 //Get  All Max Selling Products for seller
 router.get('/seller/avg/rating', (request, response) => {
@@ -136,7 +132,7 @@ FROM
 	ON 
 		orderdetails.product_id = product.prod_id
 WHERE
-	 substring(now(),1,7)=substring(myorder.orderDate,1,7) and
+substring(now(), 1, 7) = substring(myorder.orderDate, 1, 7) and
 	product.seller_id = '${request.id}'`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))

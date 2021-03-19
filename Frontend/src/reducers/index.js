@@ -108,6 +108,7 @@ const reducers = combineReducers({
   getSellerTotalStore: getSellerTotalRevenue,
   getSellerCustAvgStore: getSellerCustAvgRating,
   getSellerMontlyRevenueStore: getSellerMontlyRevenueReducer,
+
   // all myorders of customers of perticular seller
   getAllCustomerMyOrdersForSellerStore: getAllCustomersMyOrderForSellerReducer,
 

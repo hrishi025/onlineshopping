@@ -95,7 +95,7 @@ router.get('/max/product/sales', (request, response) => {
 
 //Get Bar Chart Revenue Contents
 router.get('/month/revenue', (request, response) => {
-  const statement = `select  substring(pay_date, 4, 10) as month, sum(pay_amount) as revenue from payment group by month ORDER BY 1 DESC LIMIT 12`
+  const statement = `select  substring(pay_date, 1, 7) as month, sum(pay_amount) as revenue from payment group by month ORDER BY 1 DESC LIMIT 12`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

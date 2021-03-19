@@ -1,18 +1,9 @@
-//import Profile from '../../image/profile.svg'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCategory } from '../../actions/categoryAction'
-import {
-  CATEGORY_UPDATE_FAIL,
-  CATEGORY_UPDATE_REQUEST,
-  CATEGORY_UPDATE_SUCCESS,
-  CATEGORY_UPDATE_RESET,
-} from '../../constants/productConstants'
+import { CATEGORY_UPDATE_SUCCESS } from '../../constants/productConstants'
 
 const UpdateCategoryScreen = (props) => {
-  console.log(`props.location.state--->${props.location.state.cat_id}`)
-  console.log(`props.location.state--->${props.location.state.cat_title}`)
-
   const cat_id = props.location.state.cat_id
   const cat_title = props.location.state.cat_title
   const cat_desc = props.location.state.cat_description
@@ -36,7 +27,6 @@ const UpdateCategoryScreen = (props) => {
     }
   }, [response, loading, error])
 
-  //  console.log(`state---> ${state}`)
   const saveButton = () => {
     console.log(`in saveButton Method`)
     dispatch(updateCategory(cat_id, catTitle, catDesc))
@@ -49,8 +39,10 @@ const UpdateCategoryScreen = (props) => {
         <strong>Update Category Details</strong>{' '}
       </h2>
       <hr />
-      <div className="form-group" style={{ textAlign: "left" }}>
-        <label><strong>Category Title</strong></label>
+      <div className="form-group" style={{ textAlign: 'left' }}>
+        <label>
+          <strong>Category Title</strong>
+        </label>
         <input
           defaultValue={catTitle}
           type="text"
@@ -60,8 +52,10 @@ const UpdateCategoryScreen = (props) => {
           onChange={(e) => setCatTitle(e.target.value)}
         />
       </div>
-      <div className="form-group" style={{ textAlign: "left" }}>
-        <label><strong>Category Description</strong></label>
+      <div className="form-group" style={{ textAlign: 'left' }}>
+        <label>
+          <strong>Category Description</strong>
+        </label>
         <textarea
           defaultValue={catDesc}
           className="form-control"

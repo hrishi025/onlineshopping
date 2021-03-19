@@ -36,21 +36,21 @@ import {
 export const getProductReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_FETCH_REQUEST:
-      return { loading: true };
+      return { loading: true }
 
     case PRODUCT_FETCH_SUCCESS:
-      return { loading: false, response: action.payload };
+      return { loading: false, response: action.payload }
 
     case PRODUCT_FETCH_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.payload }
 
     case PRODUCT_FETCH_RESET:
-      return {};
+      return {}
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const getProductRatingReducer = (state = {}, action) => {
   switch (action.type) {
@@ -93,99 +93,94 @@ export const getProductCommentReducer = (state = {}, action) => {
 export const productPostReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_POST_REQUEST:
-      return { loading: true };
+      return { loading: true }
 
     case PRODUCT_POST_SUCCESS:
-      return { loading: false, response: action.payload };
+      return { loading: false, response: action.payload }
 
     case PRODUCT_POST_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.payload }
 
     case PRODUCT_POST_RESET:
-      return {};
+      return {}
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const companyFetchReducer = (state = {}, action) => {
   switch (action.type) {
     case COMPANY_FETCH_REQUEST:
-      return { loading: true };
+      return { loading: true }
 
     case COMPANY_FETCH_SUCCESS:
-      return { loading: false, response: action.payload };
+      return { loading: false, response: action.payload }
 
     case COMPANY_FETCH_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.payload }
 
     case COMPANY_FETCH_RESET:
-      return {};
+      return {}
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const categoryFetchReducer = (state = {}, action) => {
   switch (action.type) {
     case CATEGORY_FETCH_REQUEST:
-      return { loading: true };
+      return { loading: true }
 
     case CATEGORY_FETCH_SUCCESS:
-      return { loading: false, response: action.payload };
+      return { loading: false, response: action.payload }
 
     case CATEGORY_FETCH_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.payload }
 
     case CATEGORY_FETCH_RESET:
-      return {};
+      return {}
 
     default:
-      return state;
+      return state
   }
-};
-
-
+}
 
 export const productUpdateReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
-      return { loading: true };
+      return { loading: true }
 
     case PRODUCT_UPDATE_SUCCESS:
-      return { loading: false, response: action.payload };
+      return { loading: false, response: action.payload }
 
     case PRODUCT_UPDATE_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.payload }
 
     case PRODUCT_UPDATE_RESET:
-      return {};
+      return {}
 
     default:
-      return state;
+      return state
   }
-};
-
-
-
+}
 
 export const productDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
-      return { loading: true };
+      return { loading: true }
 
     case PRODUCT_DELETE_SUCCESS:
-      return { loading: false, response: action.payload };
+      return { loading: false, response: action.payload }
 
     case PRODUCT_DELETE_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.payload }
 
     case PRODUCT_DELETE_RESET:
-      return {};
+      return {}
 
     default:
-      return state;
+      return state
   }
-};
+}

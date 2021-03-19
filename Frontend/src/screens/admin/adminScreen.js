@@ -1,10 +1,7 @@
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCartItems } from '../../actions/cartActions'
+
 import {
-  PieChart,
-  Pie,
   Tooltip,
   BarChart,
   XAxis,
@@ -21,12 +18,9 @@ import {
 } from '../../actions/adminDashBoardActions'
 
 const AdminScreen = (props) => {
-  // const cartItemsStore = useSelector((store) => store.cartItemsStore);
-  // const { response, loading, error } = cartItemsStore;
-
+  
   const paymentStore = useSelector((store) => store.paymentStore)
-  const { response, loading, error } = paymentStore
-  //const  { TotalRevenue } = paymentStore.response
+  
 
   const ratingStore = useSelector((store) => store.ratingStore)
 
@@ -37,7 +31,6 @@ const AdminScreen = (props) => {
   )
   const dispatch = useDispatch()
 
-  const chartData = monthWiseRevenueStore
 
   useEffect(() => {
     console.log('in use effect')

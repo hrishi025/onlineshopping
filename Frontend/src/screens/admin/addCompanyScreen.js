@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-//import { signup } from "../actions/userActions";
-import { Link } from 'react-router-dom'
 import { COMPANY_ADD_RESET } from '../../constants/productConstants'
 import { addCompany } from '../../actions/companyAction'
 

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ADD_ADDRESS_FAIL, ADD_ADDRESS_REQUEST, ADD_ADDRESS_SUCCESS, FETCH_ADDRESS_FAIL, FETCH_ADDRESS_REQUEST, FETCH_ADDRESS_SUCCESS } from "../constants/addressConstants";
-import { PRODUCT_FETCH_FAIL, PRODUCT_FETCH_REQUEST, PRODUCT_FETCH_SUCCESS } from "../constants/productConstants";
 
 export const addAddress = (address, city, state, country, pin) => {
     return (dispatch) => {
