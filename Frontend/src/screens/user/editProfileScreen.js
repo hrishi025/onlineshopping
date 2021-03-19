@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editprofile, getProfile } from "../actions/userActions";
-import Profile from "../image/profile.svg";
-import { USER_PROFILE_RESET } from "../constants/userConstants";
+import { editprofile, getProfile } from "../../actions/userActions";
+import Profile from "../../image/profile.svg";
+import { USER_PROFILE_RESET } from "../../constants/userConstants";
 
 const EditProfileScreen = (props) => {
 

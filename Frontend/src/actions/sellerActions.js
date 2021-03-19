@@ -43,6 +43,9 @@ import {
   SELLER_MONTHLY_REVENUE_SUCCESS,
   SELLER_MONTHLY_REVENUE_FAIL,
   SELLER_MONTHLY_REVENUE_RESET,
+  SELLER_ALL_CUSTOMER_MYORDERS_REQUEST,
+  SELLER_ALL_CUSTOMER_MYORDERS_SUCCESS,
+  SELLER_ALL_CUSTOMER_MYORDERS_FAIL,
 } from './../constants/sellerConstants'
 
 export const getProductList = () => {
@@ -292,95 +295,35 @@ export const getSellerMonthlyRevenue = () => {
   }
 }
 
-export const getAllCategories = () => {
+//get seller customer satisfaction
+export const getAllCustomersMyOrdersForSeller = () => {
   return (dispatch) => {
     dispatch({
-      type: CATEGORY_FETCH_REQUEST,
+      type: SELLER_ALL_CUSTOMER_MYORDERS_REQUEST,
     })
 
+    const url = request_url + '/seller/alluserorders'
+    console.log(`in get seller max sale productss`)
     const header = {
       headers: {
         'Content-Type': 'application/json',
         token: sessionStorage['token'],
       },
     }
+
+    axios
+      .get(url, header)
+      .then((response) => {
+        dispatch({
+          type: SELLER_ALL_CUSTOMER_MYORDERS_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: SELLER_ALL_CUSTOMER_MYORDERS_FAIL,
+          payload: error,
+        })
+      })
   }
 }
-//     const url = "http://localhost:4000/category/";
-//     axios
-//       .get(url, header)
-//       .then((response) => {
-//         dispatch({
-//           type: CATEGORY_FETCH_SUCCESS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: CATEGORY_FETCH_FAIL,
-//           payload: error,
-//         });
-//       });
-//   };
-// };
-
-// export const getAllCompanies = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: COMPANY_FETCH_REQUEST,
-//     });
-
-//     const header = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         token: sessionStorage["token"],
-//       },
-//     };
-
-//     const url = "http://localhost:4000/company/";
-//     axios
-//       .get(url, header)
-//       .then((response) => {
-//         dispatch({
-//           type: COMPANY_FETCH_SUCCESS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: COMPANY_FETCH_FAIL,
-//           payload: error,
-//         });
-//       });
-//   };
-// };
-
-// export const getProductDetails = (prod_id) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: PRODUCT_FETCH_REQUEST,
-//     });
-
-//     const url = `http://localhost:4000/productdetails/${prod_id}`;
-//     console.log(url);
-//     const header = {
-//       "Content-Type": "application/json",
-//       token: sessionStorage["token"],
-//     };
-
-//     axios
-//       .get(url, header)
-//       .then((response) => {
-//         dispatch({
-//           type: PRODUCT_FETCH_SUCCESS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: PRODUCT_FETCH_FAIL,
-//           payload: error,
-//         });
-//       });
-//   };
-// };

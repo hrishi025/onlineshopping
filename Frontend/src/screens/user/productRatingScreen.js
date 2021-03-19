@@ -1,7 +1,7 @@
 //import Profile from '../image/profile.svg';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { rateProduct } from '../actions/productActions'
+import { rateProduct } from '../../actions/productActions'
 
 const ProductRatigScreen = (props) => {
   const orderdetails_id = props.location.state.orderdetails_id

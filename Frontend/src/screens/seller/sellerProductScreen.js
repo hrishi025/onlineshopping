@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductList } from '../actions/sellerActions'
-import { deleteProduct } from '../actions/productActions'
+import { getProductList } from '../../actions/sellerActions'
+import { deleteProduct } from '../../actions/productActions'
 
 const SellerProductScreen = (props) => {
   const dispatch = useDispatch()

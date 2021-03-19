@@ -18,6 +18,7 @@ import {
 
 import { viewOrderDetailsReducer } from './orderReducer'
 import {
+  cartCheckoutReducer,
   cartFetchAtLoginReducer,
   cartFetchReducer,
   cartReducer,
@@ -52,7 +53,9 @@ import {
   getSellerTotalRevenue,
   getSellerCustAvgRating,
   getSellerMontlyRevenueReducer,
+  getAllCustomersMyOrderForSellerReducer,
 } from './sellerReducer'
+import { addAddressReducer, fetchAddressReducer } from './AddressReducers'
 
 const reducers = combineReducers({
   //user stores
@@ -62,6 +65,10 @@ const reducers = combineReducers({
   userListStore: userListReducer,
   userApproveStore: userApproveReducer,
   userSuspendStore: userSuspendReducer,
+
+  //address store
+  addAddressStore: addAddressReducer,
+  fetchAddressStore: fetchAddressReducer,
 
   //product stores
   allProductStore: getProductReducer,
@@ -75,6 +82,7 @@ const reducers = combineReducers({
   cartItemsStore: cartFetchReducer,
   updateCartStore: updateCartReducer,
   cartLoginStore: cartFetchAtLoginReducer,
+  cartCheckoutStore: cartCheckoutReducer,
 
   //category and company store
   categoryFetchStore: categoryFetchReducer,
@@ -96,6 +104,8 @@ const reducers = combineReducers({
   getSellerTotalStore: getSellerTotalRevenue,
   getSellerCustAvgStore: getSellerCustAvgRating,
   getSellerMontlyRevenueStore: getSellerMontlyRevenueReducer,
+  // all myorders of customers of perticular seller
+  getAllCustomerMyOrdersForSellerStore: getAllCustomersMyOrderForSellerReducer,
 
   //order Details
   viewOrderDetailsStore: viewOrderDetailsReducer,

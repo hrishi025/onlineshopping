@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMyOrderList, updateMyOrder } from '../actions/myorderActions'
+import { getMyOrderList, updateMyOrder } from '../../actions/myorderActions'
 
 const UserMyOrderScreen = (props) => {
   const viewMyOrderStore = useSelector((store) => store.viewMyOrderStore)

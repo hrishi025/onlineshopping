@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { viewOrderDetails } from '../actions/orderActions'
+import { viewOrderDetails } from '../../actions/orderActions'
 
 const OrderDetailsScreen = (props) => {
   const viewOrderDetailsStore = useSelector(

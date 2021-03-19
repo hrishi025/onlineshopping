@@ -191,11 +191,11 @@ router.get('/orders', (request, response) => {
 
 router.post('/checkout', (request, response) => {
   let { pay_type } = request.body
-  // closure
-  ;(async () => {
-    // step 1:
-    // - get all the products from cart
-    const statementCart = `
+    // closure
+    ; (async () => {
+      // step 1:
+      // - get all the products from cart
+      const statementCart = `
 			select 
 				c.cart_id as cart_id,
 				p.prod_id as prod_id, 
@@ -206,59 +206,59 @@ router.post('/checkout', (request, response) => {
 				inner join product p on c.prod_id = p.prod_id
 				where c.user_id = ${request.id}`
 
-    const [cart_items] = await pool.execute(statementCart)
+      const [cart_items] = await pool.execute(statementCart)
 
-    //create a total variable to calculate total cart items value
-    let total = 0
-    for (const item of cart_items) {
-      total += item['cart_quantity'] * item['prod_price']
-      // total = total + ( item['cart_quantity'] * item['prod_price'] )
-    }
-    console.log(total)
+      //create a total variable to calculate total cart items value
+      for (const item of cart_items) {
+        let total = 0
+        total += item['cart_quantity'] * item['prod_price']
+        // total = total + ( item['cart_quantity'] * item['prod_price'] )
 
-    // steps 2:
-    // - add these products to an order
-    const date = moment().format('DD/MM/YYYY')
-    const statementMyOrder = `
+        console.log(total)
+
+        // steps 2:
+        // - add these products to an order
+        const date = moment().format('DD/MM/YYYY')
+        const statementMyOrder = `
 			insert into myorder 
 				(user_id, total_price, orderDate)
 			values
 				(${request.id}, ${total}, '${date}')
 			`
-    console.log(statementMyOrder)
+        console.log(statementMyOrder)
 
-    // place an order
-    const [myorder] = await pool.execute(statementMyOrder)
-    console.log(myorder)
+        // place an order
+        const [myorder] = await pool.execute(statementMyOrder)
+        console.log(myorder)
 
-    // get the myorder_id
-    const myorder_id = myorder['insertId']
+        // get the myorder_id
+        const myorder_id = myorder['insertId']
 
-    //insert all cart items one by one in order details table
-    for (const item of cart_items) {
-      const statementOrderDetails = `
+        //insert all cart items one by one in order details table
+
+        const statementOrderDetails = `
 				insert into orderDetails 
 					(myorder_id, product_id, price, quantity)
 				values
 					(${myorder_id}, ${item['prod_id']}, ${item['prod_price']}, ${item['cart_quantity']})`
-      console.log(statementOrderDetails)
-      await pool.execute(statementOrderDetails)
-    }
+        console.log(statementOrderDetails)
+        await pool.execute(statementOrderDetails)
 
-    // step 3
-    // - delete all the items from the cart
-    const statementCartDeleteItems = `delete from cart where user_id = ${request.id}`
-    await pool.execute(statementCartDeleteItems)
+        //make payment 	//Insert into Payment
+        if (pay_type == undefined) {
+          pay_type = 0
+        }
+        const statementPayment = `INSERT INTO payment(user_id, pay_amount, myorder_id, pay_date, pay_type) VALUES('${request.id}', '${total}', '${myorder_id}', '${date}', '${pay_type}')`
+        await pool.execute(statementPayment)
+      }
 
-    //make payment 	//Insert into Payment
-    if (pay_type == undefined) {
-      pay_type = 0
-    }
-    const statementPayment = `INSERT INTO payment(user_id, pay_amount, myorder_id, pay_date, pay_type) VALUES('${request.id}', '${total}', '${myorder_id}', '${date}', '${pay_type}')`
-    await pool.execute(statementPayment)
+      // step 3
+      // - delete all the items from the cart
+      const statementCartDeleteItems = `delete from cart where user_id = ${request.id}`
+      await pool.execute(statementCartDeleteItems)
 
-    response.send({ status: 'success' })
-  })()
+      response.send({ status: 'success' })
+    })()
 })
 
 module.exports = router

@@ -1,33 +1,41 @@
 import logo from './logo.svg'
 import './App.css'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import HomeScreen from './screens/homeScreen'
-import SignupScreen from './screens/signupScreen'
-import SigninScreen from './screens/signinScreen'
 import Navigation from './components/Navigation'
-import addProductList from './screens/addProductScreen'
-import ProductDetailsScreen from './screens/productDetailsScreen'
-import EditProfileScreen from './screens/editProfileScreen'
-import sellerScreen from './screens/sellerScreen'
-import EditSellerProductScreen from './screens/editSellerProductScreen'
-import CartScreen from './screens/cartScreen'
-import MyOrderScreen from './screens/myorderScreen'
-import OrderDetailsScreen from './screens/orderDetailsScreen'
-import UserListScreen from './screens/adminScreens/userListScreen'
-import SellerListScreen from './screens/adminScreens/sellerListScreen'
-import AdminScreen from './screens/adminScreens/adminScreen'
-import SellerProductScreen from './screens/sellerProductScreen'
-import addCompanyScreen from './screens/adminScreens/addCompanyScreen'
-import showCompanyScreen from './screens/adminScreens/showCompanysScreen'
-import updateCompanyScreen from './screens/adminScreens/updateCompanyScreen'
-import categoryScreen from './screens/adminScreens/categoryListScreen'
-import updateCategoryScreen from './screens/adminScreens/updateCategoryScreen'
-import addCategoryScreen from './screens/adminScreens/addCategoryScreen'
-import ShowAllProductAdminScreen from './screens/adminScreens/showAllProductAdminScreen'
-import productRatingScreen from './screens/productRatingScreen'
-import showAllOrdersAdminScreen from './screens/adminScreens/showAllOrdersAdminScree'
-import UserOrderDetailsScreen from './screens/userOrderDetailsScreen'
-import UserMyOrderScreen from './screens/userMyorderScreen'
+
+//common screens
+import HomeScreen from './screens/common/homeScreen'
+import SignupScreen from './screens/common/signupScreen'
+import SigninScreen from './screens/common/signinScreen'
+import ProductDetailsScreen from './screens/common/productDetailsScreen'
+import CartScreen from './screens/common/cartScreen'
+import OrderDetailsScreen from './screens/common/orderDetailsScreen'
+
+//user screens
+import EditProfileScreen from './screens/user/editProfileScreen'
+import AddAddressScreen from './screens/user/addAddressScreen'
+import productRatingScreen from './screens/user/productRatingScreen'
+import UserMyOrderScreen from './screens/user/userMyorderScreen'
+
+//seller screens
+import addProductList from './screens/seller/addProductScreen'
+import sellerScreen from './screens/seller/sellerScreen'
+import EditSellerProductScreen from './screens/seller/editSellerProductScreen'
+import SellerProductScreen from './screens/seller/sellerProductScreen'
+import SellerAllCustomersMyOrderScreen from './screens/seller/sellerAllCustomersMyOrderScreen'
+
+//admin screens
+import categoryScreen from './screens/admin/categoryListScreen'
+import showAllOrdersAdminScreen from './screens/admin/showAllOrdersAdminScree'
+import updateCategoryScreen from './screens/admin/updateCategoryScreen'
+import addCategoryScreen from './screens/admin/addCategoryScreen'
+import ShowAllProductAdminScreen from './screens/admin/showAllProductAdminScreen'
+import SellerListScreen from './screens/admin/sellerListScreen'
+import AdminScreen from './screens/admin/adminScreen'
+import updateCompanyScreen from './screens/admin/updateCompanyScreen'
+import showCompanyScreen from './screens/admin/showCompanysScreen'
+import addCompanyScreen from './screens/admin/addCompanyScreen'
+import UserListScreen from './screens/admin/userListScreen'
 
 function App() {
   return (
@@ -50,7 +58,7 @@ function App() {
           component={EditSellerProductScreen}
         />
         <Route path="/productdetails/:id" component={ProductDetailsScreen} />
-        <Route path="/view-myorders" component={MyOrderScreen} />
+        <Route path="/all-customers-myorders-for-seller" component={SellerAllCustomersMyOrderScreen} />
         <Route path="/get-users" component={UserListScreen} />
         <Route path="/get-seller" component={SellerListScreen} />
         <Route path="/add-company" component={addCompanyScreen} />
@@ -68,8 +76,8 @@ function App() {
           path="/admin-order-details"
           component={showAllOrdersAdminScreen}
         />
-        <Route path="/user-order-details" component={UserOrderDetailsScreen} />
         <Route path="/user-myorder" component={UserMyOrderScreen} />
+        <Route path="/user-address" component={AddAddressScreen} />
       </Router>
     </div>
   )

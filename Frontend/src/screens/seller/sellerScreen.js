@@ -4,7 +4,7 @@ import {
   getSellerTotalRevenue,
   getSellerCustAvgRating,
   getSellerMonthlyRevenue,
-} from '../actions/sellerActions'
+} from '../../actions/sellerActions'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -50,8 +50,8 @@ const SellerScreen = (props) => {
     props.history.push('/show-product')
   }
 
-  const viewMyorders = () => {
-    props.history.push('/view-myorders')
+  const viewAllCustomerMyorders = () => {
+    props.history.push('/all-customers-myorders-for-seller')
   }
 
   const addProduct = () => {
@@ -205,8 +205,8 @@ const SellerScreen = (props) => {
                         <div className="card-body">
                           <button
                             className="btn btn-info"
-                            onClick={viewMyorders}>
-                            View My Orders
+                            onClick={viewAllCustomerMyorders}>
+                            Customer Orders
                           </button>
                         </div>
                       </div>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../actions/userActions";
+import { signup } from "../../actions/userActions";
 import { Link } from "react-router-dom";
-import { USER_SIGNUP_RESET } from "../constants/userConstants";
+import { USER_SIGNUP_RESET } from "../../constants/userConstants";
 
 const SignupScreen = (props) => {
   const userSignupStore = useSelector((state) => state.userSignupStore);

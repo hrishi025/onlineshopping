@@ -5,8 +5,8 @@ import {
   addProduct,
   getAllCategories,
   getAllCompanies,
-} from '../actions/productActions'
-import { PRODUCT_POST_RESET } from '../constants/productConstants'
+} from '../../actions/productActions'
+import { PRODUCT_POST_RESET } from '../../constants/productConstants'
 
 const AddProductScreen = (props) => {
   const addProductStore = useSelector((state) => state.addProductStore)

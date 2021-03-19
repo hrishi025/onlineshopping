@@ -102,6 +102,11 @@ const Navigation = () => {
                   <span className="nav-link">Home</span>
                 </Link>
               </li>
+              <li class="nav-item active">
+                <Link to="/user-address">
+                  <span className="nav-link">Address</span>
+                </Link>
+              </li>
               <li class="nav-item">
                 <Link to="/about">
                   <span className="nav-link">About</span>

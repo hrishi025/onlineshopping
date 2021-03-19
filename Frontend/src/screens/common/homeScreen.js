@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductList } from '../actions/productActions'
-import { addToCart, getAllCartItemsAtLogin } from '../actions/cartActions'
-import { request_url } from '../config/url'
-import { CART_ADD_RESET } from '../constants/cartConstants'
+import { getProductList } from '../../actions/productActions'
+import { addToCart, getAllCartItemsAtLogin } from '../../actions/cartActions'
+import { request_url } from '../../config/url'
+import { CART_ADD_RESET } from '../../constants/cartConstants'
 
 const HomeScreen = (props) => {
   // to fetch all available products list from db
@@ -28,7 +28,7 @@ const HomeScreen = (props) => {
     //passing all the avaliable products into arr1
     console.log('arr 1')
     console.log(response.data)
-    const arr1 = response.data
+    const arr1 = allProductStore.response.data
 
     //passing all the avaliable products from cart into arr2
     console.log('arr 2')

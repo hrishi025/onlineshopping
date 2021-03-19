@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../actions/cartActions';
-import { getProductDetails } from '../actions/productActions';
+import { addToCart } from '../../actions/cartActions';
+import { getProductDetails } from '../../actions/productActions';
 
 const ProductDetailsScreen = (props) => {
 	let params = useParams();

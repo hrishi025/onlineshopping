@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMyOrderList, updateMyOrder } from '../actions/myorderActions'
+import { getMyOrderList, updateMyOrder } from '../../actions/myorderActions'
+import { getAllCustomersMyOrdersForSeller } from '../../actions/sellerActions'
 
-const MyOrderScreen = (props) => {
-  const viewMyOrderStore = useSelector((store) => store.viewMyOrderStore)
-  const { response, loading, error } = viewMyOrderStore
+const SellerAllCustomersMyOrderScreen = (props) => {
+  const getAllCustomerMyOrdersForSellerStore = useSelector((store) => store.getAllCustomerMyOrdersForSellerStore)
+  const { response, loading, error } = getAllCustomerMyOrdersForSellerStore
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     console.log('in use effect of MyOrderScreen')
-    dispatch(getMyOrderList())
+    dispatch(getAllCustomersMyOrdersForSeller())
   }, [])
 
   // to re-render page after delete button is pressed
@@ -69,10 +70,10 @@ const MyOrderScreen = (props) => {
 
                       </thead>
                       <tbody>
-                        {viewMyOrderStore.response &&
-                          viewMyOrderStore.response.data &&
-                          viewMyOrderStore.response.data.length > 0 &&
-                          viewMyOrderStore.response.data.map((p) => {
+                        {getAllCustomerMyOrdersForSellerStore.response &&
+                          getAllCustomerMyOrdersForSellerStore.response.data &&
+                          getAllCustomerMyOrdersForSellerStore.response.data.length > 0 &&
+                          getAllCustomerMyOrdersForSellerStore.response.data.map((p) => {
                             return (
                               <tr>
                                 <td>{p.myorder_id}</td>
@@ -123,4 +124,4 @@ const MyOrderScreen = (props) => {
   )
 }
 
-export default MyOrderScreen
+export default SellerAllCustomersMyOrderScreen

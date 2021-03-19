@@ -1,9 +1,9 @@
-import Profile from '../image/profile.svg';
+import Profile from '../../image/profile.svg';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProduct } from '../actions/sellerActions';
-import { USER_PROFILE_SUCCESS } from '../constants/userConstants';
-import { PRODUCT_UPDATE_RESET, PRODUCT_UPDATE_SUCCESS } from '../constants/productConstants';
+import { updateProduct } from '../../actions/sellerActions';
+import { USER_PROFILE_SUCCESS } from '../../constants/userConstants';
+import { PRODUCT_UPDATE_RESET, PRODUCT_UPDATE_SUCCESS } from '../../constants/productConstants';
 
 const EditSellerProductScreen = (props) => {
 	console.log(`props.location.state--->${props.location.state.photo}`);

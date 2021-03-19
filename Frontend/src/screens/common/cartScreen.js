@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCartItems, getAllCartItemsAtLogin, removeFromCart, updateCart } from '../actions/cartActions';
+import { cartCheckout, getAllCartItems, getAllCartItemsAtLogin, removeFromCart, updateCart } from '../../actions/cartActions';
 import { Link } from 'react-router-dom';
-import { CART_REMOVE_RESET, CART_UPDATE_RESET } from '../constants/cartConstants';
+import { CART_CHECKOUT_RESET, CART_REMOVE_RESET, CART_UPDATE_RESET } from '../../constants/cartConstants';
 
 const CartScreen = (props) => {
 	const userSigninStore = useSelector((state) => state.userSigninStore);
@@ -103,6 +103,10 @@ const CartScreen = (props) => {
 		});
 		props.history.push('/');
 	};
+
+	const shippingDetails = () => {
+		props.history.push("/user-address")
+	}
 
 	return (
 		<div className="App">
@@ -205,10 +209,10 @@ const CartScreen = (props) => {
 								</table>
 
 								<div class="card-body border-top">
-									<a href="#" class="btn btn-primary float-md-right">
-										{' '}
-										Make Purchase <i class="fa fa-chevron-right" />{' '}
-									</a>
+									<button class="btn btn-outline-primary float-md-right"
+										onClick={shippingDetails}>
+										Make Purchase
+									</button>
 									<button
 										class="btn btn-light"
 										onClick={() => {
