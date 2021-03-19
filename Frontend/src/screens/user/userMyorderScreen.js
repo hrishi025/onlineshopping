@@ -7,7 +7,7 @@ const UserMyOrderScreen = (props) => {
   const updateMyOrderStore = useSelector((store) => store.updateMyOrderStore)
   const onOrderDetails = (p) => {
     props.history.push({
-      pathname: '/user-order-details',
+      pathname: '/order-details',
       state: p, // your data array of objects
     })
   }

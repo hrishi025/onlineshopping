@@ -92,40 +92,6 @@ const Navigation = () => {
       {userSigninStore &&
         userSigninStore.response &&
         userSigninStore.response.status == 'success' &&
-<<<<<<< HEAD
-        (userSigninStore.response.data.role == "CUSTOMER" ||
-          userSigninStore.response.data.role == "CUSTSELL") &&
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <Link class="navbar-brand" to="/">
-            E-Shopping
-          </Link>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <Link to="/">
-                  <span className="nav-link">Home</span>
-                </Link>
-              </li>
-              <li class="nav-item active">
-                <Link to="/user-address">
-                  <span className="nav-link">Address</span>
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/about">
-                  <span className="nav-link">About</span>
-                </Link>
-              </li>
-            </ul>
-
-            <div class="form-inline my-2 my-lg-0">
-
-=======
         (userSigninStore.response.data.role == 'CUSTOMER' ||
           userSigninStore.response.data.role == 'CUSTSELL') && (
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -144,7 +110,6 @@ const Navigation = () => {
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
->>>>>>> 704a30f1e9cfacc395a53085eaa9d14dad283dba
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                   <Link to="/">

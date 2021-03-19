@@ -21,7 +21,7 @@ const SellerAllCustomersMyOrderScreen = (props) => {
       updateMyOrderStore.response &&
       updateMyOrderStore.response.status == 'success'
     ) {
-      dispatch(getMyOrderList())
+      dispatch(getAllCustomersMyOrdersForSeller())
     }
   }, [
     updateMyOrderStore.response,

@@ -7,19 +7,28 @@ const router = express.Router()
 
 // Get Address Details
 router.get('/address', (request, response) => {
-	const statement = `SELECT * FROM address where user_id=${request.id}`;
-	db.execute(statement, (error, data) => {
-		response.send(utils.createResult(error, data));
-	});
+  const statement = `SELECT * FROM address where user_id=${request.id}`;
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data));
+  });
+});
+
+// Get Address Details via myorder_id for order details page
+router.get('/address/:myorder_id', (request, response) => {
+  const { myorder_id } = request.params
+  const statement = `SELECT * FROM address where myorder_id=${myorder_id}`;
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data));
+  });
 });
 
 //Insert new address
 router.post('/address', (request, response) => {
-	const { address, city, state, country, pin } = request.body;
-	const statement = `INSERT INTO address(user_id, address, city, state, country, pin) VALUES('${request.id}', '${address}', '${city}', '${state}', '${country}', '${pin}')`;
-	db.execute(statement, (error, data) => {
-		response.send(utils.createResult(error, data));
-	});
+  const { address, city, state, country, pin } = request.body;
+  const statement = `INSERT INTO address(user_id, address, city, state, country, pin) VALUES('${request.id}', '${address}', '${city}', '${state}', '${country}', '${pin}')`;
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data));
+  });
 });
 
 //Update Address

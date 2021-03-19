@@ -73,3 +73,35 @@ export const fetchAddress = () => {
             })
     };
 };
+
+export const fetchAddressForOrderDetails = (myorder_id) => {
+    return (dispatch) => {
+        dispatch({
+            type: FETCH_ADDRESS_REQUEST,
+        })
+
+        const url = `http://localhost:4000/address/${myorder_id}`
+
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                token: sessionStorage['token'],
+            },
+        }
+
+        axios
+            .get(url, header)
+            .then((response) => {
+                dispatch({
+                    type: FETCH_ADDRESS_SUCCESS,
+                    payload: response.data,
+                })
+            })
+            .catch((error) => {
+                dispatch({
+                    type: FETCH_ADDRESS_FAIL,
+                    payload: error,
+                })
+            })
+    };
+};

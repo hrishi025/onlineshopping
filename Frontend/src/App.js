@@ -71,7 +71,7 @@ function App() {
           path="/get-product-admin"
           component={ShowAllProductAdminScreen}
         />
-        <Route path="/rate-product" component={productRatingScreen} />
+        <Route path="/rate-product/:id" component={productRatingScreen} />
         <Route
           path="/admin-order-details"
           component={showAllOrdersAdminScreen}
