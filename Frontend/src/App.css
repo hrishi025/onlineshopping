@@ -428,9 +428,16 @@ product details screen
 
 /* my order screen product image */
 
+.img-fluid-user-myorders {
+  margin-left: auto;
+  max-width: 30%;
+  height: auto;
+  margin-right: auto;
+}
+
 .img-fluid-myorders {
   margin-left: auto;
-  max-width: 20%;
+  max-width: 70%;
   height: auto;
   margin-right: auto;
 }

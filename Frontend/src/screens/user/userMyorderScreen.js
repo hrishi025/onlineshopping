@@ -79,7 +79,7 @@ const UserMyOrderScreen = (props) => {
                                 <td style={{ width: '25%' }}>
                                   <img
                                     src={'http://localhost:4000/' + `${p.photo}`}
-                                    className=" cover rounded mx-auto d-block img-fluid-myorders"
+                                    className=" cover rounded mx-auto d-block img-fluid-user-myorders"
                                     alt="Image Loading Failed"
                                     width="30px"
                                     height="30px"

@@ -96,13 +96,13 @@ const SellerAllCustomersMyOrderScreen = (props) => {
                             (p) => {
                               return (
                                 <tr>
-                                  <td style={{ width: '25%' }}>
+                                  <td style={{ width: '10%' }}>
                                     <img
                                       src={'http://localhost:4000/' + `${p.photo}`}
                                       className=" cover rounded mx-auto d-block img-fluid-myorders"
                                       alt="Image Loading Failed"
-                                      width="30px"
-                                      height="30px"
+                                      width="auto"
+                                      height="auto"
                                     />
                                   </td>
                                   <td>{p.prod_title}</td>
