@@ -80,7 +80,8 @@ const SellerAllCustomersMyOrderScreen = (props) => {
                     <table className="table my-0" id="dataTable">
                       <thead>
                         <tr>
-                          <th>MyOrder ID</th>
+                          <th>Product Image</th>
+                          <th>Product Name</th>
                           <th>Order Date</th>
                           <th>Order Status</th>
                           <th>Actions</th>
@@ -95,7 +96,16 @@ const SellerAllCustomersMyOrderScreen = (props) => {
                             (p) => {
                               return (
                                 <tr>
-                                  <td>{p.myorder_id}</td>
+                                  <td style={{ width: '25%' }}>
+                                    <img
+                                      src={'http://localhost:4000/' + `${p.photo}`}
+                                      className=" cover rounded mx-auto d-block img-fluid-myorders"
+                                      alt="Image Loading Failed"
+                                      width="30px"
+                                      height="30px"
+                                    />
+                                  </td>
+                                  <td>{p.prod_title}</td>
                                   <td>{p.orderDate}</td>
                                   <td>{p.status}</td>
                                   <td>

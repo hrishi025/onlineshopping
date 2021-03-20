@@ -11,6 +11,7 @@ router.get('/myorder', (request, response) => {
   const statement = ` 
   SELECT 
     product.prod_title,
+    product.photo,
     orderdetails.rating,
     orderdetails.comment,   
     product.prod_price, 

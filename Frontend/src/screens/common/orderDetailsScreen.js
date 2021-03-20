@@ -16,6 +16,8 @@ const OrderDetailsScreen = (props) => {
   const rating = props.location.state.rating
   const comment = props.location.state.comment
   const orderdetails_id = props.location.state.orderdetails_id
+  const status = props.location.state.status
+
   console.log(orderdetails_id)
 
   const dispatch = useDispatch()
@@ -32,7 +34,7 @@ const OrderDetailsScreen = (props) => {
       )
         props.history.push('/user-myorder')
       if (userSigninStore.response.data.role == 'SELLER')
-        props.history.push('/seller')
+        props.history.push('/all-customers-myorders-for-seller')
     }
   }
 
@@ -81,7 +83,7 @@ const OrderDetailsScreen = (props) => {
                             userSigninStore.response.data &&
                             (userSigninStore.response.data.role == 'CUSTOMER' ||
                               userSigninStore.response.data.role ==
-                                'CUSTSELL') && (
+                              'CUSTSELL') && status == 'delivered' && (
                               <>
                                 <th>rating</th>
                                 <th>comment</th>
@@ -105,24 +107,24 @@ const OrderDetailsScreen = (props) => {
                                 {userSigninStore &&
                                   userSigninStore.response &&
                                   userSigninStore.response.status ==
-                                    'success' &&
+                                  'success' &&
                                   userSigninStore.response.data &&
                                   (userSigninStore.response.data.role ==
                                     'CUSTOMER' ||
                                     userSigninStore.response.data.role ==
-                                      'CUSTSELL') && (
+                                    'CUSTSELL') && status == 'delivered' && (
                                     <>
                                       <td>{rating}</td>
                                       <td>{comment}</td>
                                       <td>
                                         {(rating == null ||
                                           comment == null) && (
-                                          <Link
-                                            to={`/rate-product/${orderdetails_id}`}
-                                            className="btn btn-sm btn-success btn-add-to-cart">
-                                            Rate Product
-                                          </Link>
-                                        )}
+                                            <Link
+                                              to={`/rate-product/${orderdetails_id}`}
+                                              className="btn btn-sm btn-success btn-add-to-cart">
+                                              Rate Product
+                                            </Link>
+                                          )}
                                       </td>
                                     </>
                                   )}

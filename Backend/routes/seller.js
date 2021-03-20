@@ -144,9 +144,11 @@ router.get('/seller/alluserorders', (request, response) => {
   console.log('inside get myorder list')
   const statement = `
   SELECT 
-    product.prod_title, 
+    product.prod_title,
+    product.photo, 
     product.prod_price, 
-    myorder.user_id, 
+    myorder.user_id,
+    myorder.add_id, 
     myorder.total_price,
     myorder.orderDate, 	
     orderdetails.myorder_id, 

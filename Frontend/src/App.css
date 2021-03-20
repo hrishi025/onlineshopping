@@ -339,7 +339,8 @@ td {
   width: 25%;
 }
 
-/* 
+/*
+product details screen 
  */
 
 .clean-block.clean-product .block-content {
@@ -422,5 +423,15 @@ td {
   margin-left: auto;
   max-width: 100%;
   height: 220px;
+  margin-right: auto;
+}
+
+
+/* my order screen product image */
+
+.img-fluid-myorders {
+  margin-left: auto;
+  max-width: 20%;
+  height: auto;
   margin-right: auto;
 }
