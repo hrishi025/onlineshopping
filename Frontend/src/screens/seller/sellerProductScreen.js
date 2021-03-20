@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductList } from '../../actions/sellerActions'
 import { deleteProduct } from '../../actions/productActions'
+import { Link } from 'react-router-dom'
 
 const SellerProductScreen = (props) => {
   const dispatch = useDispatch()
@@ -79,7 +80,6 @@ const SellerProductScreen = (props) => {
                         <tr>
                           <th>Product ID</th>
                           <th>Title</th>
-                          <th>Desc</th>
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Actions</th>
@@ -92,23 +92,35 @@ const SellerProductScreen = (props) => {
                           response.data.map((p) => {
                             return (
                               <tr>
-                                <td>{p.prod_id}</td>
-                                <td>{p.prod_title}</td>
-                                <td>{p.prod_description}</td>
+                                <td style={{ width: '25%' }}>
+                                  <img
+                                    src={'http://localhost:4000/' + `${p.photo}`}
+                                    className=" cover rounded mx-auto d-block img-fluid-products"
+                                    alt="Image Loading Failed"
+                                    width="30px"
+                                    height="30px"
+                                  />
+                                </td>
+
+                                <td>
+                                  <Link to={`/productdetails/${p.prod_id}`}>
+                                    <strong>{p.prod_title}</strong>
+                                  </Link>
+                                </td>
                                 <td>{p.prod_price}</td>
                                 <td>{p.prod_qty}</td>
                                 <td>
                                   <button
                                     onClick={() => onUpdate(p)}
                                     type="button"
-                                    className="btn btn-outline-success ">
-                                    Update Product
+                                    className="btn btn-outline-success mx-2">
+                                    Update
                                   </button>
                                   <button
                                     onClick={() => onDelete(p)}
                                     type="button"
-                                    className="btn btn-outline-danger float-end ">
-                                    Delete Product
+                                    className="btn btn-outline-danger mx-2">
+                                    Delete
                                   </button>
                                 </td>
                               </tr>

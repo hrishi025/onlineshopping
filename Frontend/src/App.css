@@ -426,12 +426,20 @@ product details screen
   margin-right: auto;
 }
 
-
 /* my order screen product image */
 
 .img-fluid-myorders {
   margin-left: auto;
   max-width: 20%;
+  height: auto;
+  margin-right: auto;
+}
+
+/* seller show all products screen product image */
+
+.img-fluid-products {
+  margin-left: auto;
+  max-width: 100px;
   height: auto;
   margin-right: auto;
 }
