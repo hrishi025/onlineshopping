@@ -15,10 +15,16 @@ const SignupScreen = (props) => {
 
   const dispatch = useDispatch()
 
+  const [validation, setValidation] = useState(false);
+
   const signupButton = () => {
-    console.log('in signup button function')
-    dispatch(signup(email, password, name, phone))
-  }
+    if (email && password && name && phone) {
+      dispatch(signup(email, password, name, phone));
+    } else {
+      console.log(validation);
+      setValidation(true);
+    }
+  };
 
   useEffect(() => {
     if (response && response.status == 'success') {
@@ -46,7 +52,11 @@ const SignupScreen = (props) => {
             required="required"
             onChange={(e) => setName(e.target.value)}
           />
+          {validation == true && name == "" && (
+            <div style={{ color: "red" }}>please enter valid Name</div>
+          )}
         </div>
+
         <div className="form-group">
           <input
             type="email"
@@ -56,7 +66,13 @@ const SignupScreen = (props) => {
             required="required"
             onChange={(e) => setEmail(e.target.value)}
           />
+          {validation == true && email == "" && (
+            <div style={{ color: "red" }}>
+              please enter valid Email
+            </div>
+          )}
         </div>
+
         <div className="form-group">
           <input
             type="number"
@@ -66,7 +82,11 @@ const SignupScreen = (props) => {
             required="required"
             onChange={(e) => setPhone(e.target.value)}
           />
+          {validation == true && phone == "" && (
+            <div style={{ color: "red" }}>please enter valid Phone Number</div>
+          )}
         </div>
+
         <div className="form-group">
           <input
             type="password"
@@ -76,6 +96,9 @@ const SignupScreen = (props) => {
             required="required"
             onChange={(e) => setPassword(e.target.value)}
           />
+          {validation == true && password == "" && (
+            <div style={{ color: "red" }}>please enter valid password</div>
+          )}
         </div>
 
         <div className="form-group">

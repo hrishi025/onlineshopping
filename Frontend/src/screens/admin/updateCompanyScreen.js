@@ -23,11 +23,18 @@ const UpdateCompanyScreen = (props) => {
 
   const dispatch = useDispatch()
 
+
+  const [validation, setValidation] = useState(false);
+
   const updateButton = () => {
-    console.log(`in saveButton Method`)
-    dispatch(updateCompany(comp_id, compTitle, compDescription))
-    props.history.push('/show-company')
-  }
+    if (comp_id && compTitle && compDescription) {
+      dispatch(updateCompany(comp_id, compTitle, compDescription));
+      props.history.push("/show-company");
+    } else {
+      console.log(validation);
+      setValidation(true);
+    }
+  };
 
   return (
     <div className="signup-form">
@@ -43,6 +50,9 @@ const UpdateCompanyScreen = (props) => {
           required="required"
           onChange={(e) => setCompTitle(e.target.value)}
         />
+        {validation == true && compTitle == "" && (
+          <div style={{ color: "red" }}>please enter Company Title</div>
+        )}
       </div>
 
       <div className="form-group" style={{ textAlign: "left" }}>
@@ -54,6 +64,9 @@ const UpdateCompanyScreen = (props) => {
           required="required"
           onChange={(e) => setCompDescription(e.target.value)}
         />
+        {validation == true && compDescription == "" && (
+          <div style={{ color: "red" }}>please enter Company Descrption</div>
+        )}
       </div>
 
       <div className="form-group">

@@ -27,10 +27,17 @@ const UpdateCategoryScreen = (props) => {
     }
   }, [response, loading, error])
 
+  const [validation, setValidation] = useState(false);
   const saveButton = () => {
-    console.log(`in saveButton Method`)
-    dispatch(updateCategory(cat_id, catTitle, catDesc))
-  }
+    console.log(`in saveButton Method`);
+
+    if (cat_id && catTitle && catDesc) {
+      dispatch(updateCategory(cat_id, catTitle, catDesc));
+    } else {
+      console.log(validation);
+      setValidation(true);
+    }
+  };
 
   return (
     <div className="signup-form">
@@ -51,7 +58,11 @@ const UpdateCategoryScreen = (props) => {
           required="required"
           onChange={(e) => setCatTitle(e.target.value)}
         />
+        {validation == true && catTitle == "" && (
+          <div style={{ color: "red" }}>please enter Category Title</div>
+        )}
       </div>
+
       <div className="form-group" style={{ textAlign: 'left' }}>
         <label>
           <strong>Category Description</strong>
@@ -63,6 +74,9 @@ const UpdateCategoryScreen = (props) => {
           required="required"
           onChange={(e) => setCatDesc(e.target.value)}
         />
+        {validation == true && catDesc == "" && (
+          <div style={{ color: "red" }}>please enter Category Description</div>
+        )}
       </div>
 
       <div className="form-group">

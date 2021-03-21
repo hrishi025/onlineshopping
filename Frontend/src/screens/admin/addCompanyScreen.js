@@ -12,11 +12,6 @@ const AddCompanyScreen = (props) => {
 
   const dispatch = useDispatch()
 
-  const addCompanyButton = () => {
-    console.log('in signup button function')
-    dispatch(addCompany(companyTitle, companyDesc))
-  }
-
   useEffect(() => {
     if (response && response.status == 'success') {
       dispatch({ type: COMPANY_ADD_RESET })
@@ -27,6 +22,19 @@ const AddCompanyScreen = (props) => {
       alert('error while making API call')
     }
   }, [response, loading, error])
+
+  const [validation, setValidation] = useState(false);
+
+  const addCompanyButton = () => {
+    console.log("in signup button function");
+
+    if (companyTitle && companyDesc) {
+      dispatch(addCompany(companyTitle, companyDesc));
+    } else {
+      console.log(validation);
+      setValidation(true);
+    }
+  };
 
   return (
     <div className="signup-form">
@@ -41,7 +49,11 @@ const AddCompanyScreen = (props) => {
           required="required"
           onChange={(e) => setCompanyTitle(e.target.value)}
         />
+        {validation == true && companyTitle == "" && (
+          <div style={{ color: "red" }}>please enter Company Title</div>
+        )}
       </div>
+
       <div className="form-group">
         <input
           type="text"
@@ -51,6 +63,9 @@ const AddCompanyScreen = (props) => {
           required="required"
           onChange={(e) => setCompanyDesc(e.target.value)}
         />
+        {validation == true && companyDesc == "" && (
+          <div style={{ color: "red" }}>please enter Company Description</div>
+        )}
       </div>
 
       <div className="form-group">

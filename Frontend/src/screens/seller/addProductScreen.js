@@ -29,20 +29,36 @@ const AddProductScreen = (props) => {
 
   const dispatch = useDispatch()
 
+  const [validation, setValidation] = useState(false);
+
+
   const addnewProduct = () => {
-    console.log('in add Product button function')
-    dispatch(
-      addProduct(
-        prodtitle,
-        proddesc,
-        category,
-        prodprice,
-        company,
-        prodqty,
-        selectedFile
-      )
-    )
-  }
+    console.log("in add Product button function");
+
+    if (
+      prodtitle &&
+      proddesc &&
+      category &&
+      prodprice &&
+      company &&
+      selectedFile
+    ) {
+      dispatch(
+        addProduct(
+          prodtitle,
+          proddesc,
+          category,
+          prodprice,
+          company,
+          prodqty,
+          selectedFile
+        )
+      );
+    } else {
+      console.log(validation);
+      setValidation(true);
+    }
+  };
 
   const onFileSelected = (event) => {
     setSelectedFile(event.target.files[0])
@@ -81,6 +97,11 @@ const AddProductScreen = (props) => {
           required="required"
           onChange={(e) => setProdtitle(e.target.value)}
         />
+        {
+          validation == true && prodtitle == "" && (
+            <div style={{ color: "red" }}>please enter Product Title</div>
+          )
+        }
       </div>
 
       <div className="form-group">
@@ -91,6 +112,11 @@ const AddProductScreen = (props) => {
           placeholder="Product Description"
           required="required"
           onChange={(e) => setProddesc(e.target.value)}></input>
+        {
+          validation == true && proddesc == "" && (
+            <div style={{ color: "red" }}>please enter Product Description</div>
+          )
+        }
       </div>
 
       <div className="form-group">
@@ -101,6 +127,11 @@ const AddProductScreen = (props) => {
           placeholder="Product Price"
           required="required"
           onChange={(e) => setProdprice(e.target.value)}></input>
+        {
+          validation == true && prodprice == "" && (
+            <div style={{ color: "red" }}>please enter Product Price</div>
+          )
+        }
       </div>
 
       <div className="form-group">
@@ -111,6 +142,11 @@ const AddProductScreen = (props) => {
           placeholder="Product Quantity"
           required="required"
           onChange={(e) => setProdqty(e.target.value)}></input>
+        {
+          validation == true && prodqty == "" && (
+            <div style={{ color: "red" }}>please enter Product Quantity</div>
+          )
+        }
       </div>
 
       <div className="form-group">

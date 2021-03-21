@@ -26,10 +26,16 @@ const AddCategoryScreen = (props) => {
     }
   }, [response, loading, error])
 
-  //  console.log(`state---> ${state}`)
+  const [validation, setValidation] = useState(false);
+
   const saveButton = () => {
     console.log(`in saveButton Method`)
-    dispatch(addCategory(cat_title, cat_description))
+    if (cat_title && cat_description) {
+      dispatch(addCategory(cat_title, cat_description));
+    } else {
+      console.log(validation);
+      setValidation(true);
+    }
   }
 
   return (
@@ -47,6 +53,11 @@ const AddCategoryScreen = (props) => {
           required="required"
           onChange={(e) => setCat_title(e.target.value)}
         />
+        {validation == true && cat_title == "" && (
+          <div style={{ color: "red" }}>please enter Category Title</div>
+        )}
+
+
       </div>
       <div className="form-group">
         <input
@@ -56,6 +67,9 @@ const AddCategoryScreen = (props) => {
           required="required"
           onChange={(e) => setCat_description(e.target.value)}
         />
+        {validation == true && cat_description == "" && (
+          <div style={{ color: "red" }}>please enter Category description </div>
+        )}
       </div>
 
       <div className="form-group">
