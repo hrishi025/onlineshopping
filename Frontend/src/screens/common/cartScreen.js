@@ -8,6 +8,8 @@ import {
 } from '../../actions/cartActions'
 import { Link } from 'react-router-dom'
 import { CART_REMOVE_RESET, CART_UPDATE_RESET } from '../../constants/cartConstants'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartScreen = (props) => {
   const userSigninStore = useSelector((state) => state.userSigninStore)
@@ -42,6 +44,7 @@ const CartScreen = (props) => {
     if (userSigninStore.response == null) {
       console.log('remove token')
       sessionStorage.removeItem('token')
+      toast("please Signin again to continue");
       props.history.push('/signin')
     }
     if (cartItems != null) {
@@ -66,6 +69,7 @@ const CartScreen = (props) => {
         type: CART_REMOVE_RESET,
       })
       await dispatch(getAllCartItemsAtLogin())
+      toast("item removed from cart!");
       await props.history.push('/')
     }
   }, [cartRemoveStore.response, cartRemoveStore.loading, cartRemoveStore.error])
@@ -113,6 +117,7 @@ const CartScreen = (props) => {
 
   return (
     <div className="App">
+      <ToastContainer />
       <section class="section-pagetop bg">
         <div class="container">
           <h2 class="title-page">Shopping cart</h2>

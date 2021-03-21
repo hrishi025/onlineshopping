@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateMyOrder } from '../../actions/myorderActions'
 import { getAllCustomersMyOrdersForSeller } from '../../actions/sellerActions'
+import { request_url } from '../../config/url'
 
 const SellerAllCustomersMyOrderScreen = (props) => {
   const getAllCustomerMyOrdersForSellerStore = useSelector(
@@ -98,7 +99,7 @@ const SellerAllCustomersMyOrderScreen = (props) => {
                                 <tr>
                                   <td style={{ width: '10%' }}>
                                     <img
-                                      src={'http://localhost:4000/' + `${p.photo}`}
+                                      src={request_url + `/${p.photo}`}
                                       className=" cover rounded mx-auto d-block img-fluid-myorders"
                                       alt="Image Loading Failed"
                                       width="auto"

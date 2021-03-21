@@ -5,6 +5,7 @@ import { addToCart } from '../../actions/cartActions';
 import { getProductComments, getProductDetails, getProductRatings } from '../../actions/productActions';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
+import { request_url } from '../../config/url';
 
 // dependency of rating needed to be used to show stars 
 const useStyles = makeStyles((theme) => ({
@@ -18,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetailsScreen = (props) => {
-  let params = useParams()
-  console.log('params.id' + params.id)
+	let params = useParams()
+	console.log('params.id' + params.id)
 
 	const classes = useStyles();
 
@@ -34,7 +35,7 @@ const ProductDetailsScreen = (props) => {
 
 	const cartStore = useSelector((state) => state.cartStore);
 
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 	useEffect(async () => {
 		console.log('in use effect');
@@ -43,10 +44,10 @@ const ProductDetailsScreen = (props) => {
 		await dispatch(getProductComments(params.id));
 	}, []);
 
-  const onAddToCart = (p) => {
-    console.log(p)
-    dispatch(addToCart(p.prod_id, '1'))
-  }
+	const onAddToCart = (p) => {
+		console.log(p)
+		dispatch(addToCart(p.prod_id, '1'))
+	}
 
 	//to check if reviews are avaliable or not 
 	const [reviewAvailablityToggle, setReviewAvailablityToggle] = useState(false);
@@ -78,7 +79,7 @@ const ProductDetailsScreen = (props) => {
 															<div className="zoomed-image">
 																<div className="sidebar">
 																	<img className="img-fluid d-block small-preview"
-																		src={'http://localhost:4000/' + `${p.photo}`} />
+																		src={request_url + `/${p.photo}`} />
 																</div>
 															</div>
 														</div>

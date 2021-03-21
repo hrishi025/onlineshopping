@@ -1,4 +1,5 @@
 import axios from "axios";
+import { request_url } from "../config/url";
 import { ADD_ADDRESS_FAIL, ADD_ADDRESS_REQUEST, ADD_ADDRESS_SUCCESS, FETCH_ADDRESS_FAIL, FETCH_ADDRESS_REQUEST, FETCH_ADDRESS_SUCCESS } from "../constants/addressConstants";
 
 export const addAddress = (address, city, state, country, pin) => {
@@ -7,7 +8,7 @@ export const addAddress = (address, city, state, country, pin) => {
             type: ADD_ADDRESS_REQUEST,
         })
 
-        const url = 'http://localhost:4000/address'
+        const url = request_url + '/address'
 
         const body = {
             address,
@@ -47,7 +48,7 @@ export const fetchAddress = () => {
             type: FETCH_ADDRESS_REQUEST,
         })
 
-        const url = 'http://localhost:4000/address'
+        const url = request_url + '/address'
 
         const header = {
             headers: {
@@ -79,7 +80,7 @@ export const fetchUserAddresses = () => {
             type: FETCH_ADDRESS_REQUEST,
         })
 
-        const url = `http://localhost:4000/address`
+        const url = request_url + '/address'
 
         const header = {
             headers: {
@@ -111,7 +112,7 @@ export const fetchAddressForOrderDetails = (add_id) => {
             type: FETCH_ADDRESS_REQUEST,
         })
 
-        const url = `http://localhost:4000/address/${add_id}`
+        const url = request_url + `/address/${add_id}`
 
         const header = {
             headers: {

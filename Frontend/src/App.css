@@ -450,3 +450,8 @@ product details screen
   height: auto;
   margin-right: auto;
 }
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+}

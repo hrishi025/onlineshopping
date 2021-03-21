@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { useHistory } from 'react-router'
+import { request_url } from '../config/url'
 import {
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
@@ -19,14 +21,14 @@ import {
   USER_SUSPEND_REQUEST,
   USER_SUSPEND_FAIL,
 } from '../constants/userConstants'
-
 import { USER_SIGNUP_FAIL } from './../constants/userConstants'
 
 export const logout = () => {
   return (dispatch) => {
+    const history = useHistory();
     sessionStorage.removeItem('token')
     dispatch({ type: USER_SIGNOUT })
-    document.location.href = '/signin'
+    history.push('/');
   }
 }
 
@@ -36,7 +38,7 @@ export const signup = (email, password, name, phone) => {
       type: USER_SIGNUP_REQUEST,
     })
 
-    const url = 'http://localhost:4000/user/signup'
+    const url = request_url + '/user/signup'
 
     const body = {
       email,
@@ -74,7 +76,7 @@ export const signin = (email, password) => {
       type: USER_SIGNIN_REQUEST,
     })
 
-    const url = 'http://localhost:4000/user/signin'
+    const url = request_url + '/user/signin'
 
     const body = {
       email,
@@ -110,7 +112,7 @@ export const editprofile = (password, name, phone) => {
       type: USER_PROFILE_REQUEST,
     })
 
-    const url = 'http://localhost:4000/user/edit'
+    const url = request_url + '/user/edit'
 
     const body = {
       password,
@@ -145,7 +147,6 @@ export const editprofile = (password, name, phone) => {
 }
 
 //get all user
-
 export const getAllUsers = () => {
   return (dispatch) => {
     dispatch({
@@ -159,7 +160,7 @@ export const getAllUsers = () => {
       },
     }
 
-    const url = 'http://localhost:4000/admin/user'
+    const url = request_url + '/admin/user'
     axios
       .get(url, header)
       .then((response) => {
@@ -183,7 +184,7 @@ export const approveUser = (id) => {
       type: USER_APPROVE_REQUEST,
     })
 
-    const url = 'http://localhost:4000/user/approve-user'
+    const url = request_url + '/user/approve-user'
 
     const body = {
       id,
@@ -221,7 +222,7 @@ export const suspendUser = (id) => {
       type: USER_SUSPEND_REQUEST,
     })
 
-    const url = 'http://localhost:4000/user/suspend-user'
+    const url = request_url + '/user/suspend-user'
 
     const body = {
       id,
@@ -269,7 +270,7 @@ export const getAllSellers = () => {
       },
     }
 
-    const url = 'http://localhost:4000/admin/seller'
+    const url = request_url + '/admin/seller'
     axios
       .get(url, header)
       .then((response) => {
@@ -293,7 +294,7 @@ export const approveSeller = (id) => {
       type: USER_APPROVE_REQUEST,
     })
 
-    const url = 'http://localhost:4000/admin/approve-seller'
+    const url = request_url + '/admin/approve-seller'
 
     const body = {
       user_id: id,
@@ -331,7 +332,7 @@ export const suspendSelller = (id) => {
       type: USER_SUSPEND_REQUEST,
     })
 
-    const url = 'http://localhost:4000/admin/suspend-seller'
+    const url = request_url + '/admin/suspend-seller'
 
     const body = {
       user_id: id,

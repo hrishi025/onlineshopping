@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { request_url } from '../config/url'
 import {
   ORDERDETAILS_FETCH_REQUEST,
   ORDERDETAILS_FETCH_SUCCESS,
@@ -11,7 +12,7 @@ export const viewOrderDetails = (myorder_id) => {
       type: ORDERDETAILS_FETCH_REQUEST,
     })
 
-    const url = `http://localhost:4000/orderdetails/${myorder_id}`
+    const url = request_url + `/orderdetails/${myorder_id}`
 
     const header = {
       headers: {
@@ -44,7 +45,7 @@ export const viewOrderDetailsAdmin = () => {
       type: ORDERDETAILS_FETCH_REQUEST,
     })
 
-    const url = 'http://localhost:4000/orderdetails'
+    const url = request_url + '/orderdetails'
 
     const header = {
       headers: {

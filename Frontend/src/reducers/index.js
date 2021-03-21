@@ -58,6 +58,7 @@ import {
   getAllCustomersMyOrderForSellerReducer,
 } from './sellerReducer'
 import { addAddressReducer, fetchAddressReducer } from './AddressReducers'
+import { searchProductReducer } from './searchProductReducer'
 
 const reducers = combineReducers({
   //user stores
@@ -79,6 +80,7 @@ const reducers = combineReducers({
   deleteProductStore: productDeleteReducer,
   getProductRatingStore: getProductRatingReducer,
   getProductCommentStore: getProductCommentReducer,
+  searchProductStore: searchProductReducer,
 
   //cart stores
   cartStore: cartReducer, // cart add reducer

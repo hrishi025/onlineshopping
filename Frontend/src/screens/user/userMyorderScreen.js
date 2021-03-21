@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { getMyOrderList, updateMyOrder } from '../../actions/myorderActions'
+import { request_url } from '../../config/url'
+import { MYORDER_UPDATE_RESET } from '../../constants/myorderConstants'
 
 const UserMyOrderScreen = (props) => {
   const viewMyOrderStore = useSelector((store) => store.viewMyOrderStore)
@@ -25,11 +28,11 @@ const UserMyOrderScreen = (props) => {
 
   useEffect(() => {
     dispatch(getMyOrderList())
-  }, [
-    updateMyOrderStore.response,
-    updateMyOrderStore.error,
-    updateMyOrderStore.loading,
-  ])
+    if (updateMyOrderStore.response && updateMyOrderStore.response.status == 'success') {
+      dispatch({ type: MYORDER_UPDATE_RESET })
+      toast("Order Cancelled Successfully..!");
+    }
+  }, [updateMyOrderStore.response, updateMyOrderStore.error, updateMyOrderStore.loading])
 
   const goBackHandler = () => {
     props.history.push('/')
@@ -78,7 +81,7 @@ const UserMyOrderScreen = (props) => {
                               <tr style={{ textAlign: 'left' }}>
                                 <td style={{ width: '25%' }}>
                                   <img
-                                    src={'http://localhost:4000/' + `${p.photo}`}
+                                    src={request_url + `/${p.photo}`}
                                     className=" cover rounded mx-auto d-block img-fluid-user-myorders"
                                     alt="Image Loading Failed"
                                     width="30px"

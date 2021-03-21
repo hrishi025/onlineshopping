@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { editprofile } from '../../actions/userActions'
 import Profile from '../../image/profile.svg'
 import { USER_PROFILE_RESET } from '../../constants/userConstants'
+import { toast } from 'react-toastify'
 
 const EditProfileScreen = (props) => {
   const userSigninStore = useSelector((state) => state.userSigninStore)
@@ -25,6 +26,7 @@ const EditProfileScreen = (props) => {
   useEffect(() => {
     if (response && response.status == 'success') {
       dispatch({ type: USER_PROFILE_RESET })
+      toast("Profile Updated successfully!");
       props.history.push('/')
     } else if (error) {
       // there is an error while making the API call

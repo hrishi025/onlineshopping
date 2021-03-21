@@ -5,13 +5,11 @@ import { getProductList } from '../../actions/productActions'
 import { addToCart, getAllCartItemsAtLogin } from '../../actions/cartActions'
 import { request_url } from '../../config/url'
 import { CART_ADD_RESET } from '../../constants/cartConstants'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const HomeScreen = (props) => {
+const SearchScreen = (props) => {
   // to fetch all available products list from db
-  const allProductStore = useSelector((state) => state.allProductStore)
-  const { response, loading, error } = allProductStore
+  const searchProductStore = useSelector((state) => state.searchProductStore)
+  const { response, loading, error } = searchProductStore
 
   // to show add to cart button when user is not logged in
   const userSigninStore = useSelector((state) => state.userSigninStore)
@@ -30,7 +28,7 @@ const HomeScreen = (props) => {
     //passing all the avaliable products into arr1
     console.log('arr 1')
     console.log(response.data)
-    const arr1 = allProductStore.response.data
+    const arr1 = searchProductStore.response.data
 
     //passing all the avaliable products from cart into arr2
     console.log('arr 2')
@@ -67,7 +65,6 @@ const HomeScreen = (props) => {
       })
       //then fetch all the items which are added to cart so that the nav bar cart value will be changed
       dispatch(getAllCartItemsAtLogin())
-      toast("Added to cart!");
       //then redirect to cart page
       await props.history.push('/cart')
     }
@@ -78,7 +75,7 @@ const HomeScreen = (props) => {
       dispatch({
         type: CART_ADD_RESET,
       })
-      toast("Please Signin to continue!");
+      alert('Please Signin to continue')
       await props.history.push('/signin')
     }
   }, [cartStore.response])
@@ -94,7 +91,6 @@ const HomeScreen = (props) => {
 
   return (
     <div>
-      
       <h1>
         <strong>Expect More, Pay Less...!!</strong>
       </h1>{' '}
@@ -114,7 +110,7 @@ const HomeScreen = (props) => {
                 <div className="product-container">
                   <div className="card">
                     <img
-                      src={request_url + `/${p.photo}`}
+                      src={'http://localhost:4000/' + `${p.photo}`}
                       className=" cover rounded mx-auto d-block img-fluid"
                       alt="Image Loading Failed"
                       width="300px"
@@ -191,4 +187,4 @@ const HomeScreen = (props) => {
   )
 }
 
-export default HomeScreen
+export default SearchScreen

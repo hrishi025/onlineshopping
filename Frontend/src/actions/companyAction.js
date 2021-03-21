@@ -21,7 +21,7 @@ export const getCompany = () => {
       type: COMPANY_FETCH_REQUEST,
     })
 
-    const url = 'http://localhost:4000/company'
+    const url = request_url + '/company'
 
     const header = {
       headers: {
@@ -53,7 +53,7 @@ export const addCompany = (comp_title, comp_description) => {
       type: COMPANY_ADD_REQUEST,
     })
 
-    const url = 'http://localhost:4000/company'
+    const url = request_url + '/company'
 
     const header = {
       headers: {
@@ -92,7 +92,7 @@ export const updateCompany = (comp_id, comp_title, comp_description) => {
       type: COMPANY_UPDATE_REQUEST,
     })
     console.log(`in update action`)
-    const url = 'http://localhost:4000/company/update'
+    const url = request_url + '/company/update'
     const body = {
       comp_id,
       comp_title,
@@ -128,7 +128,7 @@ export const deleteCompany = (comp_id) => {
       type: COMPANY_DELETE_REQUEST,
     })
 
-    const url = `http://localhost:4000/company/${comp_id}`
+    const url = request_url + `/company/${comp_id}`
 
     const header = {
       headers: {

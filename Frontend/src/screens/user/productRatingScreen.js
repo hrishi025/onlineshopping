@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
+import { toast } from 'react-toastify'
 import { rateProduct } from '../../actions/productActions'
 
 const ProductRatigScreen = (props) => {
@@ -18,6 +19,7 @@ const ProductRatigScreen = (props) => {
     console.log(`in saveButton Method`)
     console.log('prod_id' + orderdetails_id)
     dispatch(rateProduct(orderdetails_id, rating, comment))
+    toast("Rating Added successfully!");
     props.history.push('/user-myorder')
   }
 

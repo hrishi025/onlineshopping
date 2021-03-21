@@ -39,7 +39,7 @@ export const getProductList = () => {
       type: PRODUCT_FETCH_REQUEST,
     })
 
-    const url = 'http://localhost:4000/seller/product'
+    const url = request_url + '/seller/product'
 
     const header = {
       headers: {
@@ -86,7 +86,7 @@ export const updateProduct = (
     formData.append('prod_qty', prod_qty)
     formData.append('photo', productPhoto)
 
-    const url = 'http://localhost:4000/product/update'
+    const url = request_url + '/product/update'
     console.log(` update product --.>prod_id--->${prod_id} 
                   prod_title--->${prod_title}  prod_price--->${prod_price} 
                   prod_qty--->${prod_qty} prod_qty--->${productPhoto}`)
@@ -121,7 +121,7 @@ export const applyForSeller = () => {
       type: SELLER_APPLY_REQUEST,
     })
 
-    const url = 'http://localhost:4000/seller/apply'
+    const url = request_url + '/seller/apply'
 
     const header = {
       headers: {
@@ -156,7 +156,7 @@ export const getSellerMaxSaleProducts = () => {
       type: SELLER_MAX_SELLING_PROD_REQUEST,
     })
 
-    const url = 'http://localhost:4000/seller/Max/product'
+    const url = request_url + '/seller/Max/product'
     console.log(`in get seller max sale productss`)
     const header = {
       headers: {
@@ -188,7 +188,7 @@ export const getSellerTotalRevenue = () => {
       type: SELLER_TOTAL_REVENUE_REQUEST,
     })
 
-    const url = 'http://localhost:4000/seller/total/revenue'
+    const url = request_url + '/seller/total/revenue'
     console.log(`in get seller max sale productss`)
     const header = {
       headers: {
@@ -221,7 +221,7 @@ export const getSellerCustAvgRating = () => {
       type: SELLER_CUST_RATING_REQUEST,
     })
 
-    const url = 'http://localhost:4000/seller/avg/rating'
+    const url = request_url + '/seller/avg/rating'
     console.log(`in get seller max sale productss`)
     const header = {
       headers: {
@@ -254,7 +254,7 @@ export const getSellerMonthlyRevenue = () => {
       type: SELLER_MONTHLY_REVENUE_REQUEST,
     })
 
-    const url = 'http://localhost:4000/seller/month/revenue'
+    const url = request_url + '/seller/month/revenue'
     console.log(`in get seller max sale productss`)
     const header = {
       headers: {

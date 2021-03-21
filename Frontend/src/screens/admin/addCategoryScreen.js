@@ -1,6 +1,7 @@
 //import Profile from '../../image/profile.svg'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { addCategory } from '../../actions/categoryAction'
 import { CATEGORY_ADD_SUCCESS } from '../../constants/productConstants'
 
@@ -16,6 +17,7 @@ const AddCategoryScreen = (props) => {
   useEffect(() => {
     if (response && response.status == 'success') {
       dispatch({ type: CATEGORY_ADD_SUCCESS })
+      toast("Category Added successfully!");
       props.history.push('/get-category')
     } else if (error) {
       // there is an error while making the API call

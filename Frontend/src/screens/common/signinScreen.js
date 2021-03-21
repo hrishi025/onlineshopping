@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signin } from '../../actions/userActions'
 import { Link } from 'react-router-dom'
 import { getAllCartItemsAtLogin } from '../../actions/cartActions'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SigninScreen = (props) => {
   const userSigninStore = useSelector((state) => state.userSigninStore)
@@ -22,6 +24,7 @@ const SigninScreen = (props) => {
     if (response && response.status == 'success') {
       sessionStorage.setItem('token', response.data.token)
       dispatch(getAllCartItemsAtLogin())
+      toast(`Welcome ${response.data.name}!`);
       props.history.push('/')
     } else if (error) {
       // there is an error while making the API call

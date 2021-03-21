@@ -33,7 +33,7 @@ const SignupScreen = (props) => {
 
   return (
     <div className="signup-form">
-      <form>
+      <div className="form">
         <h2>Sign Up</h2>
         <p>It's free and only takes a minute.</p>
         <hr />
@@ -86,7 +86,7 @@ const SignupScreen = (props) => {
             Sign Up
           </button>
         </div>
-      </form>
+      </div>
       <p className="small text-center">
         By clicking the Sign Up button, you agree to our <br />
         <a href="#" style={{ color: 'blue' }}>

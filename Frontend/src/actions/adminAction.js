@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { request_url } from '../config/url';
 import {
   PRODUCT_FETCH_REQUEST,
   PRODUCT_FETCH_SUCCESS,
@@ -15,7 +16,7 @@ export const getProductListAdmin = () => {
       type: PRODUCT_FETCH_REQUEST,
     })
 
-    const url = 'http://localhost:4000/admin/product'
+    const url = request_url + '/admin/product'
 
     const header = {
       headers: {
@@ -53,7 +54,7 @@ export const updateProduct = (
       type: PRODUCT_UPDATE_REQUEST,
     });
 
-    const url = "http://localhost:4000/product/update";
+    const url = request_url + '/product/update';
     console.log(` update product --.>prod_id--->${prod_id} prod_title--->${prod_title}  prod_price--->${prod_price} prod_qty--->${prod_qty}`)
     const body = {
       prod_id,

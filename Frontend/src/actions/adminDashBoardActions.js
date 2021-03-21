@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { request_url } from '../config/url'
 import {
   PAYEMENT_FETCH_REQUEST,
   PAYEMENT_FETCH_SUCCESS,
@@ -22,7 +23,7 @@ export const getPayment = () => {
 
     console.log('in get payment')
 
-    const url = 'http://localhost:4000/payment/total'
+    const url = request_url + '/payment/total'
 
     const header = {
       headers: {
@@ -58,7 +59,7 @@ export const getRating = () => {
 
     console.log('in get payment')
 
-    const url = 'http://localhost:4000/rating'
+    const url = request_url + '/rating'
 
     const header = {
       headers: {
@@ -94,7 +95,7 @@ export const getMaxSalesProduct = () => {
 
     console.log('getmax salesProduct')
 
-    const url = 'http://localhost:4000/max/product/sales'
+    const url = request_url + '/max/product/sales'
 
     const header = {
       headers: {
@@ -130,7 +131,7 @@ export const getMonthWiseRevenue = () => {
 
     console.log('getmax salesProduct')
 
-    const url = 'http://localhost:4000/month/revenue'
+    const url = request_url + '/month/revenue'
 
     const header = {
       headers: {

@@ -40,7 +40,7 @@ router.get('/myorder', (request, response) => {
     ON 
       orderdetails.product_id = product.prod_id
   WHERE
-    myorder.user_id = ${request.id}`;
+    myorder.user_id = ${request.id} ORDER BY myorder.myorder_id DESC`;
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

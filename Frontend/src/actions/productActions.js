@@ -33,7 +33,7 @@ export const getProductList = () => {
       type: PRODUCT_FETCH_REQUEST,
     })
 
-    const url = 'http://localhost:4000/product'
+    const url = request_url + '/product'
 
     const header = {
       headers: {
@@ -82,7 +82,7 @@ export const addProduct = (
       type: PRODUCT_POST_REQUEST,
     })
 
-    const url = `http://localhost:4000/addproduct`
+    const url = request_url + '/addproduct'
 
     const header = {
       headers: {
@@ -115,7 +115,7 @@ export const rateProduct = (orderdetails_id, rating, comment) => {
       type: PRODUCT_UPDATE_REQUEST,
     })
 
-    const url = `http://localhost:4000/rateProduct`
+    const url = request_url + '/rateProduct'
 
     const body = {
       orderdetails_id,
@@ -159,7 +159,7 @@ export const getAllCategories = () => {
       },
     }
 
-    const url = 'http://localhost:4000/category/'
+    const url = request_url + '/category/'
     axios
       .get(url, header)
       .then((response) => {
@@ -190,7 +190,7 @@ export const getAllCompanies = () => {
       },
     }
 
-    const url = 'http://localhost:4000/company/'
+    const url = request_url + '/company/'
     axios
       .get(url, header)
       .then((response) => {
@@ -214,7 +214,7 @@ export const getProductDetails = (prod_id) => {
       type: PRODUCT_FETCH_REQUEST,
     })
 
-    const url = `http://localhost:4000/productdetails/${prod_id}`
+    const url = request_url + `/productdetails/${prod_id}`
     console.log(url)
     const header = {
       'Content-Type': 'application/json',
@@ -307,7 +307,7 @@ export const deleteProduct = (prod_id) => {
       type: PRODUCT_DELETE_REQUEST,
     })
 
-    const url = `http://localhost:4000/product/${prod_id}`
+    const url = request_url + `/product/${prod_id}`
     console.log(url)
     const header = {
       headers: {

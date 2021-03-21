@@ -238,7 +238,7 @@ router.post('/checkout', (request, response) => {
         //insert all cart items one by one in order details table
 
         const statementOrderDetails = `
-				insert into orderDetails 
+				insert into orderdetails 
 					(myorder_id, product_id, price, quantity)
 				values
 					(${myorder_id}, ${item['prod_id']}, ${item['prod_price']}, ${item['cart_quantity']})`

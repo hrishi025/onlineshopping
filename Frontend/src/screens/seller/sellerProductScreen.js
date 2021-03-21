@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProductList } from '../../actions/sellerActions'
 import { deleteProduct } from '../../actions/productActions'
 import { Link } from 'react-router-dom'
+import { request_url } from '../../config/url'
 
 const SellerProductScreen = (props) => {
   const dispatch = useDispatch()
@@ -94,7 +95,7 @@ const SellerProductScreen = (props) => {
                               <tr>
                                 <td style={{ width: '25%' }}>
                                   <img
-                                    src={'http://localhost:4000/' + `${p.photo}`}
+                                    src={request_url + `/${p.photo}`}
                                     className=" cover rounded mx-auto d-block img-fluid-products"
                                     alt="Image Loading Failed"
                                     width="30px"

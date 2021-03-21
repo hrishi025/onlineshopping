@@ -25,7 +25,7 @@ export const getCategory = () => {
       type: CATEGORY_FETCH_REQUEST,
     })
 
-    const url = 'http://localhost:4000/category'
+    const url = request_url + '/category';
 
     const header = {
       headers: {
@@ -57,7 +57,7 @@ export const addCategory = (cat_title, cat_description) => {
       type: CATEGORY_ADD_REQUEST,
     })
 
-    const url = 'http://localhost:4000/category'
+    const url = request_url + '/category';
 
     const header = {
       headers: {
@@ -93,7 +93,7 @@ export const updateCategory = (cat_id, cat_title, cat_description) => {
       type: CATEGORY_UPDATE_REQUEST,
     })
 
-    const url = `http://localhost:4000/category`
+    const url = request_url + '/category';
     const body = {
       cat_id,
       cat_title,
@@ -131,7 +131,7 @@ export const deleteCategory = (cat_id) => {
       type: CATEGORY_DELETE_REQUEST,
     })
 
-    const url = `http://localhost:4000/category/${cat_id}`
+    const url = request_url + `/category /${cat_id}`
 
     const header = {
       headers: {

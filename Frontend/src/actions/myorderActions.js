@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { request_url } from '../config/url';
 import {
 	MYORDER_FETCH_REQUEST,
 	MYORDER_FETCH_SUCCESS,
@@ -14,7 +15,7 @@ export const getMyOrderList = () => {
 			type: MYORDER_FETCH_REQUEST
 		});
 
-		const url = 'http://localhost:4000/myorder';
+		const url = request_url + '/myorder';
 
 		const header = {
 			headers: {
@@ -46,7 +47,7 @@ export const updateMyOrder = (myorder_id, status) => {
 			type: MYORDER_UPDATE_REQUEST
 		});
 
-		const url = 'http://localhost:4000/updateMyorder';
+		const url = request_url + '/updateMyorder';
 
 		const body = {
 			myorder_id,

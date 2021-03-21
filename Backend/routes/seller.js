@@ -171,7 +171,7 @@ router.get('/seller/alluserorders', (request, response) => {
     ON 
       orderdetails.product_id = product.prod_id
   WHERE
-    product.seller_id = ${request.id}`
+    product.seller_id = ${request.id} ORDER BY myorder.myorder_id DESC`
 
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))

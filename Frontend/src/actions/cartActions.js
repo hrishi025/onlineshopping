@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { request_url } from '../config/url'
 import {
   CART_FETCH_REQUEST,
   CART_FETCH_SUCCESS,
@@ -29,7 +30,7 @@ export const addToCart = (prod_id, cart_quantity) => {
     console.log('in add to cart')
     console.log(prod_id + ' token: ' + sessionStorage['token'])
 
-    const url = 'http://localhost:4000/addtocart'
+    const url = request_url + '/addtocart'
 
     const body = {
       prod_id,
@@ -73,7 +74,7 @@ export const getAllCartItems = () => {
       },
     }
 
-    const url = 'http://localhost:4000/cart/'
+    const url = request_url + '/cart/'
     axios
       .get(url, header)
       .then((response) => {
@@ -104,7 +105,7 @@ export const removeFromCart = (cart_id) => {
       },
     }
 
-    const url = `http://localhost:4000/cart/${cart_id}`
+    const url = request_url + `/cart/${cart_id}`
 
     axios
       .delete(url, header)
@@ -136,7 +137,7 @@ export const updateCart = (cart_id, cart_quantity) => {
       },
     }
 
-    const url = 'http://localhost:4000/cart'
+    const url = request_url + '/cart'
 
     const body = {
       cart_id,
@@ -173,7 +174,7 @@ export const getAllCartItemsAtLogin = () => {
       },
     }
 
-    const url = 'http://localhost:4000/cart/'
+    const url = request_url + '/cart/'
     axios
       .get(url, header)
       .then((response) => {
@@ -204,7 +205,7 @@ export const cartCheckout = (add_id) => {
       },
     }
 
-    const url = 'http://localhost:4000/user/checkout'
+    const url = request_url + '/user/checkout'
 
     const body = {
       add_id

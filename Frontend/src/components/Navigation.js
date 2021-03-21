@@ -1,49 +1,65 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logout } from '../actions/userActions'
-import { applyForSeller } from '../actions/sellerActions'
-import { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import { USER_SIGNOUT } from '../constants/userConstants'
-import { CART_FETCH_RESET_AT_LOGIN } from '../constants/cartConstants'
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react'
+import { Link } from "react-router-dom";
+import { logout } from "../actions/userActions";
+import { applyForSeller } from "../actions/sellerActions";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { USER_SIGNOUT } from "../constants/userConstants";
+import { CART_FETCH_RESET_AT_LOGIN } from "../constants/cartConstants";
+import { getProductListBySearch } from "../actions/searchProductAction"
+import { productPostReducer } from "../reducers/productReducer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navigation = () => {
-  const dispatch = useDispatch()
-  const userSigninStore = useSelector((store) => store.userSigninStore)
+  const dispatch = useDispatch();
+  const userSigninStore = useSelector((store) => store.userSigninStore);
 
-  const cartLoginStore = useSelector((state) => state.cartLoginStore)
+  const cartLoginStore = useSelector((state) => state.cartLoginStore);
 
-  const onApply = () => {
-    dispatch(applyForSeller())
-    alert(
-      'Apllied For Seller Successfully..! Please Relogin And Wait Until Admin Approves Your Request.'
-    )
-    dispatch(logout())
+
+  const searchProductStore = useSelector((state) => state.searchProductStore);
+
+  const [product_name, setProduct_name] = useState('')
+
+  const searchButton = (props) => {
+    console.log('in search button function')
+    dispatch(getProductListBySearch(product_name))
+    history.push('/search-product')
   }
 
-  const history = useHistory()
+  const onApply = () => {
+    dispatch(applyForSeller());
+    toast("Apllied For Seller Successfully..! Please Relogin And Wait Until Admin Approves Your Request.");
+
+    dispatch(logout());
+  };
+
+  const history = useHistory();
 
   const onLogout = () => {
     dispatch({
       type: CART_FETCH_RESET_AT_LOGIN,
-    })
+    });
     dispatch({
       type: USER_SIGNOUT,
-    })
+    });
     // history.push('/home')
-    sessionStorage.removeItem('token')
-    alert('Logout Successfull')
-    history.push('/')
-  }
+    sessionStorage.removeItem("token");
+    toast("Signed-out Successfully..!");
+
+    history.push("/");
+  };
 
   //On Refresh Page Divert to Sign in
   useEffect(() => {
     if (userSigninStore && userSigninStore.response == null) {
-      sessionStorage.removeItem('token')
-      alert('You Have Been Signed Out... Please Signin to continue')
-      history.push('/')
+      sessionStorage.removeItem("token");
+      toast("Please Signin to continue!");
+      history.push("/");
     }
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -59,7 +75,8 @@ const Navigation = () => {
             data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation">
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
 
@@ -76,6 +93,20 @@ const Navigation = () => {
                 </Link>
               </li>
             </ul>
+
+            <ul class="navbar-nav mr-auto">
+              <li class="d-flex">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="product name here..!!"
+                  aria-label="Search"
+                  onChange={(e) => setProduct_name(e.target.value)}
+                />
+                <button class="btn btn-outline-dark mx-2" onClick={searchButton}>search</button>
+              </li>
+            </ul>
+
             <div class="form-inline my-2 my-lg-0">
               <Link to="/signin">
                 <button class="btn btn-outline-info my-2 my-sm-0">
@@ -84,15 +115,17 @@ const Navigation = () => {
               </Link>
             </div>
           </div>
+
+
         </nav>
       )}
 
       {/* customer navbar */}
       {userSigninStore &&
         userSigninStore.response &&
-        userSigninStore.response.status == 'success' &&
-        (userSigninStore.response.data.role == 'CUSTOMER' ||
-          userSigninStore.response.data.role == 'CUSTSELL') && (
+        userSigninStore.response.status == "success" &&
+        (userSigninStore.response.data.role == "CUSTOMER" ||
+          userSigninStore.response.data.role == "CUSTSELL") && (
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <Link class="navbar-brand" to="/">
               E-Shopping
@@ -104,7 +137,8 @@ const Navigation = () => {
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation">
+              aria-label="Toggle navigation"
+            >
               <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -122,6 +156,19 @@ const Navigation = () => {
                 </li>
               </ul>
 
+              <ul class="navbar-nav mr-auto">
+                <li class="d-flex">
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="product name here..!!"
+                    aria-label="Search"
+                    onChange={(e) => setProduct_name(e.target.value)}
+                  />
+                  <button class="btn btn-outline-dark mx-2" onClick={searchButton}>search</button>
+                </li>
+              </ul>
+
               <div class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item dropdown">
@@ -132,7 +179,8 @@ const Navigation = () => {
                       role="button"
                       data-toggle="dropdown"
                       aria-haspopup="true"
-                      aria-expanded="false">
+                      aria-expanded="false"
+                    >
                       Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -143,7 +191,7 @@ const Navigation = () => {
                         <a class="dropdown-item">My Orders</a>
                       </Link>
                       <div class="dropdown-divider"></div>
-                      {userSigninStore.response.data.role == 'CUSTOMER' && (
+                      {userSigninStore.response.data.role == "CUSTOMER" && (
                         <button class="dropdown-item" onClick={onApply}>
                           Apply For Seller
                         </button>
@@ -162,7 +210,8 @@ const Navigation = () => {
                           <Link
                             to="/cart"
                             class="cart position-relative d-inline-flex"
-                            aria-label="View your shopping cart">
+                            aria-label="View your shopping cart"
+                          >
                             <i class="fas fa fa-shopping-cart fa-lg" />
                             <span class="cart-basket d-flex align-items-center justify-content-center">
                               {cartLoginStore.response.data.length}
@@ -175,11 +224,16 @@ const Navigation = () => {
 
                 <button
                   class="btn btn-outline-info my-2 my-sm-0"
-                  onClick={onLogout}>
+                  onClick={onLogout}
+                >
                   Logout
                 </button>
               </div>
             </div>
+
+
+
+
           </nav>
         )}
 
@@ -187,8 +241,8 @@ const Navigation = () => {
 
       {userSigninStore &&
         userSigninStore.response &&
-        userSigninStore.response.status == 'success' &&
-        userSigninStore.response.data.role == 'SELLER' && (
+        userSigninStore.response.status == "success" &&
+        userSigninStore.response.data.role == "SELLER" && (
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <Link class="navbar-brand" to="/">
               E-Shopping
@@ -200,7 +254,8 @@ const Navigation = () => {
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation">
+              aria-label="Toggle navigation"
+            >
               <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -224,6 +279,20 @@ const Navigation = () => {
                   </Link>
                 </li>
               </ul>
+
+              <ul class="navbar-nav mr-auto">
+                <li class="d-flex">
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="product name here..!!"
+                    aria-label="Search"
+                    onChange={(e) => setProduct_name(e.target.value)}
+                  />
+                  <button class="btn btn-outline-dark mx-2" onClick={searchButton}>search</button>
+                </li>
+              </ul>
+
               <div class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item dropdown">
@@ -234,7 +303,8 @@ const Navigation = () => {
                       role="button"
                       data-toggle="dropdown"
                       aria-haspopup="true"
-                      aria-expanded="false">
+                      aria-expanded="false"
+                    >
                       Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -258,7 +328,8 @@ const Navigation = () => {
                           <Link
                             to="/cart"
                             class="cart position-relative d-inline-flex"
-                            aria-label="View your shopping cart">
+                            aria-label="View your shopping cart"
+                          >
                             <i class="fas fa fa-shopping-cart fa-lg" />
                             <span class="cart-basket d-flex align-items-center justify-content-center">
                               {cartLoginStore.response.data.length}
@@ -271,7 +342,8 @@ const Navigation = () => {
 
                 <button
                   class="btn btn-outline-info my-2 my-sm-0"
-                  onClick={onLogout}>
+                  onClick={onLogout}
+                >
                   Logout
                 </button>
               </div>
@@ -282,8 +354,8 @@ const Navigation = () => {
       {/* Admin navbar */}
       {userSigninStore &&
         userSigninStore.response &&
-        userSigninStore.response.status == 'success' &&
-        userSigninStore.response.data.role == 'ADMIN' && (
+        userSigninStore.response.status == "success" &&
+        userSigninStore.response.data.role == "ADMIN" && (
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <Link class="navbar-brand" to="/">
               E-Shopping
@@ -295,7 +367,8 @@ const Navigation = () => {
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation">
+              aria-label="Toggle navigation"
+            >
               <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -317,6 +390,20 @@ const Navigation = () => {
                   </Link>
                 </li>
               </ul>
+
+              <ul class="navbar-nav mr-auto">
+                <li class="d-flex">
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="product name here..!!"
+                    aria-label="Search"
+                    onChange={(e) => setProduct_name(e.target.value)}
+                  />
+                  <button class="btn btn-outline-dark mx-2" onClick={searchButton}>search</button>
+                </li>
+              </ul>
+
               <div class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item dropdown">
@@ -327,7 +414,8 @@ const Navigation = () => {
                       role="button"
                       data-toggle="dropdown"
                       aria-haspopup="true"
-                      aria-expanded="false">
+                      aria-expanded="false"
+                    >
                       Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -351,7 +439,8 @@ const Navigation = () => {
                           <Link
                             to="/cart"
                             class="cart position-relative d-inline-flex"
-                            aria-label="View your shopping cart">
+                            aria-label="View your shopping cart"
+                          >
                             <i class="fas fa fa-shopping-cart fa-lg" />
                             <span class="cart-basket d-flex align-items-center justify-content-center">
                               {cartLoginStore.response.data.length}
@@ -364,7 +453,8 @@ const Navigation = () => {
 
                 <button
                   class="btn btn-outline-info my-2 my-sm-0"
-                  onClick={onLogout}>
+                  onClick={onLogout}
+                >
                   Logout
                 </button>
               </div>
@@ -372,7 +462,7 @@ const Navigation = () => {
           </nav>
         )}
     </div>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

@@ -4,7 +4,9 @@ import {
 	MYORDER_FETCH_FAIL,
 	MYORDER_UPDATE_REQUEST,
 	MYORDER_UPDATE_SUCCESS,
-	MYORDER_UPDATE_FAIL
+	MYORDER_UPDATE_FAIL,
+	MYORDER_UPDATE_RESET,
+	MYORDER_FETCH_RESET
 } from './../constants/myorderConstants';
 
 export const getMyorderReducer = (state = {}, action) => {
@@ -17,6 +19,9 @@ export const getMyorderReducer = (state = {}, action) => {
 
 		case MYORDER_FETCH_FAIL:
 			return { loading: false, error: action.payload };
+
+		case MYORDER_FETCH_RESET:
+			return {};
 
 		default:
 			return state;
@@ -33,6 +38,9 @@ export const updateMyorderReducer = (state = {}, action) => {
 
 		case MYORDER_UPDATE_FAIL:
 			return { loading: false, error: action.payload };
+
+		case MYORDER_UPDATE_RESET:
+			return {};
 
 		default:
 			return state;

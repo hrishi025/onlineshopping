@@ -43,7 +43,8 @@ app.use((request, response, next) => {
     request.url == '/product' ||
     request.url.startsWith('/productdetails') ||
     request.url.startsWith('/productRatingAvg') ||
-    request.url.startsWith('/productComment')
+    request.url.startsWith('/productComment') ||
+    request.url.startsWith('/search')
   ) {
     // skip checking the token
     next()

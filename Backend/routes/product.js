@@ -21,6 +21,14 @@ router.get('/product', (request, response) => {
 	});
 });
 
+router.post('/search/product', (request, response) => {
+	const { product_name } = request.body
+	const statement = `SELECT * FROM product where  prod_title like '%${product_name}%'`;
+	db.execute(statement, (error, data) => {
+		response.send(utils.createResult(error, data));
+	});
+});
+
 //Get Products Details
 router.get('/productdetails/:prod_id', (request, response) => {
 	const { prod_id } = request.params;

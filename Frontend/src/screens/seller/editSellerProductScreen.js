@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProduct } from '../../actions/sellerActions'
+import { request_url } from '../../config/url'
 
 import { PRODUCT_UPDATE_RESET } from '../../constants/productConstants'
 
@@ -60,7 +61,7 @@ const EditSellerProductScreen = (props) => {
         <div className="row">
           <div className="col-md-6" col-10 mx-auto>
             <img
-              src={'http://localhost:4000/' + `${productPhoto}`}
+              src={request_url + `/${productPhoto}`}
               className="img-fluid contact-img"
               alt="no image avaliable"
               height="250"

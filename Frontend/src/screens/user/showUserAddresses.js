@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import { fetchUserAddresses } from "../../actions/addressAction"
 import { cartCheckout, getAllCartItemsAtLogin } from "../../actions/cartActions"
 import { CART_CHECKOUT_RESET } from "../../constants/cartConstants"
@@ -11,7 +12,7 @@ const ShowUserAddresses = (props) => {
 
     const dispatch = useDispatch()
 
-    const [addId, setAddId] = useState(0)
+    const [addId, setAddId] = useState()
 
     useEffect(() => {
         dispatch(fetchUserAddresses())
@@ -21,14 +22,19 @@ const ShowUserAddresses = (props) => {
         console.log(addId)
     }, [addId])
 
-
     //to check checkout status
     const cartCheckoutStore = useSelector(state => state.cartCheckoutStore)
     useEffect(async () => {
         if (cartCheckoutStore.response && cartCheckoutStore.response.status == 'success') {
             await dispatch({ type: CART_CHECKOUT_RESET })
             await dispatch(getAllCartItemsAtLogin());
+            toast("Order Placed successfully!");
             await props.history.push('/user-myorder');
+        }
+        if (addId == null) {
+            await dispatch({ type: CART_CHECKOUT_RESET })
+            await dispatch(getAllCartItemsAtLogin());
+            toast("please specify address");
         }
     }, [cartCheckoutStore.response, cartCheckoutStore.error, cartCheckoutStore.loading])
 
@@ -37,14 +43,34 @@ const ShowUserAddresses = (props) => {
     }
 
     return (
-        <div>
+        <div className="container">
+            <h1>Select Shipping Address</h1>
+            <hr />
             {
                 fetchAddressStore && fetchAddressStore.response && fetchAddressStore.response.status == 'success' &&
                 fetchAddressStore.response.data.map((address) => {
                     return (
-                        <div>
-                            <input type="radio" name="site_name" value={address.add_id} onChange={(e) => { setAddId(e.target.value) }} />
-                            {address.add_id}, {address.address}, {address.city}, {address.state}, {address.country}, {address.pin}
+                        <div style={{ textAlign: "left" }} className="mx-auto align-items-center">
+                            <div className="card" style={{ width: "18rem" }}>
+                                <div className="card-body">
+                                    <h6 className="card-subtitle mb-2 text-muted">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="radio" name="site_name" value={address.add_id} onChange={(e) => { setAddId(e.target.value) }} />
+                                                </td>
+                                                <td>
+                                                    {' '}
+                                                </td>
+                                                <td style={{ textAlign: "center" }}>
+                                                    {'   '}{address.address}, {address.city}, {address.state}, {address.country}, {address.pin}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </h6>
+                                </div>
+                            </div>
+                            <br />
                         </div>
                     )
                 })
@@ -52,9 +78,9 @@ const ShowUserAddresses = (props) => {
 
             <div>
                 <Link to="/add-new-address">
-                    <button>Add New Address</button>
+                    <button className="btn btn-outline-primary mx-2">Add New Address</button>
                 </Link>
-                <button onClick={checkout}>checkout</button>
+                <button onClick={checkout} className="btn btn-outline-success mx-2">checkout</button>
             </div>
         </div >
     )

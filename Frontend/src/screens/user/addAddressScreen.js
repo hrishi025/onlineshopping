@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import React from 'react'
 import {
-  ADD_ADDRESS_RESET,
-  FETCH_ADDRESS_RESET,
+    ADD_ADDRESS_RESET,
+    FETCH_ADDRESS_RESET,
 } from '../../constants/addressConstants'
 import { addAddress, fetchAddress } from '../../actions/addressAction'
 import { cartCheckout, getAllCartItemsAtLogin } from '../../actions/cartActions'
 import { CART_CHECKOUT_RESET } from '../../constants/cartConstants'
+import { toast } from 'react-toastify'
 
 const AddAddressScreen = (props) => {
 
@@ -60,6 +61,7 @@ const AddAddressScreen = (props) => {
         if (response && response.status == 'success') {
             dispatch({ type: ADD_ADDRESS_RESET })
             dispatch({ type: FETCH_ADDRESS_RESET })
+            toast("Address Added successfully!");
             props.history.push("/view-user-addresses")
         } else if (error) {
             // there is an error while making the API call
@@ -68,20 +70,6 @@ const AddAddressScreen = (props) => {
             alert('error while making API call')
         }
     }, [response, loading, error])
-
-    // //to check checkout status
-    // const cartCheckoutStore = useSelector(state => state.cartCheckoutStore)
-    // useEffect(async () => {
-    //     if (cartCheckoutStore.response && cartCheckoutStore.response.status == 'success') {
-    //         await dispatch({ type: CART_CHECKOUT_RESET })
-    //         await dispatch(getAllCartItemsAtLogin());
-    //         await props.history.push('/user-myorder');
-    //     }
-    // }, [cartCheckoutStore.response, cartCheckoutStore.error, cartCheckoutStore.loading])
-
-    // const checkout = () => {
-    //     dispatch(cartCheckout());
-    // }
 
     return (
         <div className="signup-form">
