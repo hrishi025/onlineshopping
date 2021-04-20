@@ -17,7 +17,7 @@ export const getProductListBySearch = (product_name) => {
         type: SEARCH_PRODUCT_FETCH_REQUEST,
       })
   
-      const url = 'http://localhost:4000/search/product'
+      const url = request_url + '/search/product'
   
       console.log(`in action of getProductListBySearch`)
 
