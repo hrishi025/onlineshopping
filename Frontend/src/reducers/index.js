@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 import {
   userApproveReducer,
   userListReducer,
   userSignupReducer,
   userSuspendReducer,
-} from './userReducer'
-import { userSigninReducer, userProfileReducer } from './userReducer'
+} from "./userReducer";
+import { userSigninReducer, userProfileReducer } from "./userReducer";
 import {
   companyFetchReducer,
   getProductReducer,
@@ -16,9 +16,9 @@ import {
   getProductRatingReducer,
   getProductCommentReducer,
   // sellerProfileReducer
-} from './productReducer'
+} from "./productReducer";
 
-import { viewOrderDetailsReducer } from './orderReducer'
+import { viewOrderDetailsReducer } from "./orderReducer";
 import {
   cartCheckoutReducer,
   cartFetchAtLoginReducer,
@@ -26,20 +26,20 @@ import {
   cartReducer,
   cartRemoveReducer,
   updateCartReducer,
-} from './cartReducer'
-import { getMyorderReducer, updateMyorderReducer } from './myorderReducer'
+} from "./cartReducer";
+import { getMyorderReducer, updateMyorderReducer } from "./myorderReducer";
 import {
   addCompanyReducer,
   deleteCompanyReducer,
   getCompanyReducer,
   updateCompanyReducer,
-} from './companyReducer'
+} from "./companyReducer";
 import {
   addCategoryReducer,
   deleteCategoryReducer,
   getCategoryReducer,
   updateCategoryReducer,
-} from './categoryReducer'
+} from "./categoryReducer";
 
 import {
   paymentReducer,
@@ -47,7 +47,7 @@ import {
   ratingReducer,
   maxSaleProductReducer,
   monthWiseRevenueReducer,
-} from './adminDashBoardReducer'
+} from "./adminDashBoardReducer";
 
 import {
   sellerApplyReducer,
@@ -56,9 +56,66 @@ import {
   getSellerCustAvgRating,
   getSellerMontlyRevenueReducer,
   getAllCustomersMyOrderForSellerReducer,
-} from './sellerReducer'
-import { addAddressReducer, fetchAddressReducer } from './AddressReducers'
-import { searchProductReducer } from './searchProductReducer'
+} from "./sellerReducer";
+import { addAddressReducer, fetchAddressReducer } from "./AddressReducers";
+import { searchProductReducer } from "./searchProductReducer";
+
+import { persistReducer } from "redux-persist";
+// import storage from 'redux-persist/lib/storage'; // local storage
+import storageSession from "redux-persist/lib/storage/session"; // session storage
+
+const persistConfig = {
+  key: "root",
+  storage: storageSession,
+  whitelist: [
+    "userSignupStore",
+    "userSigninStore",
+    "editProfileStore",
+    "userListStore",
+    "userApproveStore",
+    "userApproveStore",
+    "userSuspendStore",
+    "addAddressStore",
+    "fetchAddressStore",
+    "allProductStore",
+    "addProductStore",
+    "updateProductStore",
+    "deleteProductStore",
+    "getProductRatingStore",
+    "getProductCommentStore",
+    "searchProductStore",
+    "cartStore",
+    "cartRemoveStore",
+    "cartItemsStore",
+    "updateCartStore",
+    "cartLoginStore",
+    "cartCheckoutStore",
+    "categoryFetchStore",
+    "companyFetchStore",
+    "getComponyStore",
+    "updateComponyStore",
+    "deleteComponyStore",
+    "addCompanyStore",
+    "getCategoryStore",
+    "updateCategoryStore",
+    "deleteCategoryStore",
+    "addCategoryStore",
+    "sellerApplyStore",
+    "gettingSellerMaxProductStore",
+    "getSellerTotalStore",
+    "getSellerCustAvgStore",
+    "getSellerMontlyRevenueStore",
+    "getAllCustomerMyOrdersForSellerStore",
+    "viewOrderDetailsStore",
+    "viewMyOrderStore",
+    "updateMyOrderStore",
+    "paymentStore",
+    "dataStore",
+    "ratingStore",
+    "maxSaleProductStore",
+    "monthWiseRevenueStore",
+  ],
+};
 
 const reducers = combineReducers({
   //user stores
@@ -127,6 +184,6 @@ const reducers = combineReducers({
   ratingStore: ratingReducer,
   maxSaleProductStore: maxSaleProductReducer,
   monthWiseRevenueStore: monthWiseRevenueReducer,
-})
+});
 
-export default reducers
+export default persistReducer(persistConfig, reducers);
